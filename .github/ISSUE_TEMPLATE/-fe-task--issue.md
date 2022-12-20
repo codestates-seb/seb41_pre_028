@@ -1,6 +1,6 @@
 ---
-name: "[FE-Task] title"
-about: issue task card
+name: "[FE-Task] Issue"
+about: Frontend Issue Task
 title: ''
 labels: ''
 assignees: ''
