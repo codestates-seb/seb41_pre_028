@@ -7,8 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString(callSuper = true)
 @Entity
 @Table(name="USERS")
@@ -16,14 +20,17 @@ public class User extends AuditingFields {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long userId;
-    @Setter @Column(nullable = false) private String nickname;
-    @Setter @Column(nullable = false) private String email;
-    @Setter @Column(nullable = false) private String password;
-    @Setter @Column private Integer reputation;
+    @Column(nullable = false) private String nickname;
+    @Column(nullable = false) private String email;
+    @Column(nullable = false) private String password;
+    @Column private Integer reputation;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
 
-    public User(Long userId, String password, String email, String nickname, Integer reputation) {
-        this.userId = userId;
+    public User( String password, String email, String nickname, Integer reputation) {
+
         this.password = password;
         this.email = email;
         this.nickname = nickname;
