@@ -1,0 +1,28 @@
+= Stack OverFlow
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Hwang Jung Sik <jungsik.hwang@codestates.com>
+
+v1.0.0, 2022.07.10
+
+***
+== UserController
+=== 회원 정보 보기
+.curl-request
+include::{snippets}/get-user/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-user/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/get-user/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/get-user/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-user/response-fields.adoc[]
