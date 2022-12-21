@@ -36,7 +36,7 @@ public class JpaRepositoryTest {
 
         // Then
         assertThat(user)
-                .hasSize(0);
+                .hasSize(1);
     }
 
     @DisplayName("insert 테스트")
@@ -44,7 +44,7 @@ public class JpaRepositoryTest {
     void givenTestData_whenInserting_thenWorksFine(){
         // Given
         long preCnt = userRepository.count();
-        User user = new User(1L, "test1234", "email", "nickname", 0);
+        User user = new User("test1234", "email", "nickname", 0);
 
         // When
         userRepository.save(user);
@@ -58,7 +58,7 @@ public class JpaRepositoryTest {
     @Test
     void givenTestData_whenUpdating_thenWorksFine(){
         // Given
-        User user = new User(1L, "test1234", "email", "nickname", 0);
+        User user = new User( "test1234", "email", "nickname", 0);
         String updatedNickname = "updateTest";
         user.setNickname(updatedNickname);
 
@@ -76,7 +76,7 @@ public class JpaRepositoryTest {
     @Test
     void givenTestData_whenDeleting_thenWorksFine(){
         // Given
-        User user = new User(1L, "test1234", "email", "nickname", 0);
+        User user = new User( "test1234", "email", "nickname", 0);
         userRepository.save(user);
         long preUserAccountCnt = userRepository.count();
 
