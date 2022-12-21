@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-public class UserAccountDto {
+public class UserDto {
 
     @Getter
     @AllArgsConstructor
@@ -16,7 +16,7 @@ public class UserAccountDto {
         private String email;
 
         @NotBlank(message = "이름은 공백이 아니어야 합니다.")
-        private String name;
+        private String nickname;
 
         @NotBlank
         private String password;
@@ -26,9 +26,8 @@ public class UserAccountDto {
 
     @AllArgsConstructor
     @Getter
-    public static class response{
-        private String userId;
-        private String name;
+    public static class Response{
+        private Long userId;
         private String nickname;
         private String email;
         private Integer reputation;
