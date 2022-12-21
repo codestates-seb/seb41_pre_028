@@ -23,6 +23,17 @@ public class UserDto {
 
     }
 
+    @Getter
+    @AllArgsConstructor
+    public static class Patch{
+        private long userId;
+        @Email
+        private String email;
+
+        private String nickname;
+        public void setUserId(long userId){this.userId = userId;}
+    }
+
 
     @AllArgsConstructor
     @Getter
@@ -32,4 +43,7 @@ public class UserDto {
         private String email;
         private Integer reputation;
     }
+
+
+
 }
