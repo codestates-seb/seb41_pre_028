@@ -36,11 +36,9 @@ public interface AnswerMapper {
         answerDtoResponse.setContent(answer.getContent());
         answerDtoResponse.setAnswerStatus(answer.getAnswerStatus());
 
-//        answerDtoResponse.setVote(answer.getVoteAnswers().size());
 
-        //audit?
-//        answerDtoResponse.setCreatedAt(answer.getCreatedAt());
-//        answerDtoResponse.setModifiedAt(answer.getModifiedAt());
+        answerDtoResponse.setCreatedAt(answer.getCreatedAt());
+        answerDtoResponse.setModifiedAt(answer.getModifiedAt());
 //        answerDtoResponse.setCreatedBy(answer.getCreatedBy());
 //        answerDtoResponse.setModifiedBy(answer.getModifiedBy());
 

@@ -46,15 +46,6 @@ public class AnswerController {
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}/answer_vote")
-    public ResponseEntity voteAnswer(@PathVariable("id") @Positive long answerId,
-                                     @Valid @RequestBody AnswerDto.VotePatch votePatchDto){
-        //mapping하면서 vote객체하나 생성됨
-        //생성된 vote를 저장하기위해
-        //Answer answer = answerService.updateVoteAnswer(answer);
-        AnswerDto.Response response = new AnswerDto.Response(answerId,1,1,"stub data", Answer.AnswerStatus.ANSWER_NORMAL,1, LocalDateTime.now(),LocalDateTime.now(),"stubUser","stubUser");
-        return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity getAnswer(@PathVariable("id") @Positive long answerId){

@@ -45,17 +45,6 @@ public class Answer extends Auditable{
             comment.setAnswer(this);
         }
     }
-//    @OneToMany(mappedBy = "answer")
-//    private List<VoteAnswer> voteAnswers = new ArrayList<>();
-
-//     public void setVote(VoteAnswer voteAnswer){
-//        this.voteAnswers.add(voteAnswer);
-//        if(voteAnswer.getAnswer() != this){
-//            voteAnswer.setAnswer(this);
-//        }
-//     }
-
-
 
     public enum AnswerStatus{
         ANSWER_DELETED(0, "삭제된 답변"),

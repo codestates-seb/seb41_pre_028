@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 
 public class AnswerDto {
 
+    @NoArgsConstructor  //test를 위해 추가
+    @AllArgsConstructor //test를 위해 추가
     @Getter
     public static class Post{
         @Positive
@@ -28,23 +30,15 @@ public class AnswerDto {
         private String content;
     }
 
+    @NoArgsConstructor  //test를 위해 추가
+    @AllArgsConstructor //test를 위해 추가
     @Getter
     @Setter
     public static class Patch{
 
         private long answerId;
-
         private AnswerStatus answerStatus;
-
         private String content;
-    }
-
-    @Setter
-    public static class VotePatch{
-        private long answerId;
-
-        @Pattern(regexp = "[+-]")
-        private String vote;
     }
 
 
@@ -59,7 +53,6 @@ public class AnswerDto {
         private String content;
         private AnswerStatus answerStatus;
 
-        private long vote;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private String createdBy;
