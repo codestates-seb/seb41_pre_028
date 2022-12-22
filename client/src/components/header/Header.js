@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
-import { PrimaryLink, SecondaryLink } from "./StyledLink";
+import { PrimaryLink, SecondaryLink } from "../StyledLink";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -22,6 +22,7 @@ const Header = () => {
         <div>
           <SearchBar></SearchBar>
         </div>
+        {/** 로그인&비로그인 다르게 보여줌 */}
         {/* <ul className="flex flex-row">
           <li>프로필</li>
           <li>로그아웃</li>
