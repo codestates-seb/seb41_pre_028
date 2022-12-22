@@ -39,8 +39,21 @@ public class Answer extends Auditable{
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments = new ArrayList<>();
 
+    public void setComment(Comment comment){
+        this.comments.add(comment);
+        if(comment.getAnswer() != this){
+            comment.setAnswer(this);
+        }
+    }
 //    @OneToMany(mappedBy = "answer")
 //    private List<VoteAnswer> voteAnswers = new ArrayList<>();
+
+//     public void setVote(VoteAnswer voteAnswer){
+//        this.voteAnswers.add(voteAnswer);
+//        if(voteAnswer.getAnswer() != this){
+//            voteAnswer.setAnswer(this);
+//        }
+//     }
 
 
 
