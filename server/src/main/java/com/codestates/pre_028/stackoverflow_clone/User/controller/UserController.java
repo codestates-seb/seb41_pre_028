@@ -1,20 +1,20 @@
 package com.codestates.pre_028.stackoverflow_clone.User.controller;
 
+import com.codestates.pre_028.stackoverflow_clone.Auth.Dto.LoginDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.mapper.UserMapper;
 import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 @RestController
 @RequestMapping("/users")
 @Validated
@@ -43,7 +43,7 @@ public class UserController {
     }*/
 
     //회원 가입
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity postUser(@Valid @RequestBody UserDto.Post requestBody){
 
         User user =mapper.userPostToUser(requestBody);
@@ -53,6 +53,14 @@ public class UserController {
         return new ResponseEntity<>(
                 new SingleResponseDto<>(response), HttpStatus.CREATED);
 
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity postLoginUser(@RequestBody LoginDto requestBody , HttpServletResponse response){
+        User user = mapper.loginUserPostToUser(requestBody);
+
+
+        return new ResponseEntity<>(user,  HttpStatus.OK);
     }
 
     @PatchMapping("/{user-id}")

@@ -1,5 +1,6 @@
 package com.codestates.pre_028.stackoverflow_clone.User.service;
 
+import com.codestates.pre_028.stackoverflow_clone.Auth.Dto.LoginDto;
 import com.codestates.pre_028.stackoverflow_clone.Auth.utils.CustomAuthorityUtils;
 import com.codestates.pre_028.stackoverflow_clone.Auth.utils.UserRegistrationApplicationEvent;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
@@ -7,6 +8,8 @@ import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
 import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,4 +90,20 @@ public class UserService {
         User verifiedUser = findVerifiedUser(id);
         userRepository.deleteById(id);
     }
+
+    public User getLoginUserWithToken() { // 로그인된 유저 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousUser"))
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+
+        Optional<User> optionalUser = userRepository.findByEmail(authentication.getName());
+        User user = optionalUser.orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
+
+        System.out.println("HERE:"+user.getUserId());
+
+        return user;
+    }
 }
+

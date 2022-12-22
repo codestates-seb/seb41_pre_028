@@ -5,9 +5,9 @@
 :toc-title: Table of Contents
 :source-highlighter: prettify
 
-Hwang Jung Sik <jungsik.hwang@codestates.com>
 
-v1.0.0, 2022.07.10
+
+v1.0.0, 2022.12.21
 
 ***
 == UserController

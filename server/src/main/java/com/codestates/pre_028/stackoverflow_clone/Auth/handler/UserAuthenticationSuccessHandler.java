@@ -1,5 +1,6 @@
 package com.codestates.pre_028.stackoverflow_clone.Auth.handler;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,13 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
+
+        Cookie cookie = new Cookie("Set-Cookie", response.getHeader(authentication.getName()));
+        cookie.setDomain("localhost");
+        cookie.setHttpOnly(true);
+
+        response.addCookie(cookie);
+
         log.info(" # 인증 성공입니다!");
     }
 }
