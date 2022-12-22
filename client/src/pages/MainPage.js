@@ -1,5 +1,13 @@
+import MainContainer from "../components/MainContainer";
+import SideBar from "../components/SideBar";
+
 const MainPage = () => {
-  return <div>Top Questions</div>;
+  return (
+    <MainContainer>
+      <SideBar></SideBar>
+      <main>Top Questions</main>
+    </MainContainer>
+  );
 };
 
 export default MainPage;
