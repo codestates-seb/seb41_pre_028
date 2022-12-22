@@ -32,7 +32,7 @@ public class AnswerController {
 
 //        Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
 //        AnswerDto.Response response = mapper.answerToAnswerResponseDto(answer);
-        AnswerDto.Response response = new AnswerDto.Response(1,1,1,"stub data", Answer.AnswerStatus.ANSWER_NORMAL,1, LocalDateTime.now(),LocalDateTime.now(),"stubUser","stubUser");
+        AnswerDto.Response response = new AnswerDto.Response(1,1,1,"stub data", Answer.AnswerStatus.ANSWER_NORMAL, LocalDateTime.now(),LocalDateTime.now(),"stubUser","stubUser");
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
 
@@ -42,7 +42,7 @@ public class AnswerController {
 //        answerPatchDto.setAnswerId(answerId);
 //        Answer answer = answerService.updateAnswer(mapper.answerPatchDtoToAnswer(answerPatchDto));
 //        AnswerDto.Response response = mapper.answerToAnswerResponseDto(answer);
-        AnswerDto.Response response = new AnswerDto.Response(answerId,1,1,"stub data", Answer.AnswerStatus.ANSWER_NORMAL,1, LocalDateTime.now(),LocalDateTime.now(),"stubUser","stubUser");
+        AnswerDto.Response response = new AnswerDto.Response(answerId,1,1,"stub data", Answer.AnswerStatus.ANSWER_NORMAL, LocalDateTime.now(),LocalDateTime.now(),"stubUser","stubUser");
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
@@ -51,14 +51,14 @@ public class AnswerController {
     public ResponseEntity getAnswer(@PathVariable("id") @Positive long answerId){
 
         //Answer answer = answerService.findAnswer(answerId);
-        AnswerDto.Response response = new AnswerDto.Response(answerId,1,1,"stub data", Answer.AnswerStatus.ANSWER_NORMAL,1, LocalDateTime.now(),LocalDateTime.now(),"stubUser","stubUser");
+        AnswerDto.Response response = new AnswerDto.Response(answerId,1,1,"stub data", Answer.AnswerStatus.ANSWER_NORMAL, LocalDateTime.now(),LocalDateTime.now(),"stubUser","stubUser");
         return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity getAnswers(){
-        AnswerDto.Response response1 = new AnswerDto.Response(1,1,1,"stub data1", Answer.AnswerStatus.ANSWER_NORMAL,1, LocalDateTime.now(),LocalDateTime.now(),"stubUser1","stubUser1");
-        AnswerDto.Response response2 = new AnswerDto.Response(2,2,2,"stub data2", Answer.AnswerStatus.ANSWER_NORMAL,1, LocalDateTime.now(),LocalDateTime.now(),"stubUser2","stubUser2");
+        AnswerDto.Response response1 = new AnswerDto.Response(1,1,1,"stub data1", Answer.AnswerStatus.ANSWER_NORMAL, LocalDateTime.now(),LocalDateTime.now(),"stubUser1","stubUser1");
+        AnswerDto.Response response2 = new AnswerDto.Response(2,2,2,"stub data2", Answer.AnswerStatus.ANSWER_NORMAL, LocalDateTime.now(),LocalDateTime.now(),"stubUser2","stubUser2");
         return new ResponseEntity<>(new MultiResponseDto<>(Arrays.asList(response1,response2)),HttpStatus.OK);
     }
 
