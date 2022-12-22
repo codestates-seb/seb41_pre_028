@@ -1,12 +1,13 @@
 import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
-import Buffer from "../buffer/buffer";
+import { BufferMd5 } from "../buffer/Buffer.jsx";
 
 const Editor = () => {
   const [value, setValue] = useState("");
   return (
     <div className="container">
       <MDEditor
+        data-color-mode="light"
         value={value}
         onChange={setValue}
         preview="edit"
@@ -29,7 +30,7 @@ const Editor = () => {
           },
         }}
       />
-      <Buffer />
+      <BufferMd5 />
       <div> {value}</div>
     </div>
   );
