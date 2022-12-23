@@ -64,6 +64,10 @@ public class AnswerDto {
 //        public void setUser(User user){
 //            this.userId= user.getUserId();
 //        }
+
+        public String getAnswerStatus(){
+            return answerStatus.getStatus();
+        }
     }
 
 }

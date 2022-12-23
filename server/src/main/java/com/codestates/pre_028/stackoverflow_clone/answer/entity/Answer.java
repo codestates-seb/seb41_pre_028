@@ -47,16 +47,15 @@ public class Answer extends Auditable{
     }
 
     public enum AnswerStatus{
-        ANSWER_DELETED(0, "삭제된 답변"),
-        ANSWER_ADOPTED(1, "채택된 답변"),
-        ANSWER_NORMAL(2, "일반 답변");
+        ANSWER_NORMAL("일반 답변"),
+        ANSWER_ADOPTED("채택된 답변"),
+        ANSWER_DELETED("삭제된 답변");
 
-        private int statusNumber;
-        private String statusDescription;
+        @Getter
+        private String status;
 
-        AnswerStatus(int statusNumber, String statusDescription){
-            this.statusNumber = statusNumber;
-            this.statusDescription = statusDescription;
+        AnswerStatus( String status){
+            this.status = status;
         }
     }
 }
