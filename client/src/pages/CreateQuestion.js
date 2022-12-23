@@ -1,10 +1,13 @@
 import InputPrimary from "../components/input/inputPrimary.jsx";
+import { BufferMd5, BufferMr5 } from "../components/buffer/Buffer.jsx";
+import Editor from "../components/editor/Editor.jsx";
+import { Button } from "@mui/material";
 
 const CreateQuestion = () => {
   return (
-    <div className="content">
+    <div className="m-5 p-2 bg-[#f1f2f3]">
       <h1 className="p-2 my-8 font-bold text-3xl">Ask a public question</h1>
-      <div className="mb-8">
+      <div className="bg-[#EBF4FA] border border-[#A5CFED] p-6 rounded-md">
         <h2 className="mb-3 text-2xl">Writing a good question</h2>
         <p className="text-md">
           You’re ready to{" "}
@@ -13,7 +16,7 @@ const CreateQuestion = () => {
             className="text-secondary-400"
           >
             ask
-          </a>{" "}
+          </a>
           a{" "}
           <a
             href="https://stackoverflow.com/help/on-topic"
@@ -45,14 +48,17 @@ const CreateQuestion = () => {
           <li>Review your question and post it to the site.</li>
         </ul>
       </div>
-      <div className="mb-8">
+
+      <BufferMd5 />
+
+      <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
         <h2 className="mb-0 font-bold text-xl">Title</h2>
         <p className="mb-2 text-sm">
           Be specific and imagine you’re asking a question to another person.
         </p>
-        <InputPrimary />
+        <InputPrimary placeholder="e.g. Is there an R function for finding the index of an element in a vector?" />
       </div>
-      <div className="mb-8 ">
+      <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
         <h2 className="mb-0 font-bold text-xl ">
           What are the details of your problem?
         </h2>
@@ -60,9 +66,9 @@ const CreateQuestion = () => {
           Introduce the problem and expand on what you put in the title. Minimum
           20 characters.
         </p>
-        <InputPrimary />
+        <Editor />
       </div>
-      <div className="mb-8">
+      <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
         <h2 className="mb-0 font-bold text-xl">
           What did you try and what were you expecting?
         </h2>
@@ -70,10 +76,26 @@ const CreateQuestion = () => {
           Describe what you tried, what you expected to happen, and what
           actually resulted. Minimum 20 characters.
         </p>
+        <Editor />
+      </div>
+      <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
+        <h2 className="mb-0 font-bold text-xl">Tags </h2>
+        <p className="mb-2 text-sm">
+          Add up to 5 tags to describe what your question is about. Start typing
+          to see suggestions.
+        </p>
         <InputPrimary />
       </div>
-      <button className="mb-2"> submit</button>
-      <button> Discard draft</button>
+      <div className="flex flex-row">
+        <Button variant="contained" sx={{ fontSize: 12 }} size="large">
+          Post your question
+        </Button>
+
+        <BufferMr5 />
+        <Button color="error" sx={{ fontSize: 12 }} size="large">
+          Discard draft
+        </Button>
+      </div>
     </div>
   );
 };
