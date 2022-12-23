@@ -34,7 +34,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-h-max">
+    <div className="w-full max-h-max relative">
       <SearchInput
         type="text"
         placeholder="Search..."
@@ -43,7 +43,7 @@ const SearchBar = () => {
       ></SearchInput>
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
-        className="absolute top-1/2 mt-[-9px] left-28"
+        className="absolute top-1/2 mt-[-9px] left-[0.5rem] text-[#838C95]"
       />
     </div>
   );

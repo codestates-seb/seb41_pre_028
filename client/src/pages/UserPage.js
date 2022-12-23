@@ -1,12 +1,14 @@
-import SideBar from "../components/SideBar";
-import MainContainer from "../components/MainContainer";
+import SideBar from "../components/sideBar/SideBar";
+import { PageContainer, MainContainer } from "../components/StyledContainer";
 
 const UserPage = () => {
   return (
-    <MainContainer>
-      <SideBar className="sideBar"></SideBar>
-      <main className="content">Users</main>
-    </MainContainer>
+    <PageContainer>
+      <MainContainer>
+        <SideBar></SideBar>
+        <main className="content">Top Questions</main>
+      </MainContainer>
+    </PageContainer>
   );
 };
 

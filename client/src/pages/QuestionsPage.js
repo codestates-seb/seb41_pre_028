@@ -1,15 +1,17 @@
-import SideBar from "../components/SideBar";
-import MainContainer from "../components/MainContainer";
+import SideBar from "../components/sideBar/SideBar";
 import QuestionList from "../components/question/QuestionList";
+import { PageContainer, MainContainer } from "../components/StyledContainer";
 
 const QuestionsPage = () => {
   return (
-    <MainContainer>
-      <SideBar className="sideBar"></SideBar>
-      <main className="content">
-        <QuestionList></QuestionList>
-      </main>
-    </MainContainer>
+    <PageContainer>
+      <MainContainer>
+        <SideBar></SideBar>
+        <main className="content">
+          <QuestionList></QuestionList>
+        </main>
+      </MainContainer>
+    </PageContainer>
   );
 };
 
