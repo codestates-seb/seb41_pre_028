@@ -2,7 +2,7 @@ import ButtonBox from "../components/login/ButtonBox";
 import Inputbox from "../components/login/InputBox";
 const LoginPage = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-[#f1f2f3]">
+    <div className="flex justify-center items-center h-screen w-full bg-[#f1f2f3]">
       <div className="flex flex-col ">
         <div className="flex justify-center items-center mb-4">
           <img

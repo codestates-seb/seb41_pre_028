@@ -26,3 +26,16 @@ code {
   display: grid;
   grid-template-rows: 1fr 4fr 1fr;
 }
+
+.logo-img{
+  background: url(https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27) no-repeat;
+  background-position: 0 -500px;
+}
+
+:root{
+  /** 컨테이너 최대 늘어날 수 있는 너비 지정 **/
+  --screen-full: 80rem;
+
+  /** spacing variable **/
+  --h-header: 50px;
+}

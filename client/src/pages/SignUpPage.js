@@ -2,7 +2,7 @@ import ButtonBox from "../components/login/ButtonBox";
 import InputBox from "../components/login/InputBox";
 const SignUpPage = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-[#f1f2f3]">
+    <div className="flex justify-center items-center h-screen w-full bg-[#f1f2f3]">
       <div className=" flex flex-col justify-center gap-5  max-[640px]:flex-row">
         <h1 className="text-3xl mb-8 max-[640px]:hidden">
           Join the Stack Overflow community

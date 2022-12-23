@@ -1,24 +1,28 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/header/Header";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/MainPage";
+import QuestionsPage from "./pages/QuestionsPage";
+import UserPage from "./pages/UserPage";
 import CreateQuestion from "./pages/CreateQuestion";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <div className="fixed top-0 w-screen  bg-[#F8F9F9] flex justify-center">
-          <Link to="/createQuestion"> Quick Question </Link>
-          <Link to="/"> Home</Link>
-          <Link to="/login"> Sign Up </Link>
-          <Link to="/signup"> Sign In </Link>
-        </div>
+      <Header />
+      <div className="w-screen flex justify-center">
         <Routes>
+          <Route path="/" element={<MainPage />}></Route>
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/createQuestion" element={<CreateQuestion />} />
+          <Route path="/questions" element={<QuestionsPage />}></Route>
+          <Route path="/users" element={<UserPage />}></Route>
+          <Route path="/users/:id" element={<UserPage />}></Route>
+          <Route path="/*" element={<MainPage />} />
         </Routes>
-      </BrowserRouter>
+      </div>
     </div>
   );
 }
