@@ -20,7 +20,6 @@ const InputPrimary = ({ placeholder }) => {
         data-max-length="150"
         onChange={onChangeTitle}
       />
-      <div className="flex flex-column items-center">{title}</div>
     </div>
   );
 };

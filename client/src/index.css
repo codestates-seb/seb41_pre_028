@@ -21,3 +21,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.main-body {
+  display: grid;
+  grid-template-rows: 1fr 4fr 1fr;
+}
