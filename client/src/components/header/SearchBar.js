@@ -1,19 +1,18 @@
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { change } from "../../features/search/searchSlice";
+import { change } from "../../features/searchSlice";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput = styled.input`
-  flex-grow: 1;
-  height: 100%;
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
-  div {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: white;
-  }
+  border: 1px solid #babfc4;
+  padding-left: 32px;
 `;
 
 const SearchBar = () => {
@@ -33,14 +32,19 @@ const SearchBar = () => {
     // action 생성자 함수로 넘겨주는 인자는 action.payload에 저장됨
     dispatch(change(e.target.value));
   };
+
   return (
-    <div>
+    <div className="w-full max-h-max">
       <SearchInput
         type="text"
         placeholder="Search..."
         onKeyUp={handleKeyUp}
         onChange={handleChange}
       ></SearchInput>
+      <FontAwesomeIcon
+        icon={faMagnifyingGlass}
+        className="absolute top-1/2 mt-[-9px] left-28"
+      />
     </div>
   );
 };

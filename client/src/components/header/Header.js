@@ -19,7 +19,7 @@ const Header = () => {
         <Link to={"/"} className="h-full flex items-center justify-center">
           <span className="logo-img h-[30px] w-[150px] mt-[-4px]"></span>
         </Link>
-        <div>
+        <div className="h-full flex items-center justify-center grow">
           <SearchBar></SearchBar>
         </div>
         {/** 로그인&비로그인 다르게 보여줌 */}
@@ -28,10 +28,10 @@ const Header = () => {
           <li>로그아웃</li>
         </ul> */}
         <ul className="flex flex-row">
-          <li>
+          <li className="flex items-center justify-center">
             <SecondaryLink to={"/login"}>Log in</SecondaryLink>
           </li>
-          <li>
+          <li className="flex items-center justify-center">
             <PrimaryLink to={"/signup"}>Sign up</PrimaryLink>
           </li>
         </ul>
