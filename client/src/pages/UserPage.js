@@ -5,7 +5,7 @@ const UserPage = () => {
   return (
     <PageContainer>
       <MainContainer>
-        <SideBar className="side-bar"></SideBar>
+        <SideBar></SideBar>
         <main className="content">Top Questions</main>
       </MainContainer>
     </PageContainer>

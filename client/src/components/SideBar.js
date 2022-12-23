@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
-    <nav>
+    <nav className="side-bar">
       <Link to={"/"}>Home</Link>
       <ul className="flex flex-col">
         <Link to={"/questions"}>Questions</Link>
