@@ -1,12 +1,14 @@
-import MainContainer from "../components/MainContainer";
+import { PageContainer, MainContainer } from "../components/StyledContainer";
 import SideBar from "../components/SideBar";
 
 const MainPage = () => {
   return (
-    <MainContainer>
-      <SideBar></SideBar>
-      <main>Top Questions</main>
-    </MainContainer>
+    <PageContainer>
+      <MainContainer>
+        <SideBar></SideBar>
+        <main className="content">Top Questions</main>
+      </MainContainer>
+    </PageContainer>
   );
 };
 
