@@ -1,6 +1,8 @@
+// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import axios from "axios";
 const ErrSign = styled.div`
   background-color: rgba(255, 0, 0, 0.2);
   border: 1px solid red;
@@ -21,6 +23,30 @@ const InputBox = ({ isSignup }) => {
 
   const onClickLogin = (data) => {
     console.log(data);
+    if (data.nickName) {
+      axios
+        .post("/users/signup", {
+          nickname: data.nickName,
+          password: data.password,
+          email: data.email,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("회원가입 성공");
+          }
+        });
+    } else if (!data.nickName) {
+      axios
+        .post("/users/login", {
+          email: data.email,
+          password: data.password,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("로그인 성공");
+          }
+        });
+    }
   };
   const onError = (error) => {
     console.log(error);
@@ -38,12 +64,22 @@ const InputBox = ({ isSignup }) => {
         ) : null}
         {isSignup ? (
           <input
-            id="displayname"
+            id="nickName"
             type="text"
+            name="nickName"
             className="border-[#f1f2f3] border-solid border-2 rounded h-9"
             required
+            {...register("nickName", {
+              maxLength: 20,
+              minLength: 2,
+            })}
           ></input>
         ) : null}
+        {errors.nickName && (
+          <ErrSign>
+            {<span>{"닉네임은 2글자이상 20글자 미만으로 작성해주세요."}</span>}
+          </ErrSign>
+        )}
         <label htmlFor="email" className="mb-1 font-bold">
           Email
         </label>
