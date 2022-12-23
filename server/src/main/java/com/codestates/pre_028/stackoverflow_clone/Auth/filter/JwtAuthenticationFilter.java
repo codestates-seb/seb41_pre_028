@@ -40,6 +40,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         return authenticationManager.authenticate(authenticationToken);
     }
 
+    // 인증 request & response
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
@@ -49,9 +50,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String accessToken = delegateAccessToken(user);
         String refreshToken = delegateRefreshToken(user);
-        Cookie jwt = new Cookie("jwt_token", accessToken);
 
-        response.addCookie(jwt);// 쿠키 세팅
+        Cookie cookie = new Cookie("jwt_token", accessToken);
+        cookie.setDomain("/");
+        cookie.setHttpOnly(true);
+
+        response.addCookie(cookie);// 쿠키 세팅
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("Refresh", refreshToken);
 
