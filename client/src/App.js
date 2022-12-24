@@ -10,11 +10,10 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<MainPage />}></Route>
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/createQuestion" element={<CreateQuestion />} />
-        <Route path="/*" element={<MainPage />} />
+        <Route path="*" element={<MainPage />} />
       </Routes>
     </div>
   );
