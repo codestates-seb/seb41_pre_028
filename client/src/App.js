@@ -17,8 +17,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/createQuestion" element={<CreateQuestion />} />
         <Route path="/questions" element={<QuestionsPage />}></Route>
+        <Route path="/questions/:id" element={<QuestionsPage />}></Route>
+        <Route path="/questions/:word" element={<QuestionsPage />}></Route>
         <Route path="/users" element={<UserPage />}></Route>
-        <Route path="/users/:id" element={<UserPage />}></Route>
+        <Route path="/users/:userId" element={<UserPage />}></Route>
         <Route path="/*" element={<MainPage />} />
       </Routes>
     </div>

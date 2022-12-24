@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { getQuestionList } from "../../api/question";
-import { PrimaryLink } from "../StyledLink";
+import { getQuestionList } from "../../utils/api/question";
 import Question from "./Question";
 
 const QuestionList = () => {
   const [questionList, setQuestionList] = useState([]);
-
   useEffect(() => {
     getQuestionList()
       .then((res) => setQuestionList(res.data))
@@ -14,24 +12,17 @@ const QuestionList = () => {
 
   return (
     <div>
-      <div>
-        <div className="flex flex-row items-center justify-between">
-          <h1 className="text-title-size">All Questions</h1>
-          <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
-        </div>
-        <div className="flex flex-row">
-          <div>23,350 questions</div>
-          <div>
-            <div>filter zone</div>
-          </div>
-        </div>
+      <div className="flex flex-row justify-between">
+        <div>23,350 questions</div>
         <div>
-          {questionList.map((el) => (
-            <Question key={el.id} question={el}></Question>
-          ))}
+          <div>filter zone</div>
         </div>
       </div>
-      <div></div>
+      <div className="border-t border-[#e3e6e8]">
+        {questionList.map((el) => (
+          <Question key={el.id} question={el}></Question>
+        ))}
+      </div>
     </div>
   );
 };
