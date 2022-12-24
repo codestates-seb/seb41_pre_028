@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
 import { PrimaryLink } from "../components/StyledLink";
-import { PageContainer, MainContainer } from "../components/StyledContainer";
 import QuestionList from "../components/question/QuestionList";
-import SideBar from "../components/sideBar/SideBar";
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -31,21 +29,16 @@ const ContentWrapper = styled.div`
 `;
 const QuestionsPage = () => {
   return (
-    <PageContainer>
-      <MainContainer>
-        <SideBar></SideBar>
-        <ContentWrapper className="content">
-          <main>
-            <div className="flex flex-row items-center justify-between mb-[12px]">
-              <h1 className="text-title-size">All Questions</h1>
-              <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
-            </div>
-            <QuestionList></QuestionList>
-          </main>
-          <aside>광고광고</aside>
-        </ContentWrapper>
-      </MainContainer>
-    </PageContainer>
+    <ContentWrapper className="content">
+      <main>
+        <div className="flex flex-row items-center justify-between mb-[12px]">
+          <h1 className="text-title-size">All Questions</h1>
+          <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
+        </div>
+        <QuestionList></QuestionList>
+      </main>
+      <aside>광고광고</aside>
+    </ContentWrapper>
   );
 };
 
