@@ -1,9 +1,9 @@
-import SideBar from "../components/sideBar/SideBar";
-import QuestionList from "../components/question/QuestionList";
-import { PageContainer, MainContainer } from "../components/StyledContainer";
-import { PrimaryLink } from "../components/StyledLink";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
+import { PrimaryLink } from "../components/StyledLink";
+import { PageContainer, MainContainer } from "../components/StyledContainer";
+import QuestionList from "../components/question/QuestionList";
+import SideBar from "../components/sideBar/SideBar";
 
 const ContentWrapper = styled.div`
   display: flex;

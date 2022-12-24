@@ -34,7 +34,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-h-max relative">
+    <div className="w-full max-h-max relative rounded-[3px]">
       <SearchInput
         type="text"
         placeholder="Search..."

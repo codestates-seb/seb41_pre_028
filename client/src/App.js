@@ -2,10 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import CreateQuestion from "./pages/CreateQuestion";
 import MainPage from "./pages/MainPage";
 import QuestionsPage from "./pages/QuestionsPage";
 import UserPage from "./pages/UserPage";
-import CreateQuestion from "./pages/CreateQuestion";
 
 function App() {
   return (
