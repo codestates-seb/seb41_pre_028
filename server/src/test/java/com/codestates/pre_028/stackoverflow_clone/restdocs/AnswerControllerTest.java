@@ -86,9 +86,9 @@ public class AnswerControllerTest {
         //then
         actions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.data.userId").value(response.getUserId()))
-                .andExpect(jsonPath("$.data.questionId").value(response.getQuestionId()))
-                .andExpect(jsonPath("$.data.content").value(response.getContent()))
+                .andExpect(jsonPath("$.data.userId").value(post.getUserId()))
+                .andExpect(jsonPath("$.data.questionId").value(post.getQuestionId()))
+                .andExpect(jsonPath("$.data.content").value(post.getContent()))
                 .andDo(document(
                         "post-answer",
                         getRequestPreProcessor(),

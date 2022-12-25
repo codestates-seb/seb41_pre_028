@@ -14,36 +14,38 @@ import java.time.LocalDateTime;
 
 public class CommentDto {
 
+    @Setter //test stub을 위해 추가
     @Getter
     public static class Post{
         @Positive
-        private long userId;
+        private Long userId;
 
         @Positive
-        private long questionId;
+        private Long questionId;
 
         @Positive
-        private long answerId;
+        private Long answerId;
 
         @NotBlank
         private String content;
+
     }
 
+    @Setter //test stub을 위해 추가
     @Getter
     public static class Patch{
-        private long commentId;
+        private Long commentId;
         private String content;
     }
 
-    @NoArgsConstructor  //stub controller 위해
-    @AllArgsConstructor //stub controller 위해
+
     @Getter
     @Setter
     public static class Response{
-        private long commentId;
-        private long answerId;
-        private long userId;
-        private long questionId;
+        private Long commentId;
+        private Long answerId;
+        private Long userId;
+        private Long questionId;
         private String content;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
@@ -56,6 +58,8 @@ public class CommentDto {
 //        public void setQuestion(Question question){
 //            this.questionId = question.getQuestionId();
 //        }
+
+        //for dto
         public void setAnswer(Answer answer){
             this.answerId = answer.getAnswerId();
         }
