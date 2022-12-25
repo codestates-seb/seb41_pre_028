@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const SideBar = () => {
+const SideBarNav = () => {
   return (
     <nav>
       <Link to={"/"}>Home</Link>
@@ -12,4 +12,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default SideBarNav;
