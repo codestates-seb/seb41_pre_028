@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
-import { PrimaryLink, SecondaryLink } from "./StyledLink";
+import { PrimaryLink, SecondaryLink } from "../StyledLink";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -14,23 +14,24 @@ const HeaderContainer = styled.div`
 
 const Header = () => {
   return (
-    <header className="fixed top-0 z-300 w-screen h-header-height bg-[#F8F9F9] flex justify-center">
+    <header className="fixed top-0 z-40 w-screen h-header-height bg-[#F8F9F9] flex justify-center">
       <HeaderContainer>
         <Link to={"/"} className="h-full flex items-center justify-center">
           <span className="logo-img h-[30px] w-[150px] mt-[-4px]"></span>
         </Link>
-        <div>
+        <div className="h-full flex items-center justify-center grow">
           <SearchBar></SearchBar>
         </div>
+        {/** 로그인&비로그인 다르게 보여줌 */}
         {/* <ul className="flex flex-row">
           <li>프로필</li>
           <li>로그아웃</li>
         </ul> */}
         <ul className="flex flex-row">
-          <li>
+          <li className="flex items-center justify-center">
             <SecondaryLink to={"/login"}>Log in</SecondaryLink>
           </li>
-          <li>
+          <li className="flex items-center justify-center">
             <PrimaryLink to={"/signup"}>Sign up</PrimaryLink>
           </li>
         </ul>

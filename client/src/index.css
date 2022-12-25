@@ -38,4 +38,7 @@ code {
 
   /** spacing variable **/
   --h-header: 50px;
+
+  /** font size **/
+  --fs-title: 24px;
 }
