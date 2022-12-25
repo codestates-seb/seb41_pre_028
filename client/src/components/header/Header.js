@@ -14,8 +14,8 @@ const HeaderContainer = styled.div`
 
 const Header = () => {
   return (
-    <header className="fixed top-0 w-screen h-header-height bg-[#F8F9F9] flex justify-center">
-      <HeaderContainer>
+    <header className="z-40 fixed top-0 w-screen h-header-height bg-[#F8F9F9] flex justify-center">
+      <HeaderContainer className="">
         <Link to={"/"} className="h-full flex items-center justify-center">
           <span className="logo-img h-[30px] w-[150px] mt-[-4px]"></span>
         </Link>

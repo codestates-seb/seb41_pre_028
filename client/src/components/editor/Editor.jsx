@@ -5,30 +5,13 @@ import { BufferMd5 } from "../buffer/Buffer.jsx";
 const Editor = () => {
   const [value, setValue] = useState("");
   return (
-    <div className="container">
+    <div className="z-0 container">
       <MDEditor
+        className="z-0"
         data-color-mode="light"
         value={value}
         onChange={setValue}
         preview="edit"
-        components={{
-          toolbar: (command, disabled, executeCommand) => {
-            if (command.keyCommand === "code") {
-              return (
-                <button
-                  aria-label="Insert code"
-                  disabled={disabled}
-                  onClick={(evn) => {
-                    evn.stopPropagation();
-                    executeCommand(command, command.groupName);
-                  }}
-                >
-                  Code
-                </button>
-              );
-            }
-          },
-        }}
       />
       <BufferMd5 />
       <div> {value}</div>
