@@ -35,6 +35,11 @@ public class CommentDto {
     @Getter
     public static class Patch{
         private Long commentId;
+
+        private Long questionId;
+
+        private Long answerId;
+
         private String content;
     }
 
