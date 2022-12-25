@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getQuestionList } from "../api/question";
+import { getQuestionList } from "../utils/api/question";
 
 // 사용해야 하는 이유??
 // 액션 타입 문자열, 프로미스를 반환하는 비동기 함수, 추가 옵션 순서대로 인자를 받는 함수
@@ -12,6 +12,7 @@ const asyncGetQuestions = createAsyncThunk(
 );
 
 const initialState = {
+  status: "",
   data: [],
 };
 
@@ -24,14 +25,14 @@ export const questionsSlice = createSlice({
   initialState,
   // 비동기 상태 제어는 extraReducers 에서 한다.
   extraReducers: (builder) => {
-    builder.addCase(asyncGetQuestions.pending, (state, action) => {
+    builder.addCase(asyncGetQuestions.pending, (state) => {
       state.status = "Loading";
     });
     builder.addCase(asyncGetQuestions.fulfilled, (state, action) => {
       state.value = action.payload;
       state.status = "complete";
     });
-    builder.addCase(asyncGetQuestions.rejected, (state, action) => {
+    builder.addCase(asyncGetQuestions.rejected, (state) => {
       state.status = "fail";
     });
   },

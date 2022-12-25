@@ -25,6 +25,7 @@ const QuestionList = () => {
 
   useEffect(() => {
     console.log(query.get("tab"));
+
     getQuestionList()
       .then((res) => setQuestionList(res.data))
       .catch((err) => console.log(err));
