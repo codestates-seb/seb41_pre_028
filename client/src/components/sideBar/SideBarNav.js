@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-const SideBar = () => {
+const SideBarNav = () => {
   return (
-    <nav className="side-bar">
+    <nav>
       <Link to={"/"}>Home</Link>
       <ul className="flex flex-col">
         <Link to={"/questions"}>Questions</Link>
@@ -12,4 +12,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default SideBarNav;

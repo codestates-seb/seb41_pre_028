@@ -4,7 +4,7 @@ import Editor from "../components/editor/Editor.jsx";
 import { Button } from "@mui/material";
 import { PageContainer, MainContainer } from "../components/StyledContainer";
 
-const CreateQuestion = () => {
+const CreateQuestionPage = () => {
   return (
     <PageContainer className="bg-[#f1f2f3]">
       <MainContainer>
@@ -106,4 +106,4 @@ const CreateQuestion = () => {
   );
 };
 
-export default CreateQuestion;
+export default CreateQuestionPage;

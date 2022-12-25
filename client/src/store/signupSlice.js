@@ -17,7 +17,7 @@ export const SignupUser = createAsyncThunk(
   }
 );
 
-const SignupSlice = createSlice({
+const signupSlice = createSlice({
   name: "signup",
   initialState: {
     nickName: "",
@@ -44,4 +44,4 @@ const SignupSlice = createSlice({
   },
 });
 
-export default SignupSlice.reducer;
+export default signupSlice.reducer;

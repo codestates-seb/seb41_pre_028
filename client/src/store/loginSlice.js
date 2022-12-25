@@ -11,7 +11,7 @@ export const loginUser = createAsyncThunk("login/loginUser", async (data) => {
   await wait(1000).then(() => console.log("로그인 성공"));
 });
 
-const LoginSlice = createSlice({
+const loginSlice = createSlice({
   name: "login",
   initialState: {
     email: "",
@@ -40,4 +40,4 @@ const LoginSlice = createSlice({
     },
   },
 });
-export default LoginSlice.reducer;
+export default loginSlice.reducer;

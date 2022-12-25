@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 // import { LoginAPI } from "../api/LoginAPI";
 // import { SignupAPI } from "../api/SignupAPI";
-import { loginUser } from "../store/loginSlice";
-import { SignupUser } from "../store/signupSlice";
+
+import { loginUser } from "../../store/loginSlice";
+import { SignupUser } from "../../store/signupSlice";
+
 import { useDispatch, useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useNavigate } from "react-router-dom";

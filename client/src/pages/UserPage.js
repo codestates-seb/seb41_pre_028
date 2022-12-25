@@ -1,15 +1,8 @@
-import SideBar from "../components/SideBar";
-import { PageContainer, MainContainer } from "../components/StyledContainer";
+import { useParams } from "react-router-dom";
 
 const UserPage = () => {
-  return (
-    <PageContainer>
-      <MainContainer>
-        <SideBar></SideBar>
-        <main className="content">Top Questions</main>
-      </MainContainer>
-    </PageContainer>
-  );
+  const { userId } = useParams();
+  return <main className="content">userId가 {userId}인 사람의 페이지</main>;
 };
 
 export default UserPage;
