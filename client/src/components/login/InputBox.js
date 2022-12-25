@@ -1,8 +1,14 @@
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import axios from "axios";
+// import { LoginAPI } from "../api/LoginAPI";
+// import { SignupAPI } from "../api/SignupAPI";
+import { loginUser } from "../store/loginSlice";
+import { SignupUser } from "../store/signupSlice";
+import { useDispatch, useSelector } from "react-redux";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useNavigate } from "react-router-dom";
+import Button from "../button/Button";
 const ErrSign = styled.div`
   background-color: rgba(255, 0, 0, 0.2);
   border: 1px solid red;
@@ -15,6 +21,12 @@ const ErrSign = styled.div`
 `;
 
 const InputBox = ({ isSignup }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isFetching, isLogined } = useSelector((state) => state.login);
+  console.log("isFetching", isFetching);
+  console.log("isLogined", isLogined);
+
   const {
     register,
     handleSubmit,
@@ -22,32 +34,15 @@ const InputBox = ({ isSignup }) => {
   } = useForm();
 
   const onClickLogin = (data) => {
-    console.log(data);
-    if (data.nickName) {
-      axios
-        .post("/users/signup", {
-          nickname: data.nickName,
-          password: data.password,
-          email: data.email,
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("회원가입 성공");
-          }
-        });
-    } else if (!data.nickName) {
-      axios
-        .post("/users/login", {
-          email: data.email,
-          password: data.password,
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("로그인 성공");
-          }
-        });
+    if (data.nickname) {
+      dispatch(SignupUser(data)).then(() =>
+        navigate("/login", { replace: true })
+      );
+    } else if (!data.nickname) {
+      dispatch(loginUser(data));
     }
   };
+
   const onError = (error) => {
     console.log(error);
   };
@@ -64,18 +59,18 @@ const InputBox = ({ isSignup }) => {
         ) : null}
         {isSignup ? (
           <input
-            id="nickName"
+            id="nickname"
             type="text"
-            name="nickName"
+            name="nickname"
             className="border-[#f1f2f3] border-solid border-2 rounded h-9"
             required
-            {...register("nickName", {
+            {...register("nickname", {
               maxLength: 20,
               minLength: 2,
             })}
           ></input>
         ) : null}
-        {errors.nickName && (
+        {errors.nickname && (
           <ErrSign>
             {<span>{"닉네임은 2글자이상 20글자 미만으로 작성해주세요."}</span>}
           </ErrSign>
@@ -124,9 +119,14 @@ const InputBox = ({ isSignup }) => {
             1 letter and 1 number.
           </p>
         ) : null}
-        <button className="bg-[#0995ff] rounded text-white mt-3 p-1.5 hover:bg-[#0162bf]">
-          {isSignup ? "Sign Up" : "Log in"}
-        </button>
+        {!isLogined ? (
+          <button className="flex justify-center items-center bg-[#0995ff] rounded text-white mt-3  p-1.5 hover:bg-[#0162bf]">
+            {isFetching && <ClipLoader className="mr-2" size={20} />}
+            {isSignup ? "Sign Up" : "Log in"}
+          </button>
+        ) : (
+          <Button text={"text"}></Button>
+        )}
       </form>
     </div>
   );
