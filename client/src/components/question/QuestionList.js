@@ -1,29 +1,30 @@
 import { useEffect, useMemo, useState } from "react";
 import { getQuestionList } from "../../utils/api/question";
+import useQuery from "../../hooks/useQuery";
 import Question from "./Question";
 import FilterBar from "../FilterBar";
 
 const QuestionList = () => {
   const [questionList, setQuestionList] = useState([]);
   const [curFilter, setCurFilter] = useState(1);
-
+  const query = useQuery(); // URLSearchParams 객체 불러옴
   const filterList = [
     {
       id: 1,
-      name: "newest",
+      name: "Newest",
     },
     {
       id: 2,
-      name: "latest",
+      name: "Latest",
     },
     {
       id: 3,
-      name: "test",
+      name: "Test",
     },
   ];
 
   useEffect(() => {
-    console.log(curFilter);
+    console.log(query.get("tab"));
     getQuestionList()
       .then((res) => setQuestionList(res.data))
       .catch((err) => console.log(err));
@@ -33,16 +34,14 @@ const QuestionList = () => {
 
   return (
     <div className="sm:ml-[-24px]">
-      <div className="sm:ml-[24px] flex flex-row justify-between">
+      <div className="sm:ml-[24px] mb-[12px] flex flex-row justify-between items-center">
         <div>{questionsLength} questions</div>
         <div>
-          <div>
-            <FilterBar
-              filterList={filterList}
-              curFilter={curFilter}
-              setCurFilter={setCurFilter}
-            ></FilterBar>
-          </div>
+          <FilterBar
+            filterList={filterList}
+            curFilter={curFilter}
+            setCurFilter={setCurFilter}
+          ></FilterBar>
         </div>
       </div>
       <div className="border-t border-[#e3e6e8]">

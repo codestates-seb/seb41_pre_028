@@ -3,6 +3,7 @@ import SideBar from "../components/sideBar/SideBar";
 import QuestionsPage from "./QuestionsPage";
 import UsersPage from "./UsersPage";
 import UserPage from "./UserPage";
+import QuestionDetail from "./QuestionDetail";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
 
@@ -40,6 +41,7 @@ const MainPage = () => {
         <SideBar></SideBar>
         <Routes>
           <Route path="/questions" element={<QuestionsPage />}></Route>
+          <Route path="/questions/:qId" element={<QuestionDetail />}></Route>
           <Route path="/users" element={<UsersPage />}></Route>
           <Route path="/users/:userId" element={<UserPage />}></Route>
           <Route path="/*" element={<QuestionsPage />}></Route>
