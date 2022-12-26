@@ -28,13 +28,12 @@ public class Answer extends AuditingFields {
     @Column(length = 20,nullable = false)
     private AnswerStatus answerStatus = AnswerStatus.ANSWER_NORMAL;
 
-//    @ManyToOne
-//    @JoinColumn(name = "QUESTION_ID")
-//    private Question question;
-
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
 
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments = new ArrayList<>();
