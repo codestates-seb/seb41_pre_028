@@ -1,14 +1,23 @@
 package com.codestates.pre_028.stackoverflow_clone.Question.service;
 
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
+import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class QuestionService {
+
+    private final QuestionRepository questionRepository;
+
+    public QuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
+
     public Question createQuestion(Question question) {
         Question createdQuestion = question;
+        createdQuestion = questionRepository.save(question);
         return createdQuestion;
     }
 
@@ -18,6 +27,7 @@ public class QuestionService {
     }
 
     public Question findQuestion(long questionId) {
+
         Question question = new Question("제목","내용","태그");
         return question;
 

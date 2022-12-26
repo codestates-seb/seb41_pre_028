@@ -2,6 +2,7 @@ package com.codestates.pre_028.stackoverflow_clone.answer.entity;
 //추후주석제거
 
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import jakarta.persistence.*;
@@ -28,13 +29,12 @@ public class Answer extends AuditingFields {
     @Column(length = 20,nullable = false)
     private AnswerStatus answerStatus = AnswerStatus.ANSWER_NORMAL;
 
-//    @ManyToOne
-//    @JoinColumn(name = "QUESTION_ID")
-//    private Question question;
-
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
 
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments = new ArrayList<>();

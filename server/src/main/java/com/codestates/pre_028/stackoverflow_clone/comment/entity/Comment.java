@@ -2,6 +2,7 @@ package com.codestates.pre_028.stackoverflow_clone.comment.entity;
 //추후 주석제거
 
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import jakarta.persistence.*;
@@ -22,10 +23,10 @@ public class Comment extends AuditingFields {
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "QUESTION_ID")
-//    private Question question;
+
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
 
     @ManyToOne
     @JoinColumn(name = "ANSWER_ID")
