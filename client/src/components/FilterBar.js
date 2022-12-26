@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const FilterNav = styled.nav`
   display: flex;
   align-items: center;
 
-  > a {
+  > button {
     font-size: 12px;
     padding: 8px 9px;
     border: 1px solid #9fa6ad;
@@ -19,31 +18,37 @@ const FilterNav = styled.nav`
     color: #3b4045;
   }
 
-  > a:nth-child(1) {
+  > button:nth-child(1) {
     border-radius: 3px 0px 0px 3px;
   }
 
-  > a:nth-last-child(1) {
+  > button:nth-last-child(1) {
     border-radius: 0px 3px 3px 0px;
   }
 `;
 
-const FilterBar = ({ filterList, curFilter, setCurFilter }) => {
+const FilterBar = ({
+  filterList,
+  curFilter,
+  setCurFilter,
+  setSearchParams,
+}) => {
   return (
     <FilterNav>
-      {filterList.map((el) => (
-        <Link
-          to={`?tab=${el.name}`}
-          value={el.name}
-          className={el.id === curFilter ? "focus" : ""}
-          key={el.id}
-          onClick={() => setCurFilter(el.id)}
+      {filterList.map((el, idx) => (
+        <button
+          value={el}
+          className={el === curFilter ? "focus" : ""}
+          key={idx}
+          onClick={() => {
+            setCurFilter(el);
+            setSearchParams({ tab: el });
+          }}
         >
-          {el.name}
-        </Link>
+          {el}
+        </button>
       ))}
     </FilterNav>
   );
 };
-
 export default FilterBar;

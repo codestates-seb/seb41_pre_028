@@ -27,6 +27,7 @@ const ContentWrapper = styled.div`
     `};
   }
 `;
+
 const QuestionsPage = () => {
   return (
     <ContentWrapper className="content">
