@@ -53,7 +53,7 @@ public class AnswerController {
     public ResponseEntity getAnswer(@PathVariable("id") @Positive long answerId){
 
         Answer answer = answerService.findAnswer(answerId);
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.OK);
     }
 

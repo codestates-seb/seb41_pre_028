@@ -1,14 +1,12 @@
 package com.codestates.pre_028.stackoverflow_clone.comment.dto;
 //추후 주석제거
+import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 //import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
 //import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,10 +18,8 @@ public class CommentDto {
         @Positive
         private Long userId;
 
-        @Positive
         private Long questionId;
 
-        @Positive
         private Long answerId;
 
         @NotBlank
@@ -42,6 +38,7 @@ public class CommentDto {
 
         private String content;
     }
+
 
 
     @Getter
@@ -67,6 +64,10 @@ public class CommentDto {
         //for dto
         public void setAnswer(Answer answer){
             this.answerId = answer.getAnswerId();
+        }
+
+        public void setUser(User user) {
+            this.userId = user.getUserId();
         }
     }
 }

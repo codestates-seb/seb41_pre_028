@@ -1,5 +1,9 @@
 package com.codestates.pre_028.stackoverflow_clone.comment.service;
 
+import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
+import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
+import com.codestates.pre_028.stackoverflow_clone.answer.repository.AnswerRepository;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import com.codestates.pre_028.stackoverflow_clone.comment.repository.CommentRepository;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
@@ -15,14 +19,24 @@ import java.util.Optional;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final AnswerRepository answerRepository;
+    private final UserRepository userRepository;
 
-    public CommentService(CommentRepository commentRepository){
+    public CommentService(CommentRepository commentRepository, AnswerRepository answerRepository, UserRepository userRepository) {
         this.commentRepository = commentRepository;
+        this.answerRepository = answerRepository;
+        this.userRepository = userRepository;
     }
 
-
     public Comment createComment(Comment comment){
+        Answer answer = answerRepository.getReferenceById(comment.getAnswer().getAnswerId());
+        User user = userRepository.getReferenceById(comment.getUser().getUserId());
+
+        comment.setAnswer(answer);
+        comment.setUser(user);
+
         Comment savedComment = commentRepository.save(comment);
+
         return savedComment;
     }
 

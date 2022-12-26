@@ -5,6 +5,7 @@ import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer.AnswerStatus;
 //import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
 //import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
+import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
@@ -14,6 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 
 public class AnswerDto {
@@ -55,6 +58,7 @@ public class AnswerDto {
         private String email;
         private String nickname;
         private String content;
+        private List<Comment> comments;
         private AnswerStatus answerStatus;
 
         private LocalDateTime createdAt;

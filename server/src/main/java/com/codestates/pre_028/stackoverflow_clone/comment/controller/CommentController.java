@@ -37,6 +37,7 @@ public class CommentController {
         commentPostDto.setAnswerId(answerId);
         Comment comment = commentService.createComment(mapper.commentPostDtoToComment(commentPostDto));
 
+
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)),HttpStatus.CREATED);
     }
