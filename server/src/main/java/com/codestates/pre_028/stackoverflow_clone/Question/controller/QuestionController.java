@@ -21,7 +21,7 @@ public class QuestionController {
     private final QuestionMapper mapper;
 
     public QuestionController(QuestionService questionService, QuestionMapper mapper) {
-        this.questionService = new QuestionService();
+        this.questionService = questionService ;
         this.mapper = mapper;
     }
 
