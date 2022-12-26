@@ -1,5 +1,4 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.entity;
-//추후주석제거
 
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
