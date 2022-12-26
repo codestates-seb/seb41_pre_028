@@ -37,6 +37,7 @@ public class UserDto {
 
 
     @AllArgsConstructor
+    @Setter
     @Getter
     public static class Response{
         private Long userId;
