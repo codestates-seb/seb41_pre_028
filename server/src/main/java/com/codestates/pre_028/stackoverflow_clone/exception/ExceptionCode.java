@@ -3,15 +3,25 @@ package com.codestates.pre_028.stackoverflow_clone.exception;
 import lombok.Getter;
 
 public enum ExceptionCode {
+
+    ANSWER_NOT_FOUND(404, "Answer not found"),
+    COMMENT_NOT_FOUND(404,"Comment not found");
+
+    @Getter
+    private int status;
+
+    @Getter
+    private String message;
+
     QUESTION_NOT_FOUND(404,"Question Not Found"),
     QUESTION_EXISTS(409, "Question Exists"),
     QUESTION_CANNOT_CHANGE(403,"Question Can Not Be Changed"),
 
-    Comment_NOT_FOUND(404,"Comment Not Found"),
+ 
     Comment_EXISTS(409, "Comment Exists"),
     Comment_CANNOT_CHANGE(403,"Comment Can Not Be Changed"),
 
-    ANSWER_NOT_FOUND(404,"Answer Not Found"),
+  
     ANSWER_EXISTS(409, "Answer Exists"),
     ANSWER_CANNOT_CHANGE(403,"Answer Can Not Be Changed"),
     ANSWER_DELETED(405, "Answer Already Deleted"),
@@ -27,11 +37,6 @@ public enum ExceptionCode {
 
     UNAUTHORIZED(401, "Unauthorized");
 
-
-    @Getter
-    private int status;
-    @Getter
-    private String message;
 
     ExceptionCode(int status, String message){
         this.status = status;
