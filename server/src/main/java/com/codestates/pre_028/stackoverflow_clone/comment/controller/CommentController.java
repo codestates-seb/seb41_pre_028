@@ -92,7 +92,7 @@ public class CommentController {
     }
 */
 
-    @GetMapping("/questions/{id}/comments")
+/*    @GetMapping("/questions/{id}/comments")
     public ResponseEntity getQuestionComments(@PathVariable("id") @Positive Long questionId,
                                               @Positive @RequestParam int page,
                                               @Positive @RequestParam int size){
@@ -103,7 +103,7 @@ public class CommentController {
                 new MultiResponseDto<>(mapper.commentsToCommentResponseDtos(comments),
                         pageComments), HttpStatus.OK);
 
-    }
+    }*/
 
     @DeleteMapping("/answers/{id}/comments/{comment_id}")
     public ResponseEntity deleteAnswerComment(@PathVariable("id") @Positive Long answerId,
