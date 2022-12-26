@@ -22,11 +22,16 @@ public class AnswerService {
 
     public AnswerService(AnswerRepository answerRepository, UserRepository userRepository){
         this.answerRepository = answerRepository;
+        this.userRepository = userRepository;
     }
 
 
     public Answer createAnswer(Answer answer){
         verifyExistAnswer(answer.getAnswerId());
+        User user = userRepository.getReferenceById(answer.getUser().getUserId());
+
+        answer.setUser(user);
+
         Answer savedAnswer = answerRepository.save(answer);
 
         return savedAnswer;

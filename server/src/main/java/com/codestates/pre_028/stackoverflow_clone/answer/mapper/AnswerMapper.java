@@ -6,18 +6,25 @@ import com.codestates.pre_028.stackoverflow_clone.User.mapper.UserMapper;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 //import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
 //import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
+
+
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
 
     List<AnswerDto.Response> answersToAnswerResponseDtos(List<Answer> answers);
 
     default Answer answerPostDtoToAnswer(AnswerDto.Post answerPostDto){
         Answer answer = new Answer();
+        User user = new User();
+        user.setUserId(answerPostDto.getUserId());
+        
+
 //        Question question = new Question();
 //        question.setQuestionId(answerPostDto.getQuestionId());
 //        answer.setQuestion(question);
@@ -29,6 +36,7 @@ public interface AnswerMapper {
 
     default AnswerDto.Response answerToAnswerResponseDto(Answer answer){
         AnswerDto.Response answerDtoResponse = new AnswerDto.Response();
+
 
         answerDtoResponse.setAnswerId(answer.getAnswerId());
         answerDtoResponse.setUser(answer.getUser());
