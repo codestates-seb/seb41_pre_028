@@ -4,38 +4,42 @@ import lombok.Getter;
 
 public enum ExceptionCode {
 
-    ANSWER_NOT_FOUND(404, "Answer not found"),
-    COMMENT_NOT_FOUND(404,"Comment not found");
 
-    @Getter
-    private int status;
+    ANSWER_NOT_FOUND(404,"Answer not found"),
 
-    @Getter
-    private String message;
+    COMMENT_NOT_FOUND(404,"Comment not found"),
 
     QUESTION_NOT_FOUND(404,"Question Not Found"),
-    QUESTION_EXISTS(409, "Question Exists"),
+
+    QUESTION_EXISTS(409,"Question Exists"),
+
     QUESTION_CANNOT_CHANGE(403,"Question Can Not Be Changed"),
 
- 
-    Comment_EXISTS(409, "Comment Exists"),
+
+    Comment_EXISTS(409,"Comment Exists"),
+
     Comment_CANNOT_CHANGE(403,"Comment Can Not Be Changed"),
 
-  
-    ANSWER_EXISTS(409, "Answer Exists"),
+
+    ANSWER_EXISTS(409,"Answer Exists"),
+
     ANSWER_CANNOT_CHANGE(403,"Answer Can Not Be Changed"),
-    ANSWER_DELETED(405, "Answer Already Deleted"),
+
+    ANSWER_DELETED(405,"Answer Already Deleted"),
 
     USER_NOT_FOUND(404,"User Not Found"),
-    EMAIL_EXISTS(409, "Email Exists"),
-    NICKNAME_EXISTS(409, "Nickname Exists"),
 
-    USER_NOT_ALLOWED(403, "User Not Allowed"),
+    EMAIL_EXISTS(409,"Email Exists"),
+
+    NICKNAME_EXISTS(409,"Nickname Exists"),
+
+    USER_NOT_ALLOWED(403,"User Not Allowed"),
+
     USER_CANNOT_CHANGE(403,"User Can Not Be Changed"),
 
-    VOTED(409, "Already Voted"),
+    VOTED(409,"Already Voted"),
 
-    UNAUTHORIZED(401, "Unauthorized");
+    UNAUTHORIZED(401,"Unauthorized");
 
 
     ExceptionCode(int status, String message){
