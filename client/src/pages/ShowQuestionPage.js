@@ -65,6 +65,20 @@ const ShowQuestionPage = () => {
         avatar_img: "../images/identicon1.jpeg",
       },
     },
+    comment: {
+      id: 1,
+      askedAt: "8 years, 4 months ago",
+      modifiedAt: "Today",
+      viewed: "23k",
+      voted: 12,
+      content:
+        "InspiredInspiredInspired by the the CSS style above here is the inline styling for localized Button text transformation Inspired by the the CSS style above here is the inline styling for localized Button text transformation - As was mentioned in the comments above, the material design spec for buttons specifies that the text should be uppercase, but you can easily override its CSS propertyInspiredInspiredInspired by the the CSS style above here is the inline styling for localized Button text transformation Inspired by the the CSS style above here is the inline styling for localized Button text transformation - As was mentioned in the comments above, the material design spec for buttons specifies that the text should be uppercase, but you can easily override its CSS property",
+      author: {
+        id: 2,
+        name: "bakjonghyo",
+        avatar_img: "../images/identicon1.jpeg",
+      },
+    },
   };
 
   return (

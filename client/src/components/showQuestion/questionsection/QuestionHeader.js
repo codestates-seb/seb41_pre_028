@@ -16,7 +16,7 @@ function QuestionHeader({ question }) {
   return (
     <div>
       <div className="mx-3 flex flex-row items-end justify-between">
-        <h1 className="p-0 mt-4 mb-1 font-medium text-2xl">
+        <h1 className="p-0 mt-4 mb-1 font-medium text-3xl">
           <Link to={`/questions/${question.id}`}>{question.title}</Link>
         </h1>
         <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>

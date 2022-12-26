@@ -1,6 +1,7 @@
 import InputPrimary from "../input/inputPrimary.jsx";
 import { useState } from "react";
-
+import { Button } from "@mui/material";
+import { BufferMd5 } from "../buffer/Buffer.jsx";
 const CommentCell = () => {
   const [value, setValue] = useState("");
 
@@ -26,6 +27,11 @@ const CommentCell = () => {
           />
         </div>
       </InputPrimary>
+      <BufferMd5 />
+
+      <Button variant="contained" sx={{ fontSize: 12 }} size="small">
+        Post your Answer
+      </Button>
     </div>
   );
 };
