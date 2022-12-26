@@ -72,16 +72,7 @@ const CreateQuestionPage = () => {
             </p>
             <Editor />
           </div>
-          <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
-            <h2 className="mb-0 font-bold text-xl">
-              What did you try and what were you expecting?
-            </h2>
-            <p className="mb-2 text-sm">
-              Describe what you tried, what you expected to happen, and what
-              actually resulted. Minimum 20 characters.
-            </p>
-            <Editor />
-          </div>
+
           <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
             <h2 className="mb-0 font-bold text-xl">Tags </h2>
             <p className="mb-2 text-sm">

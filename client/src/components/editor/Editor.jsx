@@ -7,7 +7,6 @@ const Editor = () => {
   return (
     <div className="z-0 container">
       <MDEditor
-        className="z-0"
         data-color-mode="light"
         value={value}
         onChange={setValue}
