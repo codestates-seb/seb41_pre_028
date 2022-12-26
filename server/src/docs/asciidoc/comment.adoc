@@ -1,0 +1,115 @@
+= StackOverflowClone Answer API Docs
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Lee Joon Bum <joonbum@gmail.com>
+
+v1.0.0, 2022.12.25
+
+***
+== CommentController
+=== 답변댓글 등록
+.http-request
+include::{snippets}/post-answerComment/http-request.adoc[]
+.path-parameters
+include::{snippets}/post-answerComment/path-parameters.adoc[]
+.request-fields
+include::{snippets}/post-answerComment/request-fields.adoc[]
+.http-response
+include::{snippets}/post-answerComment/http-response.adoc[]
+.response-fields
+include::{snippets}/post-answerComment/response-fields.adoc[]
+
+=== 질문댓글 등록
+.http-request
+include::{snippets}/post-questionComment/http-request.adoc[]
+.path-parameters
+include::{snippets}/post-questionComment/path-parameters.adoc[]
+.request-fields
+include::{snippets}/post-questionComment/request-fields.adoc[]
+.http-response
+include::{snippets}/post-questionComment/http-response.adoc[]
+.response-fields
+include::{snippets}/post-questionComment/response-fields.adoc[]
+
+=== 답변댓글 수정
+.http-request
+include::{snippets}/patch-answerComment/http-request.adoc[]
+.path-parameters
+include::{snippets}/patch-answerComment/path-parameters.adoc[]
+.request-fields
+include::{snippets}/patch-answerComment/request-fields.adoc[]
+.http-response
+include::{snippets}/patch-answerComment/http-response.adoc[]
+.response-fields
+include::{snippets}/patch-answerComment/response-fields.adoc[]
+
+=== 질문댓글 수정
+.http-request
+include::{snippets}/patch-questionComment/http-request.adoc[]
+.path-parameters
+include::{snippets}/patch-questionComment/path-parameters.adoc[]
+.request-fields
+include::{snippets}/patch-questionComment/request-fields.adoc[]
+.http-response
+include::{snippets}/patch-questionComment/http-response.adoc[]
+.response-fields
+include::{snippets}/patch-questionComment/response-fields.adoc[]
+
+=== 답변 댓글 조회
+.http-request
+include::{snippets}/get-answerComments/http-request.adoc[]
+.path-parameters
+include::{snippets}/get-answerComments/path-parameters.adoc[]
+.request-field
+없음
+
+.http-response
+include::{snippets}/get-answerComments/http-response.adoc[]
+.response-fields
+include::{snippets}/get-answerComments/response-fields.adoc[]
+
+=== 질문 댓글 조회
+.http-request
+include::{snippets}/get-questionComments/http-request.adoc[]
+.path-parameters
+include::{snippets}/get-questionComments/path-parameters.adoc[]
+.request-field
+없음
+
+.http-response
+include::{snippets}/get-questionComments/http-response.adoc[]
+.response-fields
+include::{snippets}/get-questionComments/response-fields.adoc[]
+
+
+=== 답변댓글 삭제
+.http-request
+include::{snippets}/delete-answerComment/http-request.adoc[]
+.path-parameters
+include::{snippets}/delete-answerComment/path-parameters.adoc[]
+.request-field
+없음
+
+.http-response
+include::{snippets}/delete-answerComment/http-response.adoc[]
+.response-fields
+없음
+
+=== 질문댓글 삭제
+.http-request
+include::{snippets}/delete-answer/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-answerComment/path-parameters.adoc[]
+.request-field
+없음
+
+.http-response
+include::{snippets}/delete-answerComment/http-response.adoc[]
+.response-fields
+없음
+
