@@ -5,3 +5,11 @@ export const BufferMd5 = () => {
 export const BufferMr5 = () => {
   return <div className="mr-5"></div>;
 };
+
+export const BufferBorder1 = () => {
+  return (
+    <div className="mx-2 border-solid border-[0.5px] border-[#e3e6e8]"></div>
+  );
+};
+
+// border-[#e3e6e8]
