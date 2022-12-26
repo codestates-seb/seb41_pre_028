@@ -41,6 +41,11 @@ public enum ExceptionCode {
 
     UNAUTHORIZED(401,"Unauthorized");
 
+    @Getter
+    private int status;
+
+    @Getter
+    private String message;
 
     ExceptionCode(int status, String message){
         this.status = status;
