@@ -1,6 +1,7 @@
 package com.codestates.pre_028.stackoverflow_clone.User.entity;
 
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
+import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,9 @@ public class User extends AuditingFields {
     @Column(nullable = false) private String password;
     @Column private Integer reputation;
 
+    @OneToMany(mappedBy = "user")
+    private List<Answer> answers = new ArrayList<>();
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
@@ -36,4 +40,6 @@ public class User extends AuditingFields {
         this.nickname = nickname;
         this.reputation = reputation;
     }
+
+
 }
