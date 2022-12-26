@@ -38,4 +38,6 @@ public class AuditingFields {
     @Column(nullable = false, length = 100)
     private String modifiedBy; // 수정자
 
+
 }
+
