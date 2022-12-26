@@ -1,5 +1,6 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.mapper;
 //추후 주석제거
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.mapper.UserMapper;
@@ -30,9 +31,9 @@ public interface AnswerMapper {
         user.setUserId(answerPostDto.getUserId());
 
 
-//        Question question = new Question();
-//        question.setQuestionId(answerPostDto.getQuestionId());
-//        answer.setQuestion(question);
+        Question question = new Question();
+        question.setQuestionId(answerPostDto.getQuestionId());
+        answer.setQuestion(question);
         answer.setUser(user);
         answer.setContent(answerPostDto.getContent());
 
@@ -44,8 +45,8 @@ public interface AnswerMapper {
 
         answerDtoResponse.setAnswerId(answer.getAnswerId());
         answerDtoResponse.setUser(answer.getUser());
-//        answerDtoResponse.setQuestion(answer.getQuestion());
-                          //userId 1 -> 안에 있는 값을 리스트해서 주면 됌
+        answerDtoResponse.setQuestion(answer.getQuestion());
+
         answerDtoResponse.setContent(answer.getContent());
         answerDtoResponse.setAnswerStatus(answer.getAnswerStatus());
 
@@ -65,8 +66,6 @@ public interface AnswerMapper {
 
         answerWithCommentResponseDto.setAnswerId(answer.getAnswerId());
         answerWithCommentResponseDto.setUser(answer.getUser());
-//        answerDtoResponse.setQuestion(answer.getQuestion());
-        //userId 1 -> 안에 있는 값을 리스트해서 주면 됌
         answerWithCommentResponseDto.setContent(answer.getContent());
         answerWithCommentResponseDto.setAnswerStatus(answer.getAnswerStatus());
 

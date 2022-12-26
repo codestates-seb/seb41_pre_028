@@ -1,5 +1,7 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.service;
 
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
+import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
 import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
@@ -19,17 +21,21 @@ public class AnswerService {
 
     AnswerRepository answerRepository;
     UserRepository userRepository;
+    QuestionRepository questionRepository;
 
-    public AnswerService(AnswerRepository answerRepository, UserRepository userRepository){
+
+    public AnswerService(AnswerRepository answerRepository, UserRepository userRepository, QuestionRepository questionRepository) {
         this.answerRepository = answerRepository;
         this.userRepository = userRepository;
+        this.questionRepository = questionRepository;
     }
-
 
     public Answer createAnswer(Answer answer){
         verifyExistAnswer(answer.getAnswerId());
         User user = userRepository.getReferenceById(answer.getUser().getUserId());
+        Question question = questionRepository.getReferenceById(answer.getQuestion().getQuestionId());
 
+        answer.setQuestion(question);
         answer.setUser(user);
 
         Answer savedAnswer = answerRepository.save(answer);

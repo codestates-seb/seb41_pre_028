@@ -5,6 +5,8 @@ import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,12 +31,16 @@ public class Answer extends AuditingFields {
     @Column(length = 20,nullable = false)
     private AnswerStatus answerStatus = AnswerStatus.ANSWER_NORMAL;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+    @JsonManagedReference
 
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments = new ArrayList<>();

@@ -3,6 +3,9 @@ package com.codestates.pre_028.stackoverflow_clone.User.entity;
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
+import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,13 +30,22 @@ public class User extends AuditingFields {
     @Column(nullable = false) private String password;
     @Column private Integer reputation;
 
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
+    @JsonIgnore
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+
     private List<Answer> answers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
+    @JsonIgnore
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
+
+    @JsonIgnore
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
@@ -44,6 +56,20 @@ public class User extends AuditingFields {
         this.password = password;
         this.email = email;
         this.nickname = nickname;
+        this.reputation = reputation;
+    }
+
+    public User(Long userId, String nickname, String email, String password,
+                List<String> roles, List<Question> questions,
+                List<Answer> answers, List<Comment> comments, int reputation){
+        this.userId = userId;
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.questions = questions;
+        this.answers = answers;
+        this.comments = comments;
         this.reputation = reputation;
     }
 

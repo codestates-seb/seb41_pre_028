@@ -27,12 +27,11 @@ public class QuestionController {
 
     //질문 등록
     @PostMapping
-    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.QuestionPostDto questionDto){
+    public ResponseEntity postQuestion(@RequestBody QuestionDto.QuestionPostDto questionDto){
 
-        Question question = mapper.questionPostDtoToQuestion(questionDto);
+        Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionDto));
 
-        Question response = questionService.createQuestion(question);
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(question), HttpStatus.CREATED);
     }
 
     //질문 수정
@@ -55,17 +54,17 @@ public class QuestionController {
     }
 
     //질문 전체 조회
-    @GetMapping
-    public ResponseEntity getQuestions(){
-
-        List<Question> questions = questionService.findQuestions();
-
-        List<QuestionDto.QuestionResponseDto> response = questions.stream()
-                .map(question -> mapper.questionToQuestionResponseDto(question))
-                .collect(Collectors.toList());
-
-        return new ResponseEntity<>(response,HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity getQuestions(){
+//
+//        List<Question> questions = questionService.findQuestions();
+//
+//        List<QuestionDto.QuestionResponseDto> response = questions.stream()
+//                .map(question -> mapper.questionToQuestionResponseDto(question))
+//                .collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(response,HttpStatus.OK);
+//    }
 
     //질문 삭제
     @DeleteMapping("/{question-id}")

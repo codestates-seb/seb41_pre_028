@@ -2,6 +2,8 @@ package com.codestates.pre_028.stackoverflow_clone.Question.service;
 
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
+import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,15 +12,20 @@ import java.util.List;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final UserRepository userRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, UserRepository userRepository) {
         this.questionRepository = questionRepository;
+        this.userRepository = userRepository;
     }
 
     public Question createQuestion(Question question) {
-        Question createdQuestion = question;
-        createdQuestion = questionRepository.save(question);
-        return createdQuestion;
+        User user = userRepository.getReferenceById(question.getUser().getUserId());
+
+        question.setUser(user);
+
+        Question savedQuestion = questionRepository.save(question);
+        return savedQuestion;
     }
 
     public Question updateQuestion(Question question) {
@@ -28,17 +35,12 @@ public class QuestionService {
 
     public Question findQuestion(long questionId) {
 
-        Question question = new Question("제목","내용","태그");
-        return question;
+        return null;
 
     }
 
     public List<Question> findQuestions() {
-        List<Question> questions = List.of(
-                new Question("제목1","내용1","태그1"),
-                new Question("제목2","내용2","태그2")
-        );
-        return questions;
+        return null;
     }
 
     public void deleteQuestion(long questionId) {
