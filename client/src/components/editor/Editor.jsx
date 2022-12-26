@@ -5,8 +5,10 @@ import { BufferMd5 } from "../buffer/Buffer.jsx";
 const Editor = () => {
   const [value, setValue] = useState("");
   return (
-    <div className="z-0 container">
+    <div className="flex flex-col z-0 container">
+      {/* 크기를 최대로 조정해야함 */}
       <MDEditor
+        className="flex min-w-max"
         data-color-mode="light"
         value={value}
         onChange={setValue}

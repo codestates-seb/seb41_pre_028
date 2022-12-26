@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BufferMd5 } from "../../buffer/Buffer.jsx";
 import CommentCell from "../CommentCell.js";
 
-const QuestionBody = ({ question }) => {
+const AnswerBody = ({ question }) => {
   return (
     <div className="flex flex-col">
       <div className="m-4 flex flex-row">
@@ -41,4 +41,4 @@ const QuestionBody = ({ question }) => {
   );
 };
 
-export default QuestionBody;
+export default AnswerBody;

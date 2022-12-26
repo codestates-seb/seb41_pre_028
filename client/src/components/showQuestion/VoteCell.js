@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 const VoteCell = ({ item }) => {
   const [isClickQUpVote, setIsClickQUpVote] = useState(false);
   const [isClickQDownVote, setIsClickQDownVote] = useState(false);
   const [VotedScore, setVotedScore] = useState(item);
+  const [isClickQBookmark, setIsClickBookmark] = useState(true);
 
   const onClickQUpVote = () => {
     if (!isClickQUpVote && !isClickQDownVote) {
@@ -29,6 +32,15 @@ const VoteCell = ({ item }) => {
       setVotedScore(VotedScore + 1);
     }
   };
+
+  const onClickQBookmark = () => {
+    if (!isClickQBookmark) {
+      setIsClickBookmark(true);
+    } else {
+      setIsClickBookmark(false);
+    }
+  };
+
   return (
     <div className="flex flex-col mr-8">
       <button
@@ -65,6 +77,14 @@ const VoteCell = ({ item }) => {
         >
           <path d="M2 11h32L18 27 2 11Z"></path>
         </svg>
+      </button>
+      {/* 폰트어썸 임포트에 문제가 있음 */}
+      <button onClick={() => onClickQBookmark()}>
+        {!isClickQBookmark ? (
+          <FontAwesomeIcon icon={faBookmark} fill />
+        ) : (
+          <FontAwesomeIcon icon={faBookmark} border />
+        )}
       </button>
     </div>
   );
