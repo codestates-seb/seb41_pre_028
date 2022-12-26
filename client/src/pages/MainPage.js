@@ -43,7 +43,7 @@ const MainPage = () => {
           <Route path="/questions" element={<QuestionsPage />}></Route>
           <Route path="/questions/:qId" element={<QuestionDetail />}></Route>
           <Route path="/users" element={<UsersPage />}></Route>
-          <Route path="/users/:userId" element={<UserPage />}></Route>
+          <Route path="/users/:userId/*" element={<UserPage />}></Route>
           <Route path="/*" element={<QuestionsPage />}></Route>
         </Routes>
       </MainContainer>
