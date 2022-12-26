@@ -77,6 +77,8 @@ public class CommentController {
                 new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)), HttpStatus.OK);
     }
 
+/* 겟매핑 구현중
+
     @GetMapping("/answers/{id}/comments")
     public ResponseEntity getAnswerComments(@PathVariable("id") @Positive Long answerId,
                                             @Positive @RequestParam int page,
@@ -88,6 +90,7 @@ public class CommentController {
                 new MultiResponseDto<>(mapper.commentsToCommentResponseDtos(comments),
                         pageComments), HttpStatus.OK);
     }
+*/
 
     @GetMapping("/questions/{id}/comments")
     public ResponseEntity getQuestionComments(@PathVariable("id") @Positive Long questionId,
