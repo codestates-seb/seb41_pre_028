@@ -1,5 +1,8 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.service;
 
+import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
+import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.repository.AnswerRepository;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
@@ -15,8 +18,9 @@ import java.util.Optional;
 public class AnswerService {
 
     AnswerRepository answerRepository;
+    UserRepository userRepository;
 
-    public AnswerService(AnswerRepository answerRepository){
+    public AnswerService(AnswerRepository answerRepository, UserRepository userRepository){
         this.answerRepository = answerRepository;
     }
 

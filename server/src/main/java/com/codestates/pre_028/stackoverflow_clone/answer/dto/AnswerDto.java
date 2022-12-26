@@ -1,5 +1,7 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.dto;
 //추후 주석제거
+import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
+import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer.AnswerStatus;
 //import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
 //import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
@@ -23,7 +25,7 @@ public class AnswerDto {
         @Positive
         private long userId;
 
-        @Positive
+
         private long questionId;
 
         @NotBlank
@@ -50,6 +52,8 @@ public class AnswerDto {
         private long answerId;
         private long questionId;
         private long userId;
+        private String email;
+        private String nickname;
         private String content;
         private AnswerStatus answerStatus;
 
@@ -64,6 +68,13 @@ public class AnswerDto {
 //        public void setUser(User user){
 //            this.userId= user.getUserId();
 //        }
+
+
+        public void setUser(User user) {
+            this.userId = user.getUserId();
+            this.email = user.getEmail();
+            this.nickname = user.getNickname();
+        }
 
         public String getAnswerStatus(){
             return answerStatus.getStatus();
