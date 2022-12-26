@@ -1,14 +1,11 @@
 package com.codestates.pre_028.stackoverflow_clone.User.controller;
 
-import com.codestates.pre_028.stackoverflow_clone.Auth.Dto.LoginDto;
-import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
 import com.codestates.pre_028.stackoverflow_clone.User.assembler.UserAssembler;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.mapper.UserMapper;
 import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.hateoas.CollectionModel;
@@ -67,7 +64,6 @@ public class UserController {
                 linkTo(methodOn(UserService.class).findUsers()).withSelfRel());
     }
     //회원 가입
-
     @PostMapping("/signup")
     public ResponseEntity<?> postUser(@Valid @RequestBody UserDto.Post requestBody){
 
