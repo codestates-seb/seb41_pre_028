@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/answers")
 public class CommentController {
 
     private final CommentMapper mapper;
@@ -78,20 +78,18 @@ public class CommentController {
                 new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)), HttpStatus.OK);
     }
 
-/* 겟매핑 구현중
 
-    @GetMapping("/answers/{id}/comments")
-    public ResponseEntity getAnswerComments(@PathVariable("id") @Positive Long answerId,
-                                            @Positive @RequestParam int page,
-                                            @Positive @RequestParam int size){
-        Page<Comment> pageComments = commentService.findComments("Answer", answerId, page -1 , size);
-        List<Comment> comments = pageComments.getContent();
+ /*   코멘트는 Answer /Question 에 종속 적이므로 따로 GET 할 필요는 없음
+
+ @GetMapping("/answers/{id}/comments")
+    public ResponseEntity getAnswerComments(@PathVariable("id") @Positive Long answerId){
+
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.commentsToCommentResponseDtos(comments),
                         pageComments), HttpStatus.OK);
-    }
-*/
+    }*/
+
 
 /*    @GetMapping("/questions/{id}/comments")
     public ResponseEntity getQuestionComments(@PathVariable("id") @Positive Long questionId,

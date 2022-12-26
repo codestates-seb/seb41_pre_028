@@ -3,9 +3,13 @@ package com.codestates.pre_028.stackoverflow_clone.answer.controller;
 import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
+import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerWithCommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.mapper.AnswerMapper;
 import com.codestates.pre_028.stackoverflow_clone.answer.service.AnswerService;
+import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
+import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
+import com.codestates.pre_028.stackoverflow_clone.comment.service.CommentService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +30,12 @@ import java.util.List;
 public class AnswerController {
     private final AnswerMapper mapper;
     private final AnswerService answerService;
+    private final CommentService commentService;
 
-    public AnswerController(AnswerMapper mapper, AnswerService answerService){
+    public AnswerController(AnswerMapper mapper, AnswerService answerService, CommentService commentService) {
         this.mapper = mapper;
         this.answerService = answerService;
+        this.commentService = commentService;
     }
 
     @PostMapping
@@ -53,6 +59,7 @@ public class AnswerController {
     public ResponseEntity getAnswer(@PathVariable("id") @Positive long answerId){
 
         Answer answer = answerService.findAnswer(answerId);
+
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.OK);
     }

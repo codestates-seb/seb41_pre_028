@@ -1,9 +1,11 @@
 package com.codestates.pre_028.stackoverflow_clone.comment.service;
 
+import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.repository.AnswerRepository;
+import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import com.codestates.pre_028.stackoverflow_clone.comment.repository.CommentRepository;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
@@ -12,8 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -21,11 +26,25 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final AnswerRepository answerRepository;
     private final UserRepository userRepository;
+    private final QuestionRepository questionRepository;
 
-    public CommentService(CommentRepository commentRepository, AnswerRepository answerRepository, UserRepository userRepository) {
+    public CommentService(CommentRepository commentRepository, AnswerRepository answerRepository, UserRepository userRepository, QuestionRepository questionRepository) {
         this.commentRepository = commentRepository;
         this.answerRepository = answerRepository;
         this.userRepository = userRepository;
+        this.questionRepository = questionRepository;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CommentResponseDto> searchCommentWithAnswer(long answerId){
+        return commentRepository.findByAnswer_AnswerId(answerId)
+                .stream()
+                .map(comment->CommentResponseDto
+                        .builder()
+                        .userId(comment.getUser().getUserId())
+                        .build())
+                .collect(Collectors.toList());
+
     }
 
     public Comment createComment(Comment comment){
