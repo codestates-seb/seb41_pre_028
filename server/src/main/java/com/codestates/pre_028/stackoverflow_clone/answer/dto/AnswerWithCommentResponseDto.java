@@ -1,5 +1,6 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.dto;
 
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
@@ -32,6 +33,10 @@ public class AnswerWithCommentResponseDto {
         this.userId = user.getUserId();
         this.email = user.getEmail();
         this.nickname = user.getNickname();
+    }
+
+    public void setQuestion(Question question){
+        this.questionId = question.getQuestionId();
     }
 
     public String getAnswerStatus(){
