@@ -1,5 +1,6 @@
-package com.codestates.pre_028.stackoverflow_clone.comment.dto;
+package com.codestates.pre_028.stackoverflow_clone.comment.controller.dto;
 //추후 주석제거
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 //import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
@@ -62,6 +63,10 @@ public class CommentDto {
 //        }
 
         //for dto
+        public void setQuestion(Question question){
+            this.questionId = question.getQuestionId();
+        }
+
         public void setAnswer(Answer answer){
             this.answerId = answer.getAnswerId();
         }
