@@ -20,16 +20,29 @@ public interface CommentMapper {
     default Comment commentAnswerPostDtoToComment(CommentDto.AnswerPost commentPostDto){
         Comment comment = new Comment();
         User user = new User();
-//        Question question = new Question();
         Answer answer = new Answer();
 
         user.setUserId(commentPostDto.getUserId());
-//        question.setQuestionId(commentPostDto.getQuestionId());
         answer.setAnswerId(commentPostDto.getAnswerId());
 
-       comment.setUser(user);
+        comment.setUser(user);
         comment.setAnswer(answer);
-//        comment.setQuestion(question);
+
+        comment.setContent(commentPostDto.getContent());
+        return comment;
+    }
+
+    default Comment commentQuestionPostDtoToComment(CommentDto.QuestionPost commentPostDto){
+        Comment comment = new Comment();
+        User user = new User();
+        Question question = new Question();
+
+        user.setUserId(commentPostDto.getUserId());
+        question.setQuestionId(commentPostDto.getQuestionId());
+
+        comment.setUser(user);
+        comment.setQuestion(question);
+
         comment.setContent(commentPostDto.getContent());
         return comment;
     }
@@ -38,14 +51,13 @@ public interface CommentMapper {
         CommentDto.Response commentResponseDto = new CommentDto.Response();
         commentResponseDto.setCommentId(comment.getCommentId());
         commentResponseDto.setUser(comment.getUser());
-//        commentResponseDto.setQuestion(comment.getQuestion());
         commentResponseDto.setAnswer(comment.getAnswer());
         commentResponseDto.setContent(comment.getContent());
 
-//        commentResponseDto.setCreatedAt(comment.getCreatedAt());
-//        commentResponseDto.setModifiedAt(comment.getModifiedAt);
-//        commentResponseDto.setCreatedBy(comment.getCreatedBy());
-//        commentResponseDto.setModifiedBy(comment.getModifiedBy());
+        commentResponseDto.setCreatedAt(comment.getCreatedAt());
+        commentResponseDto.setModifiedAt(comment.getModifiedAt());
+        commentResponseDto.setCreatedBy(comment.getCreatedBy());
+        commentResponseDto.setModifiedBy(comment.getModifiedBy());
 
         return commentResponseDto;
     }

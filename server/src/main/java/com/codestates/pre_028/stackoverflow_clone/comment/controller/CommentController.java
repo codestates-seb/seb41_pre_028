@@ -32,7 +32,7 @@ public class CommentController {
 
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)),HttpStatus.CREATED);
+                new SingleResponseDto<>(mapper.commentToAnswerCommentResponseDto(comment)),HttpStatus.CREATED);
     }
 
 
@@ -44,7 +44,7 @@ public class CommentController {
         Comment comment = commentService.createQuestionComment(mapper.commentQuestionPostDtoToComment(commentPostDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)),HttpStatus.CREATED);
+                new SingleResponseDto<>(mapper.commentToQuestionCommentResponseDto(comment)),HttpStatus.CREATED);
     }
 
     @PatchMapping("/answers/{id}/comments/{comment_id}")

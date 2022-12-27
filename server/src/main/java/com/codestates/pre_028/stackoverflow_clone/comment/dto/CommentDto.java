@@ -68,12 +68,6 @@ public class CommentDto {
         private String createdBy;
         private String modifiedBy;
 
-//        public void setUser(User user){
-//            this.userId = user.getUserId();
-//        }
-//        public void setQuestion(Question question){
-//            this.questionId = question.getQuestionId();
-//        }
 
         //for dto
         public void setQuestion(Question question){

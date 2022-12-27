@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionMapper {
+    List<QuestionPaginationDto> questionToQuestionResponseDto(List<Question> questions);
+
     default Question questionPostDtoToQuestion(QuestionDto.QuestionPostDto questionPostDto){
         Question question = new Question();
         User user = new User();
