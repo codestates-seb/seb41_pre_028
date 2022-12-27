@@ -47,7 +47,7 @@ public class CommentController {
                 new SingleResponseDto<>(mapper.commentToQuestionCommentResponseDto(comment)),HttpStatus.CREATED);
     }
 
-    @PatchMapping("/answers/{id}/comments/{comment_id}")
+    @PatchMapping("/answers/{id}/comments/{comment-id}")
     public ResponseEntity patchAnswerComment(@PathVariable("id") @Positive Long answerId, @PathVariable("comment-id") @Positive Long commentId,
                                              @Valid @RequestBody CommentDto.Patch commentPatchDto){
 
@@ -59,7 +59,7 @@ public class CommentController {
                 new SingleResponseDto<>(mapper.commentToAnswerCommentResponseDto(comment)), HttpStatus.OK);
     }
 
-    @PatchMapping("/questions/{id}/comments/{comment_id}")
+    @PatchMapping("/questions/{id}/comments/{comment-id}")
     public ResponseEntity patchQuestionComment(@PathVariable("id") @Positive Long questionId, @PathVariable("comment-id") @Positive Long commentId,
                                                @Valid @RequestBody CommentDto.Patch commentPatchDto){
 

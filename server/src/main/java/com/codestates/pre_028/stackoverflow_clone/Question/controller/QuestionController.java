@@ -64,7 +64,7 @@ public class QuestionController {
 
     //질문 전체 조회
     @GetMapping
-    public ResponseEntity getQuestionPagination(@Positive @RequestParam int page,
+    public ResponseEntity getQuestionPagination(@RequestParam int page,
                                                 @Positive @RequestParam int size){
 
         Page<Question> pageQuestions = questionService.findQuestions(page , size);
