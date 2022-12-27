@@ -1,3 +1,4 @@
+/*
 package com.codestates.pre_028.stackoverflow_clone.restdocs;
 
 
@@ -319,3 +320,4 @@ public class AnswerControllerTest {
     }
 
 }
+*/
