@@ -8,24 +8,23 @@ import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.repository.AnswerRepository;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
 import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
+@Transactional
 @Service
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
     private final UserRepository userRepository;
     private final QuestionRepository questionRepository;
-    public AnswerService(AnswerRepository answerRepository, UserRepository userRepository, QuestionRepository questionRepository){
-        this.answerRepository = answerRepository;
-        this.userRepository = userRepository;
-        this.questionRepository = questionRepository;
-    }
 
 
     public Answer createAnswer(Answer answer){
