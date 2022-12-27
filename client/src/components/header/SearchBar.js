@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { change } from "../../store/searchSlice";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,10 +20,12 @@ const SearchBar = () => {
   // slice를 생성할 때 지정해준 이름을 이용해 state를 이용한다.
   const searchWord = useSelector((state) => state.search.word);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleKeyUp = (e) => {
     if (e.key === "Enter") {
       console.log(searchWord);
+      navigate(`/search/${searchWord}`);
       // 여기에 추가적인 작업 필요
     }
   };

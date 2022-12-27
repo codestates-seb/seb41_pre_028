@@ -4,19 +4,21 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import CreateQuestionPage from "./pages/CreateQuestionPage";
 import MainPage from "./pages/MainPage";
-import ShowQuestionPage from "./pages/ShowQuestionPage";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Routes>
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/createQuestion" element={<CreateQuestionPage />} />
-        <Route path="/showQuestion" element={<ShowQuestionPage />} />
-        <Route path="*" element={<MainPage />} />
-      </Routes>
+      <div className="flex-1">
+        <Routes>
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/createQuestion" element={<CreateQuestionPage />} />
+          <Route path="*" element={<MainPage />} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 }

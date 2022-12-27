@@ -1,36 +1,30 @@
 import { useEffect, useMemo, useState } from "react";
-import { getQuestionList } from "../../utils/api/question";
-import useQuery from "../../hooks/useQuery";
+import { useSearchParams } from "react-router-dom";
+import { getQuestionList } from "../../utils/api/api";
 import Question from "./Question";
 import FilterBar from "../FilterBar";
+import Pagination from "../pagination/Pagination";
+import { questionFilterList as filterList } from "../../static/filterAndTabList";
 
-const QuestionList = () => {
-  const [questionList, setQuestionList] = useState([]);
-  const [curFilter, setCurFilter] = useState(1);
-  const query = useQuery(); // URLSearchParams 객체 불러옴
-
-  const filterList = [
-    {
-      id: 1,
-      name: "Newest",
-    },
-    {
-      id: 2,
-      name: "Latest",
-    },
-    {
-      id: 3,
-      name: "Test",
-    },
-  ];
+const QuestionList = ({ questionList, setQuestionList }) => {
+  // UI를 담당
+  const [curFilter, setCurFilter] = useState(0);
+  // 실제 query
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    console.log(query.get("tab"));
+    // Fix
+    // 현재
+    let title = filterList[curFilter].tab;
+    if (searchParams.get("tab")) {
+      title = searchParams.get("tab");
+      setCurFilter(filterList.findIndex((el) => el.tab === title));
+    }
 
-    getQuestionList()
+    getQuestionList({ title })
       .then((res) => setQuestionList(res.data))
       .catch((err) => console.log(err));
-  }, [curFilter]);
+  }, [searchParams]);
 
   const questionsLength = useMemo(() => questionList.length, [questionList]);
 
@@ -43,6 +37,7 @@ const QuestionList = () => {
             filterList={filterList}
             curFilter={curFilter}
             setCurFilter={setCurFilter}
+            setSearchParams={setSearchParams}
           ></FilterBar>
         </div>
       </div>
@@ -51,6 +46,7 @@ const QuestionList = () => {
           <Question key={el.id} question={el}></Question>
         ))}
       </div>
+      <Pagination />
     </div>
   );
 };

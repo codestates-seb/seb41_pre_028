@@ -1,14 +1,15 @@
+import { Link } from "react-router-dom";
 const UserCard = ({ first_name, avatar, employment, address, id }) => {
   return (
     <div>
       <div className="flex">
-        <a href={`/users/${id}`}>
+        <Link to={`/users/${id}`}>
           <img className="w-12 h-12" src={avatar} alt="" />
-        </a>
+        </Link>
         <div className="flex flex-col ml-2">
-          <a className="text-sky-700	" href={`/users/${id}`}>
+          <Link className="text-sky-700	" to={`/users/${id}`}>
             {first_name}
-          </a>
+          </Link>
           <div className="font-light text-xs">{address.state}</div>
         </div>
       </div>

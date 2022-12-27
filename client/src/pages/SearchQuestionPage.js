@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
 import { PrimaryLink } from "../components/StyledLink";
@@ -29,13 +30,14 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const QuestionsPage = () => {
+const SearchQuestionPage = () => {
   const [questionList, setQuestionList] = useState([]);
+  const { searchWord } = useParams();
   return (
     <ContentWrapper className="content">
       <main>
         <div className="flex flex-row items-center justify-between mb-[12px]">
-          <h1 className="text-title-size">All Questions</h1>
+          <h1 className="text-title-size">검색어는{searchWord}</h1>
           <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
         </div>
         <QuestionList
@@ -48,4 +50,4 @@ const QuestionsPage = () => {
   );
 };
 
-export default QuestionsPage;
+export default SearchQuestionPage;
