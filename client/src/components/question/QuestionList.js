@@ -4,27 +4,22 @@ import { getQuestionList } from "../../utils/api/question";
 import Question from "./Question";
 import FilterBar from "../FilterBar";
 import Pagination from "../pagination/Pagination";
+import { questionFilterList as filterList } from "../../static/filterAndTabList";
 
 const QuestionList = () => {
   const [questionList, setQuestionList] = useState([]);
   // UI를 담당
-  const [curFilter, setCurFilter] = useState("Newest");
+  const [curFilter, setCurFilter] = useState(0);
   // 실제 query
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const filterList = ["Newest", "Latest", "Test"];
-
-  // useEffect(() => {
-  //   getQuestionList()
-  //     .then((res) => setQuestionList(res.data))
-  //     .catch((err) => console.log(err));
-  // }, []);
-
   useEffect(() => {
-    let title = curFilter;
-
+    // Fix
+    // 현재
+    let title = filterList[curFilter].tab;
     if (searchParams.get("tab")) {
       title = searchParams.get("tab");
+      setCurFilter(filterList.findIndex((el) => el.tab === title));
     }
 
     getQuestionList({ title })

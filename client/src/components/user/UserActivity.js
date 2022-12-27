@@ -1,28 +1,16 @@
 import { useEffect, useState } from "react";
+import { userActivityTabList as tabList } from "../../static/filterAndTabList";
 
 const UserActivity = ({ userId }) => {
   const [curTab, setCurTab] = useState(0);
 
-  const tabList = [
-    {
-      id: 1,
-      getData: "",
-      title: "Answers",
-    },
-    {
-      id: 2,
-      getData: "",
-      title: "Questions",
-    },
-  ];
-
   useEffect(() => {
     //axios get 요쳥 by userID
+    console.log(tabList[curTab].getData);
   }, [curTab]);
 
   return (
     <div className="flex flex-row">
-      <h2>{userId}의 activity</h2>
       <nav>
         <ul>
           {tabList.map((el, idx) => (
@@ -32,7 +20,9 @@ const UserActivity = ({ userId }) => {
           ))}
         </ul>
       </nav>
-      <div></div>
+      <div>
+        <h2>{userId}의 activity</h2>
+      </div>
     </div>
   );
 };

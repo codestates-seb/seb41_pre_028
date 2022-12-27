@@ -37,15 +37,15 @@ const FilterBar = ({
     <FilterNav>
       {filterList.map((el, idx) => (
         <button
-          value={el}
-          className={el === curFilter ? "focus" : ""}
-          key={idx}
+          value={el.tab}
+          className={idx === curFilter ? "focus" : ""}
+          key={el.id}
           onClick={() => {
-            setCurFilter(el);
-            setSearchParams({ tab: el });
+            setCurFilter(idx);
+            setSearchParams({ tab: el.tab });
           }}
         >
-          {el}
+          {el.tab}
         </button>
       ))}
     </FilterNav>

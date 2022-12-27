@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserProfile } from "../utils/api/users";
-
-import UserProfile from "../components/user/UserProfile";
-import UserActivity from "../components/user/UserActivity";
+import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 // import { media } from "../utils/style-utils";
 
@@ -22,11 +20,12 @@ const Profile = styled.div`
   flex-wrap: wrap;
 
   .profile--img {
-    margin: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
   }
 
   .profile--content {
-    margin: 8px;
+    margin-left: 8px;
   }
 `;
 
@@ -37,19 +36,6 @@ const UserPage = () => {
     name: "",
     avatar_img: "",
   });
-
-  const tabList = [
-    {
-      id: 1,
-      title: "profile",
-      content: <UserProfile userId={userId}></UserProfile>,
-    },
-    {
-      id: 2,
-      title: "activity",
-      content: <UserActivity userId={userId}></UserActivity>,
-    },
-  ];
 
   useEffect(() => {
     // id가 userId인 user 정보를 get 해와야함
@@ -74,7 +60,7 @@ const UserPage = () => {
             </div>
           </div>
           <div className="profile--content">
-            <div className="text-[34px]">{user.name}</div>
+            <div className="text-[34px] mb-[10px]">{user.name}</div>
             <div>부가적인 정보들....</div>
           </div>
         </Profile>
@@ -90,7 +76,7 @@ const UserPage = () => {
               ))}
             </ul>
           </nav>
-          <div>{tabList[userPageTab].content}</div>
+          <div>{tabList[userPageTab].showContent(userId)}</div>
         </div>
       </main>
     </ContentWrapper>
