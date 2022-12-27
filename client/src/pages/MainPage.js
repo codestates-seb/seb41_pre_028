@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
+import styled from "styled-components";
+import { media } from "../utils/style-utils";
 import SideBar from "../components/sideBar/SideBar";
 import QuestionsPage from "./QuestionsPage";
 import UsersPage from "./UsersPage";
 import UserPage from "./UserPage";
-import QuestionDetail from "./QuestionDetail";
-import styled from "styled-components";
-import { media } from "../utils/style-utils";
+import ShowQuestionPage from "./ShowQuestionPage";
 import SearchQuestionPage from "./SearchQuestionPage";
 
 export const PageContainer = styled.div`
@@ -42,7 +42,10 @@ const MainPage = () => {
         <SideBar></SideBar>
         <Routes>
           <Route path="/questions" element={<QuestionsPage />}></Route>
-          <Route path="/questions/:qId" element={<QuestionDetail />}></Route>
+          <Route
+            path="/questions/:questionId"
+            element={<ShowQuestionPage />}
+          ></Route>
           <Route path="/users" element={<UsersPage />}></Route>
           <Route path="/users/:userId/*" element={<UserPage />}></Route>
           <Route path="/search" element={<SearchQuestionPage />}></Route>

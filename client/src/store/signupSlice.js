@@ -3,16 +3,19 @@ import axios from "axios";
 
 export const SignupUser = createAsyncThunk(
   "signup/signupUser",
-  async (data) => {
+  async (data, { rejectWithValue }) => {
+    // const wait = (timeToDelay) =>
+    //   new Promise((resolve) =>
+    //     setTimeout(() => {
+    //       resolve(axios.post("/users/signup", data));
+    //     }, timeToDelay)
+    //   );
+    // await wait(1000).then(() => alert(`${data.nickname}님 환영합니다!`));
     try {
-      await axios.post("/users/signup", data).then((res) => {
-        if (res.status === 201) {
-          alert(`${data.nickname} 님 환영합니다!`);
-          console.log("회원가입 성공!");
-        }
-      });
+      const res = await axios.post("/users/signup", data);
+      return res.data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error);
     }
   }
 );
@@ -23,24 +26,31 @@ const signupSlice = createSlice({
     nickName: "",
     email: "",
     password: "",
-    isFetching: false,
+    isSignedUp: false,
+    isSuccess: false,
     isError: false,
+    error: "",
   },
   reducers: {},
-  extraReducers: {
-    [SignupUser.pending]: (state) => {
-      state.isFetching = true;
-    },
-    [SignupUser.fulfilled]: (state, payload) => {
-      state.isFetching = false;
-      state.nickName = payload.nickName;
-      state.email = payload.email;
-      state.password = payload.password;
-    },
-    [SignupUser.rejected]: (state) => {
-      state.isFetching = false;
-      state.isError = true;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(SignupUser.pending, (state) => {
+        state.isSignedUp = false;
+        state.isSuccess = true;
+      })
+
+      .addCase(SignupUser.fulfilled, (state, { payload }) => {
+        state.isSignedUp = true;
+        state.isSuccess = false;
+        state.nickName = payload.nickName;
+        state.email = payload.email;
+        state.password = payload.password;
+      })
+      .addCase(SignupUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isSignedUp = false;
+        state.isError = true;
+      });
   },
 });
 

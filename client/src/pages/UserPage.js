@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserProfile } from "../utils/api/api";
+// import { getUserProfile } from "../utils/api/api";
 import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 // import { media } from "../utils/style-utils";
@@ -39,15 +39,17 @@ const UserPage = () => {
 
   useEffect(() => {
     // id가 userId인 user 정보를 get 해와야함
-    getUserProfile(userId)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => console.log(err));
+    setUser({ ...user, name: "yerin" });
+    // getUserProfile(userId)
+    //   .then((res) => {
+    //     setUser(res.data);
+    //   })
+    //   .catch((err) => console.log(err));
   }, [userId]);
 
   return (
     <ContentWrapper className="content">
+      <div>현재 아이디 {userId}</div>
       <main>
         <Profile>
           <div className="profile--img">

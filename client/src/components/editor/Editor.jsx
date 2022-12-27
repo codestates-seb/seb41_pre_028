@@ -5,30 +5,14 @@ import { BufferMd5 } from "../buffer/Buffer.jsx";
 const Editor = () => {
   const [value, setValue] = useState("");
   return (
-    <div className="container">
+    <div className="flex flex-col z-0 container">
+      {/* 크기를 최대로 조정해야함 */}
       <MDEditor
+        className="flex min-w-max"
         data-color-mode="light"
         value={value}
         onChange={setValue}
         preview="edit"
-        components={{
-          toolbar: (command, disabled, executeCommand) => {
-            if (command.keyCommand === "code") {
-              return (
-                <button
-                  aria-label="Insert code"
-                  disabled={disabled}
-                  onClick={(evn) => {
-                    evn.stopPropagation();
-                    executeCommand(command, command.groupName);
-                  }}
-                >
-                  Code
-                </button>
-              );
-            }
-          },
-        }}
       />
       <BufferMd5 />
       <div> {value}</div>
