@@ -1,23 +1,21 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   color: white;
-  background-color: green;
+  background-color: ${(props) => props.bgColor || "#0A95FF"};
   padding: 8px;
   border-radius: 5px;
   margin-top: 5px;
 `;
 
-const Button = () => {
+const Button = ({ children, ...props }) => {
   return (
-    <StyledButton>
-      <FontAwesomeIcon icon={faCircleCheck} />
-      <div className="ml-1.5">Logined!!!</div>
+    <StyledButton {...props}>
+      <div className="ml-1.5">{children}</div>
     </StyledButton>
   );
 };

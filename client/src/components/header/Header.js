@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { PrimaryLink, SecondaryLink } from "../StyledLink";
-
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
