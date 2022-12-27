@@ -1,5 +1,4 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.entity;
-//추후주석제거
 
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
@@ -32,7 +31,7 @@ public class Answer extends AuditingFields {
     private AnswerStatus answerStatus = AnswerStatus.ANSWER_NORMAL;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
     @JsonBackReference
@@ -41,9 +40,9 @@ public class Answer extends AuditingFields {
     private Question question;
 
     @JsonManagedReference
-
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments = new ArrayList<>();
+
 
     public void setComment(Comment comment){
         this.comments.add(comment);

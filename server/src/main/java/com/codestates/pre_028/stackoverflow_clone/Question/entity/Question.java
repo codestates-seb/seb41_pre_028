@@ -43,6 +43,11 @@ public class Question extends AuditingFields {
     @OneToMany(mappedBy = "question")
     private List<Comment> comments = new ArrayList<>();
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+
     public void setComment(Comment comment){
         this.comments.add(comment);
         if(comment.getQuestion() != this){

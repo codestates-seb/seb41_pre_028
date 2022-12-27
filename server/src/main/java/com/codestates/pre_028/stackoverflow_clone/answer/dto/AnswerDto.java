@@ -67,15 +67,14 @@ public class AnswerDto {
         private String createdBy;
         private String modifiedBy;
 
-        public void setQuestion(Question question){
-            this.questionId = question.getQuestionId();
-        }
-
-
         public void setUser(User user) {
             this.userId = user.getUserId();
             this.email = user.getEmail();
             this.nickname = user.getNickname();
+        }
+
+       public void setQuestion(Question question){
+            this.questionId = question.getQuestionId();
         }
 
         public String getAnswerStatus(){

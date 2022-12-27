@@ -1,6 +1,7 @@
 package com.codestates.pre_028.stackoverflow_clone.Question.mapper;
 
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionDto;
+import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionPaginationDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionWithAnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
@@ -9,12 +10,19 @@ import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionMapper {
+    List<QuestionPaginationDto> questionToQuestionResponseDto(List<Question> questions);
+
+ List<QuestionPaginationDto> questionToQuestionWithKeywordResponseDto(List<Question> questions);
+
     default Question questionPostDtoToQuestion(QuestionDto.QuestionPostDto questionPostDto){
         Question question = new Question();
         User user = new User();
@@ -36,6 +44,7 @@ public interface QuestionMapper {
         questionResponseDto.setQuestionId(question.getQuestionId());
         questionResponseDto.setContent(question.getContent());
         questionResponseDto.setUser(question.getUser());
+        questionResponseDto.setTag(question.getTag());
 
         //메타데이타
         questionResponseDto.setCreatedAt(question.getCreatedAt());
@@ -58,6 +67,7 @@ public interface QuestionMapper {
                 .stream()
                 .map(comment -> CommentResponseDto
                         .builder()
+                        .commentId(comment.getCommentId())
                         .userId(comment.getUser().getUserId())
                         .content(comment.getContent())
                         .build())
@@ -72,6 +82,7 @@ public interface QuestionMapper {
                         .builder()
                         .userId(answer.getUser().getUserId())
                         .nickname(answer.getUser().getNickname())
+                        .questionId(answer.getQuestion().getQuestionId())
                         .content(answer.getContent())
                         .build())
                 .collect(Collectors.toList());

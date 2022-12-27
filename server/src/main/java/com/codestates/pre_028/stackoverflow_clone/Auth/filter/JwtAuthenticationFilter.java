@@ -51,11 +51,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String accessToken = delegateAccessToken(user);
         String refreshToken = delegateRefreshToken(user);
 
-        Cookie cookie = new Cookie("jwt_token", accessToken);
-        cookie.setDomain("/");
-        cookie.setHttpOnly(true);
-
-        response.addCookie(cookie);// 쿠키 세팅
+//        Cookie cookie = new Cookie("jwt_token", accessToken);
+//        cookie.setDomain("/");
+//        cookie.setHttpOnly(true);
+//
+//        response.addCookie(cookie);// 쿠키 세팅
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("Refresh", refreshToken);
 

@@ -1,23 +1,20 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.mapper;
-//추후 주석제거
+
+
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
-import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
-import com.codestates.pre_028.stackoverflow_clone.User.mapper.UserMapper;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerWithCommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
-import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
-//import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
-//import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
+import org.mapstruct.ReportingPolicy;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AnswerMapper {
 
 
@@ -66,6 +63,9 @@ public interface AnswerMapper {
 
         answerWithCommentResponseDto.setAnswerId(answer.getAnswerId());
         answerWithCommentResponseDto.setUser(answer.getUser());
+        answerWithCommentResponseDto.setQuestion(answer.getQuestion());
+
+
         answerWithCommentResponseDto.setContent(answer.getContent());
         answerWithCommentResponseDto.setAnswerStatus(answer.getAnswerStatus());
 
@@ -87,6 +87,7 @@ public interface AnswerMapper {
                 .stream()
                 .map(comment -> CommentResponseDto
                         .builder()
+                        .commentId(comment.getCommentId())
                         .userId(comment.getUser().getUserId())
                         .content(comment.getContent())
                         .build())

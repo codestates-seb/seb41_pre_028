@@ -4,42 +4,37 @@ import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
-import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.repository.AnswerRepository;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
 import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
+@Transactional
 @Service
 public class AnswerService {
 
-    AnswerRepository answerRepository;
-    UserRepository userRepository;
-    QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
+    private final UserRepository userRepository;
+    private final QuestionRepository questionRepository;
 
-
-    public AnswerService(AnswerRepository answerRepository, UserRepository userRepository, QuestionRepository questionRepository) {
-        this.answerRepository = answerRepository;
-        this.userRepository = userRepository;
-        this.questionRepository = questionRepository;
-    }
 
     public Answer createAnswer(Answer answer){
-        verifyExistAnswer(answer.getAnswerId());
         User user = userRepository.getReferenceById(answer.getUser().getUserId());
         Question question = questionRepository.getReferenceById(answer.getQuestion().getQuestionId());
 
-        answer.setQuestion(question);
         answer.setUser(user);
+        answer.setQuestion(question);
 
         Answer savedAnswer = answerRepository.save(answer);
-
         return savedAnswer;
     }
 
@@ -66,12 +61,6 @@ public class AnswerService {
         Answer findAnswer = findVerifiedAnswer(answerId);
         findAnswer.setAnswerStatus(Answer.AnswerStatus.ANSWER_DELETED);
         answerRepository.save(findAnswer);
-        //댓글제거도추후구현
-    }
-
-    //Create를 위한 메서드
-    private void verifyExistAnswer(Long answerId){
-        // 회원이 존재하는지 확인 후에 구현
     }
 
     //Update를 위한 메서드

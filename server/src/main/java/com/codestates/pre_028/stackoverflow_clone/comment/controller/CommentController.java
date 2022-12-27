@@ -1,25 +1,18 @@
 package com.codestates.pre_028.stackoverflow_clone.comment.controller;
 
-import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import com.codestates.pre_028.stackoverflow_clone.comment.mapper.CommentMapper;
-import com.codestates.pre_028.stackoverflow_clone.comment.repository.CommentRepository;
 import com.codestates.pre_028.stackoverflow_clone.comment.service.CommentService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
 @RestController
-@RequestMapping("/answers")
+@RequestMapping
 public class CommentController {
 
     private final CommentMapper mapper;
@@ -30,31 +23,31 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/answers/{id}/comments")
-    public ResponseEntity postAnswerComment(@PathVariable("id") @Positive Long answerId,
-                                            @Valid @RequestBody CommentDto.Post commentPostDto){
+    @PostMapping("/answers/{answer-id}/comments")
+    public ResponseEntity postAnswerComment(@PathVariable("answer-id") @Positive Long answerId,
+                                            @Valid @RequestBody CommentDto.AnswerPost commentPostDto){
 
         commentPostDto.setAnswerId(answerId);
-        Comment comment = commentService.createComment(mapper.commentPostDtoToComment(commentPostDto));
+        Comment comment = commentService.createAnswerComment(mapper.commentAnswerPostDtoToComment(commentPostDto));
 
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)),HttpStatus.CREATED);
+                new SingleResponseDto<>(mapper.commentToAnswerCommentResponseDto(comment)),HttpStatus.CREATED);
     }
 
 
-    @PostMapping("/questions/{id}/comments")
+    @PostMapping("/questions/{question-id}/comments")
     public ResponseEntity postQuestionComment(@PathVariable("id") @Positive Long questionId,
-                                              @Valid @RequestBody CommentDto.Post commentPostDto){
+                                              @Valid @RequestBody CommentDto.QuestionPost commentPostDto){
 
         commentPostDto.setQuestionId(questionId);
-        Comment comment = commentService.createComment(mapper.commentPostDtoToComment(commentPostDto));
+        Comment comment = commentService.createQuestionComment(mapper.commentQuestionPostDtoToComment(commentPostDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)),HttpStatus.CREATED);
+                new SingleResponseDto<>(mapper.commentToQuestionCommentResponseDto(comment)),HttpStatus.CREATED);
     }
 
-    @PatchMapping("/answers/{id}/comments/{comment_id}")
+    @PatchMapping("/answers/{answer-id}/comments/{comment-id}")
     public ResponseEntity patchAnswerComment(@PathVariable("id") @Positive Long answerId, @PathVariable("comment-id") @Positive Long commentId,
                                              @Valid @RequestBody CommentDto.Patch commentPatchDto){
 
@@ -63,11 +56,11 @@ public class CommentController {
         Comment comment = commentService.updateComment(mapper.commentPatchDtoToComment(commentPatchDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)), HttpStatus.OK);
+                new SingleResponseDto<>(mapper.commentToAnswerCommentResponseDto(comment)), HttpStatus.OK);
     }
 
-    @PatchMapping("/questions/{id}/comments/{comment_id}")
-    public ResponseEntity patchQuestionComment(@PathVariable("id") @Positive Long questionId, @PathVariable("comment-id") @Positive Long commentId,
+    @PatchMapping("/questions/{question-id}/comments/{comment-id}")
+    public ResponseEntity patchQuestionComment(@PathVariable("question-id") @Positive Long questionId, @PathVariable("comment-id") @Positive Long commentId,
                                                @Valid @RequestBody CommentDto.Patch commentPatchDto){
 
         commentPatchDto.setQuestionId(questionId);
@@ -75,7 +68,7 @@ public class CommentController {
         Comment comment = commentService.updateComment(mapper.commentPatchDtoToComment(commentPatchDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment)), HttpStatus.OK);
+                new SingleResponseDto<>(mapper.commentToQuestionCommentResponseDto(comment)), HttpStatus.OK);
     }
 
 
@@ -104,15 +97,15 @@ public class CommentController {
 
     }*/
 
-    @DeleteMapping("/answers/{id}/comments/{comment_id}")
-    public ResponseEntity deleteAnswerComment(@PathVariable("id") @Positive Long answerId,
+    @DeleteMapping("/answers/{answer-id}/comments/{comment_id}")
+    public ResponseEntity deleteAnswerComment(@PathVariable("answer-id") @Positive Long answerId,
                                               @PathVariable("comment_id") @Positive Long commentId){
         commentService.deleteComment(commentId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/questions/{id}/comments/{comment_id}")
-    public ResponseEntity deleteQuestionComment(@PathVariable("id") @Positive Long answerId,
+    @DeleteMapping("/questions/{question-id}/comments/{comment_id}")
+    public ResponseEntity deleteQuestionComment(@PathVariable("question-id") @Positive Long answerId,
                                                 @PathVariable("comment_id") @Positive Long commentId){
         commentService.deleteComment(commentId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
