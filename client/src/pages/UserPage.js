@@ -32,6 +32,7 @@ const Profile = styled.div`
 const UserPage = () => {
   const { userId } = useParams();
   const [userPageTab, setUserPageTab] = useState(0);
+  const [errMsg, setErrMsg] = useState("");
   const [user, setUser] = useState({
     nickname: "",
     email: "",
@@ -45,45 +46,53 @@ const UserPage = () => {
       .then((res) => {
         setUser(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setErrMsg("존재하지 않는 사용자입니다.");
+        }
+      });
   }, [userId]);
 
   return (
     <ContentWrapper className="content">
-      <main>
-        <Profile>
-          <div className="profile--img">
-            <div className="flex items-center justify-center">
-              <img
-                className="block w-[128px] h-[128px] rounded-[3px]"
-                src={user.avatar_img}
-                alt={`${user.nickname}'s avatar`}
-              />
+      {!errMsg ? (
+        <main>
+          <Profile>
+            <div className="profile--img">
+              <div className="flex items-center justify-center">
+                <img
+                  className="block w-[128px] h-[128px] rounded-[3px]"
+                  src={user.avatar_img}
+                  alt={`${user.nickname}'s avatar`}
+                />
+              </div>
             </div>
-          </div>
-          <div className="profile--content">
-            <div className="text-[34px] mb-[10px]">{user.nickname}</div>
-            <div>
-              <span>{user.email}</span>
-              <span>{user.createdAt}</span>
+            <div className="profile--content">
+              <div className="text-[34px] mb-[10px]">{user.nickname}</div>
+              <div>
+                <span>{user.email}</span>
+                <span>{user.createdAt}</span>
+              </div>
             </div>
+          </Profile>
+          <div>
+            <nav>
+              <ul className="flex flex-row">
+                {tabList.map((el, idx) => (
+                  <li key={el.id}>
+                    <button onClick={() => setUserPageTab(idx)}>
+                      {el.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div>{tabList[userPageTab].showContent(userId)}</div>
           </div>
-        </Profile>
-        <div>
-          <nav>
-            <ul className="flex flex-row">
-              {tabList.map((el, idx) => (
-                <li key={el.id}>
-                  <button onClick={() => setUserPageTab(idx)}>
-                    {el.title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div>{tabList[userPageTab].showContent(userId)}</div>
-        </div>
-      </main>
+        </main>
+      ) : (
+        <div>{errMsg}</div>
+      )}
     </ContentWrapper>
   );
 };
