@@ -20,6 +20,7 @@ public class QuestionWithAnswerDto {
     private String email;
     private String nickname;
     private String content;
+    private String tag;
     private List<AnswerResponseDto> answerResponseDtos;
 
     private List<CommentResponseDto> comments;
