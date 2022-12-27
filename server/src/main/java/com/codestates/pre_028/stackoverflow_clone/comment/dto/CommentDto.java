@@ -1,13 +1,13 @@
-package com.codestates.pre_028.stackoverflow_clone.comment.controller.dto;
+package com.codestates.pre_028.stackoverflow_clone.comment.dto;
 //추후 주석제거
+
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
-//import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
-//import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -15,11 +15,23 @@ public class CommentDto {
 
     @Setter //test stub을 위해 추가
     @Getter
-    public static class Post{
+    public static class QuestionPost{
         @Positive
         private Long userId;
 
+
         private Long questionId;
+
+        @NotBlank
+        private String content;
+
+    }
+    @Setter //test stub을 위해 추가
+    @Getter
+    public static class AnswerPost{
+        @Positive
+        private Long userId;
+
 
         private Long answerId;
 
@@ -27,6 +39,7 @@ public class CommentDto {
         private String content;
 
     }
+
 
     @Setter //test stub을 위해 추가
     @Getter
@@ -55,12 +68,6 @@ public class CommentDto {
         private String createdBy;
         private String modifiedBy;
 
-//        public void setUser(User user){
-//            this.userId = user.getUserId();
-//        }
-//        public void setQuestion(Question question){
-//            this.questionId = question.getQuestionId();
-//        }
 
         //for dto
         public void setQuestion(Question question){

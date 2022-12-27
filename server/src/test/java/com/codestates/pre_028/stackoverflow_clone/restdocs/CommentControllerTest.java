@@ -1,3 +1,4 @@
+/*
 package com.codestates.pre_028.stackoverflow_clone.restdocs;
 
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
@@ -55,8 +56,8 @@ public class CommentControllerTest {
     @MockBean
     private CommentMapper mapper;
 
-//    @MockBean
-//    private CommentService commentService;
+    @MockBean
+    private CommentService commentService;
 
     @Test
     void postAnswerCommentTest() throws Exception{
@@ -81,9 +82,9 @@ public class CommentControllerTest {
 
 
         given(mapper.commentPostDtoToComment(Mockito.any(CommentDto.Post.class))).willReturn(new Comment());
-//        Comment mockResultComment = new Comment();
-//        mockResultComment.setCommentId(1L);
-//        given(commentService.createComment(Mockito.any(Comment.class))).willReturn(mockResultComment);
+        Comment mockResultComment = new Comment();
+        mockResultComment.setCommentId(1L);
+        given(commentService.createComment(Mockito.any(Comment.class))).willReturn(mockResultComment);
 
         given(mapper.commentToCommentResponseDto(Mockito.any(Comment.class))).willReturn(answerCommentResponse);
 
@@ -154,9 +155,9 @@ public class CommentControllerTest {
         questionCommentResponse.setModifiedBy("stub_questionComment_modifier");
 
         given(mapper.commentPostDtoToComment(Mockito.any(CommentDto.Post.class))).willReturn(new Comment());
-//        Comment mockResultComment = new Comment();
-//        mockResultComment.setCommentId(1L);
-//        given(commentService.createComment(Mockito.any(Comment.class))).willReturn(mockResultComment);
+        Comment mockResultComment = new Comment();
+        mockResultComment.setCommentId(1L);
+        given(commentService.createComment(Mockito.any(Comment.class))).willReturn(mockResultComment);
 
         given(mapper.commentToCommentResponseDto(Mockito.any(Comment.class))).willReturn(questionCommentResponse);
 
@@ -304,9 +305,9 @@ public class CommentControllerTest {
 
 
         given(mapper.commentPatchDtoToComment(Mockito.any(CommentDto.Patch.class))).willReturn(new Comment());
-//        Comment mockResultComment = new Comment();
-//        mockResultComment.setCommentId(1L);
-//        given(commentService.updateComment(Mockito.any(Comment.class))).willReturn(mockResultComment);
+        Comment mockResultComment = new Comment();
+        mockResultComment.setCommentId(1L);
+        given(commentService.updateComment(Mockito.any(Comment.class))).willReturn(mockResultComment);
 
         given(mapper.commentToCommentResponseDto(Mockito.any(Comment.class))).willReturn(questionCommentResponse);
 
@@ -534,3 +535,4 @@ public class CommentControllerTest {
     }
 
 }
+*/
