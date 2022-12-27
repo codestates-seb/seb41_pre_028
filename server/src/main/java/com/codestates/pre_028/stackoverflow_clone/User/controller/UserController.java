@@ -38,8 +38,8 @@ public class UserController {
     }
 
     // 유저 단건 조회
-    @GetMapping ("/{id}")
-    public EntityModel<User> getUser(@PathVariable long id){
+    @GetMapping ("/{user-id}")
+    public EntityModel<User> getUser(@PathVariable("user-id") long id){
         User user = userService.findUser(id);
 
 

@@ -46,8 +46,8 @@ public class AnswerController {
                 HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
+    @PatchMapping("/{answer-id}")
+    public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.Patch answerPatchDto){
         answerPatchDto.setAnswerId(answerId);
         Answer answer = answerService.updateAnswer(mapper.answerPatchDtoToAnswer(answerPatchDto));
@@ -55,8 +55,8 @@ public class AnswerController {
                 HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity getAnswer(@PathVariable("id") @Positive long answerId){
+    @GetMapping("/{answer-id}")
+    public ResponseEntity getAnswer(@PathVariable("answer-id") @Positive long answerId){
 
         Answer answer = answerService.findAnswer(answerId);
 
@@ -75,8 +75,8 @@ public class AnswerController {
                 HttpStatus.OK);
     }*/
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteAnswer(@PathVariable("id") Long answerId){
+    @DeleteMapping("/{answer-id}")
+    public ResponseEntity deleteAnswer(@PathVariable("answer-id") Long answerId){
         answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
