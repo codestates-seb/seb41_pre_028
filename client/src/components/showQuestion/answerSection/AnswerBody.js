@@ -1,7 +1,7 @@
 import VoteCell from "../VoteCell";
 import { Link } from "react-router-dom";
 import { BufferMd5 } from "../../buffer/Buffer.jsx";
-import CommentCell from "../CommentCell.js";
+import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
 
 const QuestionStats = styled.div`
@@ -14,12 +14,12 @@ const QuestionStats = styled.div`
   text-align: right;
 `;
 
-const AnswerBody = ({ question }) => {
+const AnswerBody = ({ item }) => {
   return (
     <div className="flex flex-col">
       <div className="m-4 flex flex-row">
-        <VoteCell item={question.voted} />
-        <div> {question.content}</div>
+        <VoteCell item={item.userId} />
+        <div> {item.content}</div>
       </div>
       <BufferMd5 />
       {/* tag */}
@@ -28,7 +28,10 @@ const AnswerBody = ({ question }) => {
       <div className="flex flex-row items-center space-between ml-auto">
         <QuestionStats>
           <div>
-            <Link to={`/questions/${question.id}`} className="text-[#6a737C]">
+            <Link
+              to={`/questions/${item.questionId}`}
+              className="text-[#6a737C]"
+            >
               Share
             </Link>
           </div>
@@ -38,36 +41,37 @@ const AnswerBody = ({ question }) => {
             </Link>
           </div>
           <div>
-            <Link to={`/questions/${question.id}`} className="text-[#6a737C]">
+            <Link
+              to={`/questions/${item.questionId}`}
+              className="text-[#6a737C]"
+            >
               Follow
             </Link>
           </div>
         </QuestionStats>
 
-        <Link to={`/users/${question.author.id}`}>
+        <Link to={`/users/${item.userId}`}>
           <div className="flex items-center justify-center">
             <img
               className="block w-[16px] h-[16px] rounded-[3px]"
-              src={question.author.avatar_img}
-              alt={`${question.author.name}'s avatar`}
+              src={item.userId}
+              alt={`${item.userId}'s avatar`}
             />
           </div>
         </Link>
         <div className="flex flex-col">
           <div className="text-[12px] text-[#6a637c]">
-            asked at {question.askedAt}
+            asked at {item.createdAt}
           </div>
           <div className="h-full items-center">
             <div className="flex items-center text-[12px] text-[#0063bf]">
-              <Link to={`/users/${question.author.id}`}>
-                {question.author.name}
-              </Link>
+              <Link to={`/users/${item.userId}`}>{item.userId}</Link>
             </div>
           </div>
         </div>
       </div>
       {/* comment */}
-      <CommentCell />
+      <CommentCell commentList={item.comment} />
     </div>
   );
 };

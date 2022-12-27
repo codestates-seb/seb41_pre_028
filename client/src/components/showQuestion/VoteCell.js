@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
-const VoteCell = ({ item }) => {
+const VoteCell = ({ item = 5 }) => {
   const [isClickQUpVote, setIsClickQUpVote] = useState(false);
   const [isClickQDownVote, setIsClickQDownVote] = useState(false);
   const [VotedScore, setVotedScore] = useState(item);
