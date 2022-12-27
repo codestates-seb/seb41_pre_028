@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserProfile } from "../utils/api/users";
+import { getUserProfile } from "../utils/api/api";
 import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 // import { media } from "../utils/style-utils";
