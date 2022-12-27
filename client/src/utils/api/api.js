@@ -1,8 +1,8 @@
 import axios from "axios";
 
 /** Questions */
-export const getQuestionList = (params) =>
-  axios.get("http://localhost:3001/question", { params });
+// page, size : 필수 정보임!
+export const getQuestionList = (params) => axios.get("/questions", { params });
 
 // export const getQuestionListByUserId = (userId) => {
 //    axios.get("http://localhost:3001/question", { params: {userId}});
