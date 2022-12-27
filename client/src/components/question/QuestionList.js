@@ -8,6 +8,7 @@ const QuestionList = () => {
   const [questionList, setQuestionList] = useState([]);
   const [curFilter, setCurFilter] = useState(1);
   const query = useQuery(); // URLSearchParams 객체 불러옴
+
   const filterList = [
     {
       id: 1,

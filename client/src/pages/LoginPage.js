@@ -12,7 +12,7 @@ const LoginPage = () => {
           />
         </div>
         <ButtonBox />
-        <Inputbox />
+        <Inputbox isLogin={true} />
         <div className="flex justify-center items-center mt-10">
           Don’t have an account?
           <a href="/signup" className="ml-3 text-sky-600">

@@ -1,6 +1,6 @@
 const ButtonBox = () => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 ">
       <button className="flex justify-center items-center bg-white p-1  rounded-md border-[#dadde0] border hover:bg-[#dadde0] ">
         <svg width="18" height="18" className="mr-1">
           <image

@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-// import { LoginAPI } from "../api/LoginAPI";
-// import { SignupAPI } from "../api/SignupAPI";
-
 import { loginUser } from "../../store/loginSlice";
 import { SignupUser } from "../../store/signupSlice";
-
 import { useDispatch, useSelector } from "react-redux";
-import ClipLoader from "react-spinners/ClipLoader";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck, faLock } from "@fortawesome/free-solid-svg-icons";
+import ClipLoader from "react-spinners/ClipLoader";
+
 const ErrSign = styled.div`
   background-color: rgba(255, 0, 0, 0.2);
   border: 1px solid red;
@@ -22,13 +21,13 @@ const ErrSign = styled.div`
   align-items: center;
 `;
 
-const InputBox = ({ isSignup }) => {
-  const navigate = useNavigate();
+const InputBox = ({ isSignup, isLogin }) => {
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isFetching, isLogined } = useSelector((state) => state.login);
-  console.log("isFetching", isFetching);
+  const { isLogined, isFetching, error } = useSelector((state) => state.login);
+  const { isSignedUp, isSuccess } = useSelector((state) => state.signup);
   console.log("isLogined", isLogined);
-
+  console.log("error", error);
   const {
     register,
     handleSubmit,
@@ -36,18 +35,35 @@ const InputBox = ({ isSignup }) => {
   } = useForm();
 
   const onClickLogin = (data) => {
+    console.log(data);
     if (data.nickname) {
-      dispatch(SignupUser(data)).then(() =>
-        navigate("/login", { replace: true })
-      );
+      dispatch(SignupUser(data));
+      // .then((res) => {
+      //   if(res.error){
+      //     alert("중복된")
+      //   }
+      // });
+      // .then(() =>
+      //   navigate("/login", { replace: true })
+      // );
     } else if (!data.nickname) {
-      dispatch(loginUser(data));
+      dispatch(loginUser(data)).then((res) => console.log(res));
+      // .then((res) => {
+      //   if (res.error) {
+      //     alert("아이디 또는 비밀번호를 확인해주세요.");
+      //   } else {
+      //     setTimeout(() => {
+      //       navigate("/", { replace: true });
+      //     }, 1500);
+      //   }
+      // });
     }
   };
 
   const onError = (error) => {
     console.log(error);
   };
+
   return (
     <div>
       <form
@@ -64,7 +80,7 @@ const InputBox = ({ isSignup }) => {
             id="nickname"
             type="text"
             name="nickname"
-            className="border-[#f1f2f3] border-solid border-2 rounded h-9"
+            className="border-[#dcdfe1] border-solid border-2 rounded h-9 mb-2"
             required
             {...register("nickname", {
               maxLength: 20,
@@ -77,14 +93,15 @@ const InputBox = ({ isSignup }) => {
             {<span>{"닉네임은 2글자이상 20글자 미만으로 작성해주세요."}</span>}
           </ErrSign>
         )}
-        <label htmlFor="email" className="mb-1 font-bold">
+
+        <label htmlFor="email" className="mb-1 font-bold ">
           Email
         </label>
         <input
           id="email"
           type="text"
           name="email"
-          className="border-[#f1f2f3] border-solid border-2 rounded h-9"
+          className="border-[#dcdfe1] border-solid border-2 rounded h-9"
           required
           {...register("email", {
             pattern: {
@@ -96,13 +113,14 @@ const InputBox = ({ isSignup }) => {
         {errors.email && (
           <ErrSign>{<span>{errors?.email.message}</span>}</ErrSign>
         )}
-        <label htmlFor="password" className="mb-1 font-bold">
+
+        <label htmlFor="password" className="mb-1 mt-2 font-bold">
           Password
         </label>
         <input
           id="password"
           type="password"
-          className="border-[#f1f2f3] border-solid border-2 rounded h-9"
+          className="border-[#dcdfe1] border-solid border-2 rounded h-9"
           required
           {...register("password", {
             pattern: {
@@ -121,14 +139,42 @@ const InputBox = ({ isSignup }) => {
             1 letter and 1 number.
           </p>
         ) : null}
-        {!isLogined ? (
-          <button className="flex justify-center items-center bg-[#0995ff] rounded text-white mt-3  p-1.5 hover:bg-[#0162bf]">
-            {isFetching && <ClipLoader className="mr-2" size={20} />}
-            {isSignup ? "Sign Up" : "Log in"}
-          </button>
-        ) : (
-          <Button text={"text"}></Button>
-        )}
+
+        <div>
+          {isLogin && (
+            <Button bgColor={isLogined && "green"}>
+              {!isLogined && !isFetching ? (
+                <FontAwesomeIcon icon={faLock} className="mr-1.5" />
+              ) : null}
+              {isLogined && (
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className="mr-1.5"
+                  bounce
+                />
+              )}
+              {isFetching && <ClipLoader className="mr-2" size={20} />}
+              {isLogined === true ? (
+                <span className="font-bold ">Logined</span>
+              ) : isFetching === true ? (
+                <span className="font-bold ">Waiting...</span>
+              ) : (
+                <span className="font-bold ">Login</span>
+              )}
+            </Button>
+          )}
+          {isSignup && (
+            <Button bgColor={isSignedUp && "green"}>
+              {isSignedUp && <FontAwesomeIcon icon={faCircleCheck} bounce />}
+              {isSuccess && <ClipLoader className="mr-2" size={20} />}
+              {isSuccess ? (
+                <span className="font-bold ">Waiting...</span>
+              ) : (
+                <span className="font-bold ">Signup</span>
+              )}
+            </Button>
+          )}
+        </div>
       </form>
     </div>
   );
