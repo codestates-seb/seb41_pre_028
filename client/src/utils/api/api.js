@@ -19,5 +19,4 @@ export const getAnswerList = (params) => axios.get("/answers", { params });
 // }
 
 /** Users */
-export const getUserProfile = (userId) =>
-  axios.get(`http://localhost:3001/users/${userId}`);
+export const getUserProfile = (userId) => axios.get(`/users/${userId}`);

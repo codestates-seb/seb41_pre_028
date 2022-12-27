@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { getUserProfile } from "../utils/api/api";
+import { getUserProfile } from "../utils/api/api";
 import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 // import { media } from "../utils/style-utils";
@@ -33,23 +33,23 @@ const UserPage = () => {
   const { userId } = useParams();
   const [userPageTab, setUserPageTab] = useState(0);
   const [user, setUser] = useState({
-    name: "",
-    avatar_img: "",
+    nickname: "",
+    email: "",
+    createdAt: "",
   });
 
   useEffect(() => {
     // id가 userId인 user 정보를 get 해와야함
     setUser({ ...user, name: "yerin" });
-    // getUserProfile(userId)
-    //   .then((res) => {
-    //     setUser(res.data);
-    //   })
-    //   .catch((err) => console.log(err));
+    getUserProfile(userId)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
   }, [userId]);
 
   return (
     <ContentWrapper className="content">
-      <div>현재 아이디 {userId}</div>
       <main>
         <Profile>
           <div className="profile--img">
@@ -57,13 +57,16 @@ const UserPage = () => {
               <img
                 className="block w-[128px] h-[128px] rounded-[3px]"
                 src={user.avatar_img}
-                alt={`${user.name}'s avatar`}
+                alt={`${user.nickname}'s avatar`}
               />
             </div>
           </div>
           <div className="profile--content">
-            <div className="text-[34px] mb-[10px]">{user.name}</div>
-            <div>부가적인 정보들....</div>
+            <div className="text-[34px] mb-[10px]">{user.nickname}</div>
+            <div>
+              <span>{user.email}</span>
+              <span>{user.createdAt}</span>
+            </div>
           </div>
         </Profile>
         <div>
