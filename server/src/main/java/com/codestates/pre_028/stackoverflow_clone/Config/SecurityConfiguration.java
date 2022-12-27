@@ -5,6 +5,7 @@ import com.codestates.pre_028.stackoverflow_clone.Auth.filter.JwtAuthenticationF
 import com.codestates.pre_028.stackoverflow_clone.Auth.filter.JwtVerificationFilter;
 import com.codestates.pre_028.stackoverflow_clone.Auth.handler.UserAccessDeniedHandler;
 import com.codestates.pre_028.stackoverflow_clone.Auth.handler.UserAuthenticationEntryPoint;
+import com.codestates.pre_028.stackoverflow_clone.Auth.handler.UserAuthenticationFailureHandler;
 import com.codestates.pre_028.stackoverflow_clone.Auth.handler.UserAuthenticationSuccessHandler;
 import com.codestates.pre_028.stackoverflow_clone.Auth.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
@@ -62,6 +63,11 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/users/**").hasAnyRole("ADMIN")
                         .anyRequest().permitAll()
                 )
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .deleteCookies("jwt_token")
+
         ;// 역할에 다른 기능 추가
 
         return http.build();
@@ -84,10 +90,12 @@ public class SecurityConfiguration {
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
+
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
-            jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");  // -> /login
+            jwtAuthenticationFilter.setFilterProcessesUrl("/login");  // -> /login
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new UserAuthenticationSuccessHandler());
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, customAuthorityUtils);
 

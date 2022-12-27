@@ -16,6 +16,12 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
 
+        String refreshToken = response.getHeader("Refresh");
+        Cookie cookie = new Cookie("jwt_token", refreshToken);
+//        cookie.setDomain("/");
+        cookie.setHttpOnly(true);
+
+        response.addCookie(cookie);// 쿠키 세팅
 
         log.info(" # 인증 성공입니다!");
     }

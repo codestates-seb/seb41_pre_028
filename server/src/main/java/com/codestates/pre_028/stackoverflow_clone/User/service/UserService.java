@@ -44,7 +44,6 @@ public class UserService {
         return findVerifiedUser(id);
     }
     //유저 전체 조회
-    @Transactional(readOnly = true)
     public List<User> findUsers(){
         return new ArrayList<>(userRepository.findAll());
     }

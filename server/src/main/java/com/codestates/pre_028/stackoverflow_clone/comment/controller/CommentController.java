@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/answers")
+@RequestMapping
 public class CommentController {
 
     private final CommentMapper mapper;

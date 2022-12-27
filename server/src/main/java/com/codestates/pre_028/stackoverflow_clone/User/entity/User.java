@@ -73,5 +73,19 @@ public class User extends AuditingFields {
         this.reputation = reputation;
     }
 
+    public void addQuestion(Question question) {
+        questions.add(question);
+        if (question.getUser() != this) {
+            question.setUser(this);
+        }
+    }
+
+    public void addAnswer(Answer answer) {
+        answers.add(answer);
+        if (answer.getUser() != this) {
+            answer.setUser(this);
+        }
+    }
+
 
 }

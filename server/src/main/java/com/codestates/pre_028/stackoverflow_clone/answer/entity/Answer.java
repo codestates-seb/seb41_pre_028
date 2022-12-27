@@ -31,7 +31,7 @@ public class Answer extends AuditingFields {
     private AnswerStatus answerStatus = AnswerStatus.ANSWER_NORMAL;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
     @JsonBackReference
@@ -40,9 +40,9 @@ public class Answer extends AuditingFields {
     private Question question;
 
     @JsonManagedReference
-
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments = new ArrayList<>();
+
 
     public void setComment(Comment comment){
         this.comments.add(comment);
