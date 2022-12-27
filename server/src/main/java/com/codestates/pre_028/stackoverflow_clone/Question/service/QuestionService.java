@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -38,21 +39,30 @@ public class QuestionService {
     }
 
     public Question updateQuestion(Question question) {
-        Question updatedQuestion = question;
-        return updatedQuestion;
+        Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+        Optional.ofNullable(question.getTitle())
+                .ifPresent(title -> findQuestion.setTitle(title));
+        Optional.ofNullable(question.getContent())
+                .ifPresent(content -> findQuestion.setContent(content));
+        Optional.ofNullable(question.getTag())
+                .ifPresent(tag -> findQuestion.setTag(tag));
+        return questionRepository.save(findQuestion);
     }
 
     public Question findQuestion(long questionId) {
 
-        return null;
+        return findVerifiedQuestion(questionId);
 
     }
 
     public List<Question> findQuestions() {
-        return null;
+
+        return (List<Question>)questionRepository.findAll();
     }
 
     public void deleteQuestion(long questionId) {
+        Question findQuestion = findVerifiedQuestion(questionId);
+        questionRepository.delete(findQuestion);
 
     }
 
