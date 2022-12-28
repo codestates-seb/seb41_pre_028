@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
-import { BufferMd5 } from "../buffer/Buffer.jsx";
+import { BufferMd5 } from "../buffer/Buffer";
 
 const Editor = () => {
   const [value, setValue] = useState("");

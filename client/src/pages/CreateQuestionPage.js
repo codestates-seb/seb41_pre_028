@@ -1,5 +1,5 @@
-import InputPrimary from "../components/input/inputPrimary.jsx";
-import { BufferMd5, BufferMr5 } from "../components/buffer/Buffer.jsx";
+import InputPrimary from "../components/input/inputPrimary";
+import { BufferMd5, BufferMr5 } from "../components/buffer/Buffer";
 // import Editor from "../components/editor/Editor.jsx";
 import { Button } from "@mui/material";
 import { PageContainer, MainContainer } from "../components/StyledContainer";

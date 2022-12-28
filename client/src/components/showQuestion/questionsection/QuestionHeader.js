@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { PrimaryLink } from "../../StyledLink";
 import { Link } from "react-router-dom";
-import { BufferBorder1 } from "../../buffer/Buffer.jsx";
+import { BufferBorder1 } from "../../buffer/Buffer";
 const QuestionStats = styled.div`
   display: flex;
   flex-direction: row;

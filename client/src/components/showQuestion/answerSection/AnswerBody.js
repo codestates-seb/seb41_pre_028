@@ -1,6 +1,6 @@
 import VoteCell from "../VoteCell";
 import { Link } from "react-router-dom";
-import { BufferMd5 } from "../../buffer/Buffer.jsx";
+import { BufferMd5 } from "../../buffer/Buffer";
 import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
 // import { useState, useEffect } from "react";
@@ -33,7 +33,7 @@ const AnswerBody = ({ item }) => {
       <div className="m-4 flex flex-row">
         <VoteCell item={item.userId} />
         <div> {item.content}</div>
-        <div> {JSON.stringify(item)}</div>
+        {/* <div> {JSON.stringify(item)}</div> */}
         {console.log(item)}
       </div>
       <BufferMd5 />

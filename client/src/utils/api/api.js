@@ -4,6 +4,8 @@ import axios from "axios";
 export const getQuestionList = (params) =>
   axios.get("http://localhost:3001/question", { params });
 
+export const getQuestion = (questionId) => axios.get(`questions/${questionId}`);
+
 // export const getQuestionListByUserId = (userId) => {
 //    axios.get("http://localhost:3001/question", { params: {userId}});
 // }

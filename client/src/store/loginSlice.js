@@ -7,6 +7,7 @@ export const loginUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const res = await axios.post("/login", data);
+      localStorage.setItem("authorizationToken", res.headers.authorization);
 
       console.log(res);
 

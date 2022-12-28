@@ -1,6 +1,6 @@
 import VoteCell from "../VoteCell";
 import { Link } from "react-router-dom";
-import { BufferMd5 } from "../../buffer/Buffer.jsx";
+import { BufferMd5 } from "../../buffer/Buffer";
 import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
 
@@ -18,9 +18,9 @@ const QuestionBody = ({ item }) => {
   return (
     <div className="flex flex-col w-full">
       {/* screen 크기에 맞추기 */}
-      <div className="m-4">
+      <div className="m-4  flex flex-row w-full">
         <VoteCell item={item.userId} />
-        <div> 1</div>
+        <div className="flex flex-row w-full"> {item.content}</div>
       </div>
       <BufferMd5 />
       {/* tag */}
