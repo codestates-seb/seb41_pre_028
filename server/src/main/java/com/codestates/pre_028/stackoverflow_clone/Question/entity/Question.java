@@ -40,7 +40,7 @@ public class Question extends AuditingFields {
     List<Answer> answerList = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question" , cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     public void setUser(User user) {
