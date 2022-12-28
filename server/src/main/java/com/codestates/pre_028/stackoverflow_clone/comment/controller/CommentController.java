@@ -37,7 +37,7 @@ public class CommentController {
 
 
     @PostMapping("/questions/{question-id}/comments")
-    public ResponseEntity postQuestionComment(@PathVariable("id") @Positive Long questionId,
+    public ResponseEntity postQuestionComment(@PathVariable("question-id") @Positive Long questionId,
                                               @Valid @RequestBody CommentDto.QuestionPost commentPostDto){
 
         commentPostDto.setQuestionId(questionId);
@@ -48,7 +48,7 @@ public class CommentController {
     }
 
     @PatchMapping("/answers/{answer-id}/comments/{comment-id}")
-    public ResponseEntity patchAnswerComment(@PathVariable("id") @Positive Long answerId, @PathVariable("comment-id") @Positive Long commentId,
+    public ResponseEntity patchAnswerComment(@PathVariable("answer-id") @Positive Long answerId, @PathVariable("comment-id") @Positive Long commentId,
                                              @Valid @RequestBody CommentDto.Patch commentPatchDto){
 
         commentPatchDto.setAnswerId(answerId);
