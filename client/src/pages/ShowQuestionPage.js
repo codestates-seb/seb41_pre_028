@@ -31,7 +31,7 @@ const ShowQuestionPage = () => {
         <BufferMd5 />
 
         <div className="answer">
-          <AnswerList></AnswerList>
+          <AnswerList params={questionId}></AnswerList>
           <div>
             <h1 className="m-4 text-2xl">Your Answers</h1>
           </div>
