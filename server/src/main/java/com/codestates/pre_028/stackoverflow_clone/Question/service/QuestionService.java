@@ -56,12 +56,20 @@ public class QuestionService {
 
     public Question updateQuestion(Question question) {
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+
+
         Optional.ofNullable(question.getTitle())
                 .ifPresent(title -> findQuestion.setTitle(title));
         Optional.ofNullable(question.getContent())
                 .ifPresent(content -> findQuestion.setContent(content));
         Optional.ofNullable(question.getTag())
                 .ifPresent(tag -> findQuestion.setTag(tag));
+
+        String tag = question.getTag();
+        List<String> tagList = new ArrayList<>(Arrays.asList(tag.split(", ")));
+        findQuestion.setTagList(tagList);
+
+
         return questionRepository.save(findQuestion);
     }
 
@@ -97,6 +105,20 @@ public class QuestionService {
 
     // tag string -> tag 공백 혹은 , 로 끊어서 하나씩 테이블에 저장
     public String tagListToTag(QuestionDto.QuestionPostDto tagList){
+
+        tagList.setTag(Arrays.stream(tagList.getTag().split(","))
+                .map(tagA -> Arrays.stream(tagA.trim().split(" "))
+                        .flatMap(tagB -> Arrays.stream(tagB.split(", "))))
+                .flatMap(tagA-> tagA)
+                .distinct()
+                .filter(tagA -> !Objects.equals(tagA,""))
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", ")));
+
+        return tagList.getTag();
+    }
+
+    public String tagListToTag(QuestionDto.QuestionPatchDto tagList){
 
         tagList.setTag(Arrays.stream(tagList.getTag().split(","))
                 .map(tagA -> Arrays.stream(tagA.trim().split(" "))
