@@ -14,9 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class QuestionService {
 
@@ -38,12 +39,18 @@ public class QuestionService {
         return questionRepository.findAllDistinctContent();
     }
 
+    @Transactional
     public Question createQuestion(Question question) {
         User user = userRepository.getReferenceById(question.getUser().getUserId());
+        String tag = question.getTag();
+
+        List<String> tagList = new ArrayList<>(Arrays.asList(tag.split(", ")));
 
         question.setUser(user);
+        question.setTagList(tagList);
 
         Question savedQuestion = questionRepository.save(question);
+
         return savedQuestion;
     }
 
@@ -88,5 +95,19 @@ public class QuestionService {
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
+    // tag string -> tag 공백 혹은 , 로 끊어서 하나씩 테이블에 저장
+    public String tagListToTag(QuestionDto.QuestionPostDto tagList){
+
+        tagList.setTag(Arrays.stream(tagList.getTag().split(","))
+                .map(tagA -> Arrays.stream(tagA.trim().split(" "))
+                        .flatMap(tagB -> Arrays.stream(tagB.split(", "))))
+                .flatMap(tagA-> tagA)
+                .distinct()
+                .filter(tagA -> !Objects.equals(tagA,""))
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", ")));
+
+        return tagList.getTag();
+    }
 }
 

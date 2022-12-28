@@ -17,6 +17,7 @@ public class QuestionDto {
 
     @AllArgsConstructor
     @Getter
+    @Setter
     public static class QuestionPostDto {
 
         private long userId;

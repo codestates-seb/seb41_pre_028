@@ -1,6 +1,7 @@
 package com.codestates.pre_028.stackoverflow_clone.Question.controller;
 
 import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
+import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionPaginationDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
@@ -17,7 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,9 +41,14 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionDto.QuestionPostDto questionDto){
 
+        String tag  = questionService.tagListToTag(questionDto);
         Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionDto));
 
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(question), HttpStatus.CREATED);
+        question.setTag(tag);
+
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question)), HttpStatus.CREATED);
     }
 
     //질문 수정
@@ -51,7 +59,8 @@ public class QuestionController {
         questionPatchDto.setQuestionId(questionId);
         Question response = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
 
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response),HttpStatus.OK);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response)),HttpStatus.OK);
     }
 
     //질문 상세 조회
@@ -59,7 +68,8 @@ public class QuestionController {
     public ResponseEntity getQuestion(@PathVariable("question-id") long questionId){
         Question response = questionService.findQuestion(questionId);
 
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response),HttpStatus.OK);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response)),HttpStatus.OK);
     }
 
     //질문 전체 조회
