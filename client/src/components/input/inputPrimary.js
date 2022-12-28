@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 const InputPrimary = ({ placeholder }) => {
   const [input, setInput] = useState("");
   const onChangeTitle = (e) => {

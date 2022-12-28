@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { media } from "../utils/style-utils";
 import { PrimaryLink } from "../components/StyledLink";
 import QuestionList from "../components/question/QuestionList";
-import { useSelector } from "react-redux";
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -31,9 +30,6 @@ const ContentWrapper = styled.div`
 `;
 
 const QuestionsPage = () => {
-  const { authorizationToken } = useSelector((state) => state.login);
-  console.log("authorizationToken", authorizationToken);
-
   const [questionList, setQuestionList] = useState([]);
   return (
     <ContentWrapper className="content">

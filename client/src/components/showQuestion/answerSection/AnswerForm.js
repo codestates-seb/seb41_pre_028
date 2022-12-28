@@ -1,6 +1,6 @@
 import { BufferMr5 } from "../../buffer/Buffer.jsx";
 import { Button } from "@mui/material";
-import Editor from "../../editor/Editor.jsx";
+import Editor from "../../editor/Editor";
 
 const AnswerForm = () => {
   return (
