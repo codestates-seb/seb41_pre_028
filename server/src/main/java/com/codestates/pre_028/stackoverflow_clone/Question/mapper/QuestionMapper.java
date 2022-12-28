@@ -53,7 +53,7 @@ public interface QuestionMapper {
         questionResponseDto.setModifiedBy(question.getModifiedBy());
 
         //답변
-        questionResponseDto.setAnswerResponseDtos(answerToAnswerWithQuestionResponseDtos(answers));
+        questionResponseDto.setAnswers(answerToAnswerWithQuestionResponseDtos(answers));
 
         //댓글
         questionResponseDto.setComments(commentToCommentWithQuestionResponeDtos(comments));
