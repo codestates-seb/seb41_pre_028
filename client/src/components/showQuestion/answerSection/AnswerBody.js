@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BufferMd5 } from "../../buffer/Buffer.jsx";
 import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
-
+// import { useState, useEffect } from "react";
 const QuestionStats = styled.div`
   display: flex;
   flex-direction: row;
@@ -15,11 +15,26 @@ const QuestionStats = styled.div`
 `;
 
 const AnswerBody = ({ item }) => {
+  // const [comments, setQuestion] = useState([]);
+  // const getData = async () => {
+  //   await fetch(`/answers/${answerId}/comments`)
+  //     .then((response) => response.json())
+  //     .then((data) => setQuestion(data))
+  //     .catch((error) => console.log(error));
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
+  // const { answerId } = useParams();
   return (
     <div className="flex flex-col">
       <div className="m-4 flex flex-row">
         <VoteCell item={item.userId} />
         <div> {item.content}</div>
+        <div> {JSON.stringify(item)}</div>
+        {console.log(item)}
       </div>
       <BufferMd5 />
       {/* tag */}
@@ -71,7 +86,7 @@ const AnswerBody = ({ item }) => {
         </div>
       </div>
       {/* comment */}
-      <CommentCell commentList={item.comment} />
+      <CommentCell comments={item.userId} />
     </div>
   );
 };

@@ -34,7 +34,7 @@ const QuestionsPage = () => {
   return (
     <ContentWrapper className="content">
       <main>
-        <div className="flex flex-row items-center justify-between mb-[12px]">
+        <div className="flex flex-row items-center justify-between mb-[12px] h-screen">
           <h1 className="text-title-size">All Questions</h1>
           <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
         </div>

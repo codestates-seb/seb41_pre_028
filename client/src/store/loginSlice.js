@@ -12,7 +12,7 @@ export const loginUser = createAsyncThunk(
     //   );
     // await wait(1000).then((res) => console.log(res));
     try {
-      const res = await axios.post("/users/login", data);
+      const res = await axios.post("/login", data);
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response);
