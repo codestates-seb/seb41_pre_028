@@ -53,7 +53,7 @@ const MainPage = () => {
             path="/search/:searchWord"
             element={<SearchQuestionPage />}
           ></Route>
-          <Route path="/*" element={<QuestionsPage />}></Route>
+          <Route path="/" element={<QuestionsPage />}></Route>
         </Routes>
       </MainContainer>
     </PageContainer>

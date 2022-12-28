@@ -16,14 +16,14 @@ const QuestionStats = styled.div`
 
 const QuestionBody = ({ item }) => {
   return (
-    <div className="flex flex-col ">
-      <div className="m-4 flex flex-row min-w-full">
+    <div className="flex flex-col w-full">
+      {/* screen 크기에 맞추기 */}
+      <div className="m-4
         <VoteCell item={item.userId} />
         <div> 1</div>
       </div>
       <BufferMd5 />
       {/* tag */}
-
       {/* profile */}
       <div className="flex flex-row items-center space-between ml-auto">
         <QuestionStats>
@@ -71,7 +71,7 @@ const QuestionBody = ({ item }) => {
         </div>
       </div>
       {/* comment */}
-      <CommentCell commentList={item.comment} />
+      <CommentCell comments={item.comments} />
     </div>
   );
 };

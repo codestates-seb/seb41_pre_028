@@ -9,7 +9,7 @@ const Pagination = () => {
           setSearchParams(searchParams);
         }}
       >
-        hihihihih
+        Pagination
       </button>
     </div>
   );

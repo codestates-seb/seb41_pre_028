@@ -3,23 +3,23 @@ import QuestionBody from "../components/showQuestion/questionsection/QuestionBod
 import AnswerList from "../components/showQuestion/answerSection/AnswerList";
 import AnswerForm from "../components/showQuestion/answerSection/AnswerForm";
 import { BufferMd5 } from "../components/buffer/Buffer.jsx";
-import question from "../components/showQuestion/question";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const ShowQuestionPage = () => {
-  // const [question, setQuestion] = useState([]);
-  // const getData = async () => {
-  //   await fetch("https://koreanjson.com/posts/1")
-  //     .then((response) => response.json())
-  //     .then((data) => setQuestion(data))
-  //     .catch((error) => console.log(error));
-  // };
+  const [question, setQuestion] = useState([]);
+  const getData = async () => {
+    await fetch(`/questions/${questionId}`)
+      .then((response) => response.json())
+      .then((data) => setQuestion(data))
+      .catch((error) => console.log(error));
+  };
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
-  // const { questionId } = useParams();
+  const { questionId } = useParams();
 
   return (
     <div className="content">
@@ -31,7 +31,7 @@ const ShowQuestionPage = () => {
         <BufferMd5 />
 
         <div className="answer">
-          <AnswerList answerList={question.answers}></AnswerList>
+          <AnswerList></AnswerList>
           <div>
             <h1 className="m-4 text-2xl">Your Answers</h1>
           </div>

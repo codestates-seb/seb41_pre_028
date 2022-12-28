@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { getQuestionList } from "../../utils/api/api";
 import Question from "./Question";
 import FilterBar from "../FilterBar";
+import Pagination from "../Pagination/Pagination";
+
 import { questionFilterList as filterList } from "../../static/filterAndTabList";
 import Pagination from "../Pagination/Pagination";
 const QuestionList = ({ questionList, setQuestionList }) => {

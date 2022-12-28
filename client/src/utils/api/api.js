@@ -14,6 +14,10 @@ export const searchQuestionsByWord = (word) =>
 /** Answers */
 export const getAnswerList = (params) => axios.get("/answers", { params });
 
+/** Answers/answer-id/comments */
+// export const getAnswerCommentList = (params) =>
+//   axios.get("/answers", { params });
+
 // export const getAnswerListByUserId = (userId) => {
 //     axios.get("http://localhost:3001/question", { params: {userId}});
 // }
