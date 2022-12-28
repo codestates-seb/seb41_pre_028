@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { loginUser } from "../../store/loginSlice";
 import { SignupUser } from "../../store/signupSlice";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -22,41 +22,36 @@ const ErrSign = styled.div`
 `;
 
 const InputBox = ({ isSignup, isLogin }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLogined, isFetching, error } = useSelector((state) => state.login);
+  const { isLogined, isFetching, authorizationToken } = useSelector(
+    (state) => state.login
+  );
   const { isSignedUp, isSuccess } = useSelector((state) => state.signup);
-  console.log("isLogined", isLogined);
-  console.log("error", error);
+  console.log(isLogined);
+  console.log(authorizationToken);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const onClickLogin = (data) => {
-    console.log(data);
     if (data.nickname) {
-      dispatch(SignupUser(data));
-      // .then((res) => {
-      //   if(res.error){
-      //     alert("중복된")
-      //   }
-      // });
-      // .then(() =>
-      //   navigate("/login", { replace: true })
-      // );
+      dispatch(SignupUser(data)).then((res) => {
+        if (!res.error) {
+          alert(`${data.nickname}님 환영합니다!`);
+          navigate("/login", { replace: true });
+        }
+      });
     } else if (!data.nickname) {
-      dispatch(loginUser(data)).then((res) => console.log(res));
-      // .then((res) => {
-      //   if (res.error) {
-      //     alert("아이디 또는 비밀번호를 확인해주세요.");
-      //   } else {
-      //     setTimeout(() => {
-      //       navigate("/", { replace: true });
-      //     }, 1500);
-      //   }
-      // });
+      dispatch(loginUser(data)).then((res) => {
+        if (!res.error) {
+          setTimeout(() => {
+            navigate("/", { replace: true });
+          }, 1000); /**setTimeout은 일부러 추가했습니다.서버가 지연될시 로딩중임을 보여주기위해 */
+        }
+        return;
+      });
     }
   };
 
@@ -93,7 +88,6 @@ const InputBox = ({ isSignup, isLogin }) => {
             {<span>{"닉네임은 2글자이상 20글자 미만으로 작성해주세요."}</span>}
           </ErrSign>
         )}
-
         <label htmlFor="email" className="mb-1 font-bold ">
           Email
         </label>
