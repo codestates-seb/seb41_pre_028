@@ -1,6 +1,5 @@
 package com.codestates.pre_028.stackoverflow_clone.User.service;
 
-import com.codestates.pre_028.stackoverflow_clone.Auth.Dto.LoginDto;
 import com.codestates.pre_028.stackoverflow_clone.Auth.utils.CustomAuthorityUtils;
 import com.codestates.pre_028.stackoverflow_clone.Auth.utils.UserRegistrationApplicationEvent;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;

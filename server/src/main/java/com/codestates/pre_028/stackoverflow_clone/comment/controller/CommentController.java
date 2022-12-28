@@ -23,8 +23,8 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/answers/{id}/comments")
-    public ResponseEntity postAnswerComment(@PathVariable("id") @Positive Long answerId,
+    @PostMapping("/answers/{answer-id}/comments")
+    public ResponseEntity postAnswerComment(@PathVariable("answer-id") @Positive Long answerId,
                                             @Valid @RequestBody CommentDto.AnswerPost commentPostDto){
 
         commentPostDto.setAnswerId(answerId);
@@ -36,8 +36,8 @@ public class CommentController {
     }
 
 
-    @PostMapping("/questions/{id}/comments")
-    public ResponseEntity postQuestionComment(@PathVariable("id") @Positive Long questionId,
+    @PostMapping("/questions/{question-id}/comments")
+    public ResponseEntity postQuestionComment(@PathVariable("question-id") @Positive Long questionId,
                                               @Valid @RequestBody CommentDto.QuestionPost commentPostDto){
 
         commentPostDto.setQuestionId(questionId);
@@ -47,8 +47,8 @@ public class CommentController {
                 new SingleResponseDto<>(mapper.commentToQuestionCommentResponseDto(comment)),HttpStatus.CREATED);
     }
 
-    @PatchMapping("/answers/{id}/comments/{comment-id}")
-    public ResponseEntity patchAnswerComment(@PathVariable("id") @Positive Long answerId, @PathVariable("comment-id") @Positive Long commentId,
+    @PatchMapping("/answers/{answer-id}/comments/{comment-id}")
+    public ResponseEntity patchAnswerComment(@PathVariable("answer-id") @Positive Long answerId, @PathVariable("comment-id") @Positive Long commentId,
                                              @Valid @RequestBody CommentDto.Patch commentPatchDto){
 
         commentPatchDto.setAnswerId(answerId);
@@ -59,8 +59,8 @@ public class CommentController {
                 new SingleResponseDto<>(mapper.commentToAnswerCommentResponseDto(comment)), HttpStatus.OK);
     }
 
-    @PatchMapping("/questions/{id}/comments/{comment-id}")
-    public ResponseEntity patchQuestionComment(@PathVariable("id") @Positive Long questionId, @PathVariable("comment-id") @Positive Long commentId,
+    @PatchMapping("/questions/{question-id}/comments/{comment-id}")
+    public ResponseEntity patchQuestionComment(@PathVariable("question-id") @Positive Long questionId, @PathVariable("comment-id") @Positive Long commentId,
                                                @Valid @RequestBody CommentDto.Patch commentPatchDto){
 
         commentPatchDto.setQuestionId(questionId);
@@ -97,15 +97,15 @@ public class CommentController {
 
     }*/
 
-    @DeleteMapping("/answers/{id}/comments/{comment_id}")
-    public ResponseEntity deleteAnswerComment(@PathVariable("id") @Positive Long answerId,
+    @DeleteMapping("/answers/{answer-id}/comments/{comment_id}")
+    public ResponseEntity deleteAnswerComment(@PathVariable("answer-id") @Positive Long answerId,
                                               @PathVariable("comment_id") @Positive Long commentId){
         commentService.deleteComment(commentId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/questions/{id}/comments/{comment_id}")
-    public ResponseEntity deleteQuestionComment(@PathVariable("id") @Positive Long answerId,
+    @DeleteMapping("/questions/{question-id}/comments/{comment_id}")
+    public ResponseEntity deleteQuestionComment(@PathVariable("question-id") @Positive Long answerId,
                                                 @PathVariable("comment_id") @Positive Long commentId){
         commentService.deleteComment(commentId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
