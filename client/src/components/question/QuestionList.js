@@ -6,7 +6,6 @@ import FilterBar from "../FilterBar";
 import Pagination from "../Pagination/Pagination";
 
 import { questionFilterList as filterList } from "../../static/filterAndTabList";
-import Pagination from "../Pagination/Pagination";
 const QuestionList = ({ questionList, setQuestionList }) => {
   // UI를 담당
   const [curFilter, setCurFilter] = useState(0);
