@@ -1,7 +1,11 @@
 import UserItem from "../components/users/UsersItem";
 import FilterBar from "../components/FilterBar";
+// import { useParams } from "react-router-dom";
 
 const UsersPage = () => {
+  // const { id } = useParams();
+  // console.log(id);
+
   const filterList = [
     {
       id: 1,
