@@ -89,7 +89,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User getLoginUserWithToken() { // 로그인된 유저 가져오기
+    // 로그인된 유저 가져오기
+    public User getLoginUserWithToken() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousUser"))

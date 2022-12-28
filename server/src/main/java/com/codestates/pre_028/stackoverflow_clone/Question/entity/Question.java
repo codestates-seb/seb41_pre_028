@@ -43,6 +43,11 @@ public class Question extends AuditingFields {
     @OneToMany(mappedBy = "question" , cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "QUESTION_TAG_LIST", joinColumns = @JoinColumn(name = "QUESTION_ID"))
+    @Column(name = "TAG")
+    private List<String> tagList;
+
     public void setUser(User user) {
         this.user = user;
     }

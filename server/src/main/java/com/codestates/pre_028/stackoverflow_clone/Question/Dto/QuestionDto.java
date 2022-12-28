@@ -17,6 +17,7 @@ public class QuestionDto {
 
     @AllArgsConstructor
     @Getter
+    @Setter
     public static class QuestionPostDto {
 
         private long userId;
@@ -36,6 +37,8 @@ public class QuestionDto {
     @AllArgsConstructor
     public static class QuestionPatchDto {
         private long questionId;
+
+        private long userId;
 
         @NotBlank(message = "제목은 공백이 아니어야 합니다.")
         private String title;

@@ -14,9 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class QuestionService {
 
@@ -38,23 +39,37 @@ public class QuestionService {
         return questionRepository.findAllDistinctContent();
     }
 
+    @Transactional
     public Question createQuestion(Question question) {
         User user = userRepository.getReferenceById(question.getUser().getUserId());
+        String tag = question.getTag();
+
+        List<String> tagList = new ArrayList<>(Arrays.asList(tag.split(", ")));
 
         question.setUser(user);
+        question.setTagList(tagList);
 
         Question savedQuestion = questionRepository.save(question);
+
         return savedQuestion;
     }
 
     public Question updateQuestion(Question question) {
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+
+
         Optional.ofNullable(question.getTitle())
                 .ifPresent(title -> findQuestion.setTitle(title));
         Optional.ofNullable(question.getContent())
                 .ifPresent(content -> findQuestion.setContent(content));
         Optional.ofNullable(question.getTag())
                 .ifPresent(tag -> findQuestion.setTag(tag));
+
+        String tag = question.getTag();
+        List<String> tagList = new ArrayList<>(Arrays.asList(tag.split(", ")));
+        findQuestion.setTagList(tagList);
+
+
         return questionRepository.save(findQuestion);
     }
 
@@ -84,9 +99,42 @@ public class QuestionService {
         return findQuestion;
     }
 
+    //퀘스쳔 페이지네이션
     public Page<Question> findQuestions(int page, int size){
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
+    public Page<Question> findAllbyTag(String tag, int page, int size){
+        return questionRepository.findAllByTag(tag, PageRequest.of(page, size));
+    }
+
+    // tag string -> tag 공백 혹은 , 로 끊어서 하나씩 테이블에 저장
+    public String tagListToTag(QuestionDto.QuestionPostDto tagList){
+
+        tagList.setTag(Arrays.stream(tagList.getTag().split(","))
+                .map(tagA -> Arrays.stream(tagA.trim().split(" "))
+                        .flatMap(tagB -> Arrays.stream(tagB.split(", "))))
+                .flatMap(tagA-> tagA)
+                .distinct()
+                .filter(tagA -> !Objects.equals(tagA,""))
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", ")));
+
+        return tagList.getTag();
+    }
+
+    public String tagListToTag(QuestionDto.QuestionPatchDto tagList){
+
+        tagList.setTag(Arrays.stream(tagList.getTag().split(","))
+                .map(tagA -> Arrays.stream(tagA.trim().split(" "))
+                        .flatMap(tagB -> Arrays.stream(tagB.split(", "))))
+                .flatMap(tagA-> tagA)
+                .distinct()
+                .filter(tagA -> !Objects.equals(tagA,""))
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", ")));
+
+        return tagList.getTag();
+    }
 }
 
