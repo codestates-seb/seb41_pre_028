@@ -16,10 +16,10 @@ const QuestionStats = styled.div`
 
 const QuestionBody = ({ item }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <div className="m-4 flex flex-row min-w-full">
         <VoteCell item={item.userId} />
-        <div> {item.content}</div>
+        <div> 1</div>
       </div>
       <BufferMd5 />
       {/* tag */}

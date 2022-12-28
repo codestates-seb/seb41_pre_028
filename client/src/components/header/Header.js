@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { PrimaryLink, SecondaryLink } from "../StyledLink";
+import { loginActions } from "../../store/loginSlice";
+import { logoutUser } from "../../store/logoutSlice";
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -14,7 +16,13 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = () => {
-  const { isLogined } = useSelector((state) => state.login);
+  const { isLogined, authorizationToken } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(loginActions.logout());
+    dispatch(logoutUser());
+  };
+  console.log("authorizationToken", authorizationToken);
   return (
     <header className="fixed top-0 z-40 w-screen h-header-height bg-[#F8F9F9] flex justify-center">
       <HeaderContainer>
@@ -28,7 +36,7 @@ const Header = () => {
         {isLogined ? (
           <ul className="flex flex-row">
             <li>프로필</li>
-            <li>로그아웃</li>
+            <button onClick={onLogout}>로그아웃</button>
           </ul>
         ) : (
           <ul className="flex flex-row">
