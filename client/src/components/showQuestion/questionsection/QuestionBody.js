@@ -18,7 +18,7 @@ const QuestionBody = ({ item }) => {
   return (
     <div className="flex flex-col w-full">
       {/* screen 크기에 맞추기 */}
-      <div className="m-4
+      <div className="m-4">
         <VoteCell item={item.userId} />
         <div> 1</div>
       </div>

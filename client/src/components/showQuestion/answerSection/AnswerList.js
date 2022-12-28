@@ -16,7 +16,6 @@ function AnswerList({ answerList }) {
   }, []);
 
   // const getAnswerList = (params) => axios.get("/answers", { params });
-
   const { questionId } = useParams();
   return (
     <div className="answers-group">
