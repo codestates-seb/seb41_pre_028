@@ -1,16 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
 export const SignupUser = createAsyncThunk(
   "signup/signupUser",
   async (data, { rejectWithValue }) => {
-    // const wait = (timeToDelay) =>
-    //   new Promise((resolve) =>
-    //     setTimeout(() => {
-    //       resolve(axios.post("/users/signup", data));
-    //     }, timeToDelay)
-    //   );
-    // await wait(1000).then(() => alert(`${data.nickname}님 환영합니다!`));
     try {
       const res = await axios.post("/users/signup", data);
       return res.data;
@@ -28,8 +20,7 @@ const signupSlice = createSlice({
     password: "",
     isSignedUp: false,
     isSuccess: false,
-    isError: false,
-    error: "",
+    signUpError: "",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -47,9 +38,15 @@ const signupSlice = createSlice({
         state.password = payload.password;
       })
       .addCase(SignupUser.rejected, (state, action) => {
-        state.error = action.payload;
+        console.log(action.payload.response.data.message);
+        if (action.payload.response.data.message === "Nickname Exists") {
+          alert("이미 사용중인 디스플레이 네임입니다.");
+        } else if (action.payload.response.data.message === "Email Exists") {
+          alert("이미 사용중인 이메일입니다.");
+        }
+        state.signUpError = action.payload;
+        state.isSuccess = false;
         state.isSignedUp = false;
-        state.isError = true;
       });
   },
 });
