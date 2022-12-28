@@ -22,7 +22,7 @@ public class QuestionWithAnswerDto {
     private String nickname;
     private String content;
     private String tag;
-    private List<AnswerResponseDto> answerResponseDtos;
+    private List<AnswerResponseDto> answers;
 
     private List<CommentResponseDto> comments;
 
