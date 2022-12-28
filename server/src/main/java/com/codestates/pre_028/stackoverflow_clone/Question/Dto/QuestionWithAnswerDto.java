@@ -17,6 +17,7 @@ public class QuestionWithAnswerDto {
     private long questionId;
     private long userId;
 
+    private String title;
     private String email;
     private String nickname;
     private String content;
