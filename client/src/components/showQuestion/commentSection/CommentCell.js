@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 import CommentBody from "./CommentBody.js";
-import InputPrimary from "./../../input/inputPrimary.jsx";
+import InputPrimary from "./../../input/inputPrimary";
 import { BufferMd5 } from "../../buffer/Buffer.jsx";
 
 const CommentCell = ({ comments }) => {
