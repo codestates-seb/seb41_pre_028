@@ -99,8 +99,13 @@ public class QuestionService {
         return findQuestion;
     }
 
+    //퀘스쳔 페이지네이션
     public Page<Question> findQuestions(int page, int size){
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
+    }
+
+    public Page<Question> findAllbyTag(String tag, int page, int size){
+        return questionRepository.findAllByTag(tag, PageRequest.of(page, size));
     }
 
     // tag string -> tag 공백 혹은 , 로 끊어서 하나씩 테이블에 저장

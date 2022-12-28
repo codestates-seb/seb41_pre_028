@@ -2,6 +2,7 @@ package com.codestates.pre_028.stackoverflow_clone.Dto;
 
 import lombok.Getter;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -10,7 +11,6 @@ import java.util.List;
 public class MultiResponseDto<T> {
     private List<T> data;
     private PageInfo pageInfo;
-
     private List<Integer> barNumber;
 
     public MultiResponseDto(List<T> data, Page page, List<Integer> barNumber) {
@@ -25,4 +25,6 @@ public class MultiResponseDto<T> {
         this.pageInfo = new PageInfo(page.getNumber() ,
                 page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
+
 }
+

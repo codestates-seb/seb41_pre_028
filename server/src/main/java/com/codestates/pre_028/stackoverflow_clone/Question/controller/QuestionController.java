@@ -139,4 +139,17 @@ public class QuestionController {
                 new MultiResponseDto<>(responsDtos, pageQuestions), HttpStatus.OK);
 
     }
+
+    @GetMapping("/{tag}")
+    public ResponseEntity searchQuestionWithTag(
+            @PathVariable("tag") String tag,
+            @RequestParam int page,
+            @RequestParam(defaultValue = "15") int size){
+
+        Page<Question> pageQuestions = questionService.findAllbyTag(tag, page, size);
+        List<Question> questions = pageQuestions.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.questionToQuestionResponseDto(questions), pageQuestions), HttpStatus.OK);
+    }
 }
