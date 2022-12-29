@@ -26,6 +26,7 @@ const PageButton = styled.button`
 const Pagination = ({ totalPages }) => {
   const [curPage, setCurPage] = useState(1);
   const pageArr = useMemo(() => {
+    // p
     if (totalPages <= 5) {
       return range(2, totalPages);
     }
@@ -99,7 +100,7 @@ const Pagination = ({ totalPages }) => {
       </PageButton>
       <PageButton
         className={`${curPage === totalPages ? "focus" : ""} ${
-          totalPages === 1 ? "hidden" : ""
+          totalPages <= 1 ? "hidden" : ""
         }`}
         onClick={() => {
           setCurPage(totalPages);
@@ -115,7 +116,7 @@ const Pagination = ({ totalPages }) => {
           searchParams.set("page", curPage + 1);
           setSearchParams(searchParams);
         }}
-        className={curPage === totalPages ? "hidden" : ""}
+        className={curPage === totalPages || totalPages <= 1 ? "hidden" : ""}
       >
         next
       </PageButton>
