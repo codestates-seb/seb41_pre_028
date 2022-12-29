@@ -5,6 +5,7 @@ import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionPaginatio
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionWithAnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteQuestion;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
@@ -26,12 +27,14 @@ public interface QuestionMapper {
     default Question questionPostDtoToQuestion(QuestionDto.QuestionPostDto questionPostDto){
         Question question = new Question();
         User user = new User();
+        VoteQuestion voteQuestion = new VoteQuestion();
         user.setUserId(questionPostDto.getUserId());
 
         question.setUser(user);
         question.setTitle(questionPostDto.getTitle());
         question.setContent(questionPostDto.getContent());
         question.setTag(questionPostDto.getTag());
+        question.setVote(voteQuestion);
         return question;
 
     };
@@ -47,6 +50,7 @@ public interface QuestionMapper {
         questionResponseDto.setUser(question.getUser());
         questionResponseDto.setTitle(question.getTitle());
         questionResponseDto.setTag(question.getTag());
+        questionResponseDto.setVote(question.getVote());
 
         //메타데이타
         questionResponseDto.setCreatedAt(question.getCreatedAt());
