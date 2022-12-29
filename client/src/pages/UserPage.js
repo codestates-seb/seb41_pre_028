@@ -62,7 +62,7 @@ const UserPage = () => {
               <div className="flex items-center justify-center">
                 <img
                   className="block w-[128px] h-[128px] rounded-[3px]"
-                  src={user.avatar_img}
+                  src="https://www.gravatar.com/avatar/adef0b5893a6615076a5b41cbbcfc7bc?s=256&d=identicon&r=PG"
                   alt={`${user.nickname}'s avatar`}
                 />
               </div>

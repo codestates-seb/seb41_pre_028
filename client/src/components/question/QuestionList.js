@@ -21,7 +21,7 @@ const QuestionList = ({ questionList, setQuestionList }) => {
       searchParams.append("page", 1);
     }
     if (!searchParams.has("size")) {
-      searchParams.append("size", 2);
+      searchParams.append("size", 3);
     }
 
     getQuestionList(paramsToObject(searchParams.entries()))
