@@ -36,6 +36,7 @@ public interface QuestionMapper {
 
     };
     Question questionPatchDtoToQuestion(QuestionDto.QuestionPatchDto questionPatchDto);
+
     default QuestionWithAnswerDto questionToQuestionResponseDto(Question question){
         List<Comment> comments = question.getComments();
         List<Answer> answers = question.getAnswerList();
@@ -44,6 +45,7 @@ public interface QuestionMapper {
         questionResponseDto.setQuestionId(question.getQuestionId());
         questionResponseDto.setContent(question.getContent());
         questionResponseDto.setUser(question.getUser());
+        questionResponseDto.setTitle(question.getTitle());
         questionResponseDto.setTag(question.getTag());
 
         //메타데이타
@@ -83,6 +85,7 @@ public interface QuestionMapper {
                         .userId(answer.getUser().getUserId())
                         .nickname(answer.getUser().getNickname())
                         .questionId(answer.getQuestion().getQuestionId())
+                        .vote(answer.getVoteAnswer())
                         .content(answer.getContent())
                         .build())
                 .collect(Collectors.toList());

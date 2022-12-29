@@ -122,25 +122,7 @@ public class QuestionController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-
-    @GetMapping("/keyword")
-    public ResponseEntity searchQuestionWithKeyword(
-            @RequestParam(required = false) String keyword,
-            @PageableDefault(size = 15) Pageable pageable){
-
-
-
-        Page<Question> pageQuestions = questionService.searchQuestion(keyword,pageable);
-        List<Question> questions = pageQuestions.getContent();
-        List<QuestionPaginationDto> responsDtos = mapper.questionToQuestionWithKeywordResponseDto(questions);
-
-
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(responsDtos, pageQuestions), HttpStatus.OK);
-
-    }
-
-    @GetMapping("/{tag}")
+    @GetMapping("/search/{tag}")
     public ResponseEntity searchQuestionWithTag(
             @PathVariable("tag") String tag,
             @RequestParam int page,
@@ -152,4 +134,5 @@ public class QuestionController {
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionToQuestionResponseDto(questions), pageQuestions), HttpStatus.OK);
     }
+
 }

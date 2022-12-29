@@ -19,6 +19,7 @@ public class QuestionPaginationDto {
     private long userId;
     private String email;
     private String nickname;
+    private String tag;
 
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;

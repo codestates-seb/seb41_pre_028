@@ -3,6 +3,7 @@ package com.codestates.pre_028.stackoverflow_clone.answer.dto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteAnswer;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer.AnswerStatus;
 //import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
 //import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
@@ -61,7 +62,7 @@ public class AnswerDto {
         private String content;
         private List<Comment> comments;
         private AnswerStatus answerStatus;
-
+        private VoteAnswer vote;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private String createdBy;
@@ -76,10 +77,13 @@ public class AnswerDto {
        public void setQuestion(Question question){
             this.questionId = question.getQuestionId();
         }
-
-        public String getAnswerStatus(){
+       public String getAnswerStatus(){
             return answerStatus.getStatus();
         }
+
+       public Long getVote(){
+            return vote.getVoteNum();
+       }
     }
 
 }

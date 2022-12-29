@@ -4,6 +4,8 @@ import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteAnswer;
+import com.codestates.pre_028.stackoverflow_clone.answer.dto.VoteAnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.repository.AnswerRepository;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
@@ -70,5 +72,20 @@ public class AnswerService {
                 optionalAnswer.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
         return findAnswer;
+    }
+
+    public Answer updateVote(VoteAnswerDto voteAnswerDto){
+        Answer findAnswer = findVerifiedAnswer(voteAnswerDto.getAnswerId());
+        VoteAnswer voteAnswer = findAnswer.getVoteAnswer();
+        if(voteAnswer.getUserIds().contains(voteAnswerDto.getUserId())){
+            throw new BusinessLogicException(ExceptionCode.VOTED);
+        }
+
+        voteAnswer.setVoteNum(voteAnswer.getVoteNum() + voteAnswerDto.getVote());
+        voteAnswer.setUserIds(voteAnswerDto.getUserId());
+
+        findAnswer.setVoteAnswer(voteAnswer); //이 라인 생략가능한지 체크할것
+
+        return answerRepository.save(findAnswer);
     }
 }

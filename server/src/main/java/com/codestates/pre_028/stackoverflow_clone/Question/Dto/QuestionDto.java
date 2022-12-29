@@ -49,36 +49,4 @@ public class QuestionDto {
         private String tag;
     }
 
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter
-    @Setter
-    public static class QuestionResponseDto {
-        private long questionId;
-        private String title;
-        private String content;
-        private String tag;
-
-        private long userId;
-        private String email;
-        private String nickname;
-
-        private List<CommentResponseDto> comments;
-
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
-        private String createdBy;
-        private String modifiedBy;
-
-
-        public void setUser(User user) {
-            this.userId = user.getUserId();
-            this.email = user.getEmail();
-            this.nickname = user.getNickname();
-        }
-
-
-
-
-    }
 }

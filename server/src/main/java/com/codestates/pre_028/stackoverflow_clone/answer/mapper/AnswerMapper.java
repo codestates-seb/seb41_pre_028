@@ -3,6 +3,7 @@ package com.codestates.pre_028.stackoverflow_clone.answer.mapper;
 
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteAnswer;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerWithCommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
@@ -25,15 +26,17 @@ public interface AnswerMapper {
     default Answer answerPostDtoToAnswer(AnswerDto.Post answerPostDto){
         Answer answer = new Answer();
         User user = new User();
-        user.setUserId(answerPostDto.getUserId());
+        VoteAnswer voteAnswer = new VoteAnswer();
 
+        user.setUserId(answerPostDto.getUserId());
 
         Question question = new Question();
         question.setQuestionId(answerPostDto.getQuestionId());
+
         answer.setQuestion(question);
         answer.setUser(user);
         answer.setContent(answerPostDto.getContent());
-
+        answer.setVoteAnswer(voteAnswer);
         return answer;
     }
 
@@ -46,7 +49,7 @@ public interface AnswerMapper {
 
         answerDtoResponse.setContent(answer.getContent());
         answerDtoResponse.setAnswerStatus(answer.getAnswerStatus());
-
+        answerDtoResponse.setVote(answer.getVoteAnswer());
 
         answerDtoResponse.setCreatedAt(answer.getCreatedAt());
         answerDtoResponse.setModifiedAt(answer.getModifiedAt());
@@ -68,7 +71,7 @@ public interface AnswerMapper {
 
         answerWithCommentResponseDto.setContent(answer.getContent());
         answerWithCommentResponseDto.setAnswerStatus(answer.getAnswerStatus());
-
+        answerWithCommentResponseDto.setVote(answer.getVoteAnswer());
 
         answerWithCommentResponseDto.setCreatedAt(answer.getCreatedAt());
         answerWithCommentResponseDto.setModifiedAt(answer.getModifiedAt());

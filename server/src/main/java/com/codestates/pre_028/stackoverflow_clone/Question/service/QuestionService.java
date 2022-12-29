@@ -29,12 +29,6 @@ public class QuestionService {
         this.userRepository = userRepository;
     }
 
-    @Transactional(readOnly = true)
-    public Page<Question> searchQuestion(String keyword, Pageable pageable){
-        return questionRepository.findByContentContaining(keyword, pageable);
-    }
-
-
     public List<String> getContents(){
         return questionRepository.findAllDistinctContent();
     }

@@ -3,6 +3,7 @@ package com.codestates.pre_028.stackoverflow_clone.answer.entity;
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteAnswer;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -43,6 +44,15 @@ public class Answer extends AuditingFields {
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToOne(mappedBy = "answer", cascade = CascadeType.ALL)
+    private VoteAnswer voteAnswer;
+
+    public void setVoteAnswer(VoteAnswer voteAnswer){
+        this.voteAnswer = voteAnswer;
+        if(voteAnswer.getAnswer() != this){
+            voteAnswer.setAnswer(this);
+        }
+    }
 
     public void setComment(Comment comment){
         this.comments.add(comment);
