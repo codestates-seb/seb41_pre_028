@@ -46,7 +46,7 @@ const InputBox = ({ isSignup, isLogin }) => {
     } else if (!data.nickname) {
       dispatch(loginUser(data)).then((res) => {
         if (!res.error) {
-          setCookie("authorizationToken", res.payload.headers.authorization, {
+          setCookie("Authorization", res.payload.headers.authorization, {
             path: "/",
           });
           setTimeout(() => {

@@ -7,7 +7,6 @@ const UserItem = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   };
-  console.log(users);
   useEffect(() => {
     getUsers();
   }, []);
