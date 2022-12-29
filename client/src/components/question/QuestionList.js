@@ -60,7 +60,7 @@ const QuestionList = ({ questionList, setQuestionList }) => {
           </div>
         ) : (
           questionList.map((el) => (
-            <Question key={el.id} question={el}></Question>
+            <Question key={el.questionId} questionId={el.questionId}></Question>
           ))
         )}
       </div>
