@@ -26,9 +26,9 @@ public class VoteAnswer {
     private Answer answer;
 
     @ElementCollection
-    private List<Long> userIds = new ArrayList<>();
+    private List<Long> answerUserIds = new ArrayList<>();
 
-    public void setUserIds(Long userId){
-        this.userIds.add(userId);
+    public void setAnswerUserIds(Long userId){
+        this.answerUserIds.add(userId);
     }
 }
