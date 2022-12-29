@@ -4,6 +4,7 @@ import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerWithCommentResponseDto;
+import com.codestates.pre_028.stackoverflow_clone.answer.dto.VoteAnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.mapper.AnswerMapper;
 import com.codestates.pre_028.stackoverflow_clone.answer.service.AnswerService;
@@ -42,7 +43,7 @@ public class AnswerController {
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post answerPostDto){
         Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.CREATED);
     }
 
@@ -79,6 +80,14 @@ public class AnswerController {
     public ResponseEntity deleteAnswer(@PathVariable("answer-id") Long answerId){
         answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/{answer-id}/answer_vote")
+    public ResponseEntity voteToAnswer(@PathVariable("answer-id") Long answerId,
+                                       @Valid @RequestBody VoteAnswerDto voteAnswerDto){
+        Answer answer = answerService.updateVote(voteAnswerDto);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
+                HttpStatus.OK);
     }
 
 }
