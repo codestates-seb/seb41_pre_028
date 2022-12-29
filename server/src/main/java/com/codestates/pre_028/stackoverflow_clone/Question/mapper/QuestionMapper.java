@@ -82,6 +82,7 @@ public interface QuestionMapper {
                 .stream()
                 .map(answer -> AnswerResponseDto
                         .builder()
+                        .answerId(answer.getAnswerId())
                         .userId(answer.getUser().getUserId())
                         .nickname(answer.getUser().getNickname())
                         .questionId(answer.getQuestion().getQuestionId())
