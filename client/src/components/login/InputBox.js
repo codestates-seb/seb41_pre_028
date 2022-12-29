@@ -9,7 +9,7 @@ import Button from "../button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faLock } from "@fortawesome/free-solid-svg-icons";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import { setCookie } from "../../utils/cookie";
 const ErrSign = styled.div`
   background-color: rgba(255, 0, 0, 0.2);
   border: 1px solid red;
@@ -46,8 +46,12 @@ const InputBox = ({ isSignup, isLogin }) => {
     } else if (!data.nickname) {
       dispatch(loginUser(data)).then((res) => {
         if (!res.error) {
+          setCookie("Authorization", res.payload.headers.authorization, {
+            path: "/",
+          });
           setTimeout(() => {
-            navigate("/", { replace: true });
+            // navigate("/", { replace: true });
+            window.location.replace("/");
           }, 1000); /**setTimeout은 일부러 추가했습니다.서버가 지연될시 로딩중임을 보여주기위해 */
         }
         return;

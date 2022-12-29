@@ -5,48 +5,60 @@ import { Button } from "@mui/material";
 import { PageContainer, MainContainer } from "../components/StyledContainer";
 import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
+import { fetchCreateQuestion } from "../utils/api/api";
+import { useNavigate } from "react-router-dom";
+import { isCookieExist } from "../utils/cookie";
 
 const CreateQuestionPage = () => {
-  const Title = ({ placeholder }) => {
-    const [input, setInput] = useState("");
-    const onChangeTitle = (e) => {
-      setInput(e.target.value);
-    };
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [tag, setTag] = useState("");
 
-    return (
-      <div>
-        <input
-          id="title"
-          name="title"
-          type="text"
-          value={input}
-          maxLength="300"
-          placeholder={placeholder}
-          className="w-full px-4 py-2 border rounded border-soGray-light"
-          data-min-length="15"
-          data-max-length="150"
-          onChange={onChangeTitle}
-        />
-      </div>
-    );
+  const onChangeTitle = (e) => {
+    e.preventDefault();
+    setTitle(e.target.value);
+  };
+
+  const onChangeTag = (e) => {
+    e.preventDefault();
+    setTag(e.target.value);
   };
 
   const Editor = () => {
-    const [value, setValue] = useState("");
     return (
       <div className="flex flex-col z-0 container">
         {/* 크기를 최대로 조정해야함 */}
         <MDEditor
           className="flex min-w-max"
           data-color-mode="light"
-          value={value}
-          onChange={setValue}
+          value={content}
+          onChange={setContent}
           preview="edit"
         />
         <BufferMd5 />
-        <div> {value}</div>
+        <div> {content}</div>
       </div>
     );
+  };
+
+  const onClickDiscard = () => {
+    navigator("/questions");
+  };
+
+  const onClickSubmit = async () => {
+    console.log("title, content, tag", { title, content, tag });
+    console.log("isCookieExist", isCookieExist);
+    if (title.length < 10) {
+      console.log("Minimum 10 characters.");
+    } else if (content.length < 50) {
+      console.log("Minimum 50 characters.");
+    } else {
+      await fetchCreateQuestion({ title, content, tag }).then((questionId) => {
+        console.log(questionId);
+        navigate(`/questions/${questionId}`);
+      });
+    }
   };
   return (
     <PageContainer className="bg-[#f1f2f3]">
@@ -104,7 +116,11 @@ const CreateQuestionPage = () => {
               Be specific and imagine you’re asking a question to another
               person.
             </p>
-            <Title placeholder="e.g. Is there an R function for finding the index of an element in a vector?" />
+            <InputPrimary
+              title={title}
+              onChangeTitle={onChangeTitle}
+              placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+            />
           </div>
 
           {/* content */}
@@ -126,15 +142,29 @@ const CreateQuestionPage = () => {
               Add up to 5 tags to describe what your question is about. Start
               typing to see suggestions.
             </p>
-            <InputPrimary />
+            <InputPrimary
+              title={tag}
+              onChangeTitle={onChangeTag}
+              placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+            />
           </div>
           <div className="flex flex-row">
-            <Button variant="contained" sx={{ fontSize: 12 }} size="large">
+            <Button
+              variant="contained"
+              sx={{ fontSize: 12 }}
+              size="large"
+              onClick={onClickSubmit}
+            >
               Post your question
             </Button>
 
             <BufferMr5 />
-            <Button color="error" sx={{ fontSize: 12 }} size="large">
+            <Button
+              color="error"
+              sx={{ fontSize: 12 }}
+              size="large"
+              onClick={onClickDiscard}
+            >
               Discard draft
             </Button>
           </div>
