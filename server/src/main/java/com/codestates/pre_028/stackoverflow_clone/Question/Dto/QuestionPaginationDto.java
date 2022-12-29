@@ -1,5 +1,6 @@
 package com.codestates.pre_028.stackoverflow_clone.Question.Dto;
 
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteQuestion;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +23,7 @@ public class QuestionPaginationDto {
     private String email;
     private String nickname;
     private String tag;
+    private List<String> tagList;
     private VoteQuestion vote;
 
     private LocalDateTime createdAt;
