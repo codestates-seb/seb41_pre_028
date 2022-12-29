@@ -44,6 +44,7 @@ public class JwtTokenizer {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
         return Jwts.builder()
+                .setHeaderParam("type","jwt")
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(Calendar.getInstance().getTime())
