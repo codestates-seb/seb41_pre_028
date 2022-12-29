@@ -19,9 +19,9 @@ public class SearchService {
 
     @Transactional(readOnly = true)
     public Page<Question> searchQuestion(String value,Pageable pageable){
-        if(value.matches("%5B[a-zA-Z0-9]%5D"))
+        if(value.matches("\\[\\w+\\]"))
             return questionRepository.findByTagContaining(value.replaceAll("[^\\w+]",""), pageable);
-        else if(value.matches("\"[a-zA-Z0-9]\""))
+        else if(value.matches("\"\\w+\""))
             return questionRepository.findByTitleContaining(value.replaceAll("[^\\w+]", ""), pageable);
 
         return questionRepository.
