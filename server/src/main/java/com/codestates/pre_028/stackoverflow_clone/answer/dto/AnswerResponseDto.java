@@ -7,6 +7,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class AnswerResponseDto {
+    private long answerId;
     private long userId;
     private long questionId;
     private String nickname;

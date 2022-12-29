@@ -134,5 +134,4 @@ public class QuestionController {
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionToQuestionResponseDto(questions), pageQuestions), HttpStatus.OK);
     }
-
 }
