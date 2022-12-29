@@ -34,9 +34,9 @@ const FilterBar = ({ filterList }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    if (searchParams.has("tab")) {
+    if (searchParams.has("filter")) {
       setCurFilter(
-        filterList.findIndex((el) => el.tab === searchParams.get("tab"))
+        filterList.findIndex((el) => el.filter === searchParams.get("filter"))
       );
     }
   }, [searchParams]);
@@ -44,17 +44,17 @@ const FilterBar = ({ filterList }) => {
     <FilterNav>
       {filterList.map((el, idx) => (
         <button
-          value={el.tab}
+          value={el.filter}
           className={idx === curFilter ? "focus" : ""}
-          key={el.id}
+          key={el.filter}
           onClick={() => {
             setCurFilter(idx);
-            searchParams.set("tab", el.tab);
+            searchParams.set("filter", el.filter);
             searchParams.set("page", 1);
             setSearchParams(searchParams);
           }}
         >
-          {el.tab}
+          {el.filter}
         </button>
       ))}
     </FilterNav>

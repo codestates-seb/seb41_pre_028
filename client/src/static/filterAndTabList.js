@@ -4,11 +4,11 @@ import UserProfile from "../components/user/UserProfile";
 export const questionFilterList = [
   {
     id: 1,
-    tab: "Newest",
+    filter: "Newest",
   },
   {
     id: 2,
-    tab: "Unanswerd",
+    filter: "Unanswerd",
   },
 ];
 

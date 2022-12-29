@@ -14,8 +14,8 @@ const QuestionList = ({ questionList, setQuestionList }) => {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    if (!searchParams.has("tab")) {
-      searchParams.append("tab", filterList[0].tab);
+    if (!searchParams.has("filter")) {
+      searchParams.append("filter", filterList[0].filter);
     }
     if (!searchParams.has("page")) {
       searchParams.append("page", 1);

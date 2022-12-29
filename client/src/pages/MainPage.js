@@ -49,10 +49,6 @@ const MainPage = () => {
           <Route path="/users" element={<UsersPage />}></Route>
           <Route path="/users/:userId/*" element={<UserPage />}></Route>
           <Route path="/search" element={<SearchQuestionPage />}></Route>
-          <Route
-            path="/search/:searchWord"
-            element={<SearchQuestionPage />}
-          ></Route>
           <Route path="/" element={<QuestionsPage />}></Route>
         </Routes>
       </MainContainer>
