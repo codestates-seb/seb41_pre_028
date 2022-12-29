@@ -24,8 +24,7 @@ const SearchBar = () => {
 
   const handleKeyUp = (e) => {
     if (e.key === "Enter") {
-      console.log(searchWord);
-      navigate(`/search/${searchWord}`);
+      navigate(`/search?value=${searchWord}`);
       // 여기에 추가적인 작업 필요
     }
   };

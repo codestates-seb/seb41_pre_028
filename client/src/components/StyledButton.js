@@ -18,4 +18,15 @@ const SecondaryButton = styled.button`
   border-radius: 3px;
 `;
 
-export { PrimaryButton, SecondaryButton };
+const TabButton = styled.button`
+  color: #525960;
+  padding: 6px 12px;
+  border-radius: 1000px;
+  border: none;
+  line-height: 1.2;
+  &:hover {
+    background-color: #e3e6e8;
+  }
+`;
+
+export { PrimaryButton, SecondaryButton, TabButton };
