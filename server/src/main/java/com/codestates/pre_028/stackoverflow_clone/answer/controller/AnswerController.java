@@ -2,6 +2,7 @@ package com.codestates.pre_028.stackoverflow_clone.answer.controller;
 
 import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
+import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerWithCommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.VoteAnswerDto;
@@ -32,11 +33,13 @@ public class AnswerController {
     private final AnswerMapper mapper;
     private final AnswerService answerService;
     private final CommentService commentService;
+    private final UserService userService;
 
-    public AnswerController(AnswerMapper mapper, AnswerService answerService, CommentService commentService) {
+    public AnswerController(AnswerMapper mapper, AnswerService answerService, CommentService commentService, UserService userService) {
         this.mapper = mapper;
         this.answerService = answerService;
         this.commentService = commentService;
+        this.userService = userService;
     }
 
     @PostMapping
@@ -85,6 +88,8 @@ public class AnswerController {
     @PatchMapping("/{answer-id}/answer_vote")
     public ResponseEntity voteToAnswer(@PathVariable("answer-id") Long answerId,
                                        @Valid @RequestBody VoteAnswerDto voteAnswerDto){
+        voteAnswerDto.setUserId(userService.getLoginUserWithToken().getUserId());
+        voteAnswerDto.setAnswerId(answerId);
         Answer answer = answerService.updateVote(voteAnswerDto);
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.OK);
