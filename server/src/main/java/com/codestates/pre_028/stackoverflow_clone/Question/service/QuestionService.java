@@ -1,10 +1,12 @@
 package com.codestates.pre_028.stackoverflow_clone.Question.service;
 
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionDto;
+import com.codestates.pre_028.stackoverflow_clone.Question.Dto.VoteQuestionDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteQuestion;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
 import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
 import org.springframework.data.domain.Page;
@@ -132,6 +134,27 @@ public class QuestionService {
                 .collect(Collectors.joining(", ")));
 
         return tagList.getTag();
+    }
+
+    public Question updateVote(VoteQuestionDto voteQuestionDto){
+        Question findQuestion = findVerifiedQuestion(voteQuestionDto.getQuestionId());
+        VoteQuestion voteQuestion = findQuestion.getVote();
+
+        if(findQuestion.getUser().getUserId() == voteQuestionDto.getUserId()){
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+        }
+
+
+        if(voteQuestion.getQuestionUserIds().contains(voteQuestionDto.getUserId())){
+            throw new BusinessLogicException(ExceptionCode.VOTED);
+        }
+
+        voteQuestion.setVoteNum(voteQuestion.getVoteNum() + voteQuestionDto.getVote());
+        voteQuestion.setQuestionUserIds(voteQuestionDto.getUserId());
+
+        findQuestion.setVote(voteQuestion);
+
+        return questionRepository.save(findQuestion);
     }
 }
 

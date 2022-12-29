@@ -1,6 +1,7 @@
 package com.codestates.pre_028.stackoverflow_clone.Question.Dto;
 
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteQuestion;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
@@ -22,6 +23,7 @@ public class QuestionWithAnswerDto {
     private String nickname;
     private String content;
     private String tag;
+    private VoteQuestion vote;
     private List<AnswerResponseDto> answers;
 
     private List<CommentResponseDto> comments;
@@ -37,4 +39,7 @@ public class QuestionWithAnswerDto {
         this.nickname = user.getNickname();
     }
 
+    public Long getVote(){
+        return this.vote.getVoteNum();
+    }
 }

@@ -36,7 +36,6 @@ public class AnswerController {
             AnswerService answerService,
             CommentService commentService,
             UserService userService) {
-
         this.mapper = mapper;
         this.answerService = answerService;
         this.commentService = commentService;
@@ -99,6 +98,8 @@ public class AnswerController {
     @PatchMapping("/{answer-id}/answer_vote")
     public ResponseEntity voteToAnswer(@PathVariable("answer-id") Long answerId,
                                        @Valid @RequestBody VoteAnswerDto voteAnswerDto){
+        voteAnswerDto.setUserId(userService.getLoginUserWithToken().getUserId());
+        voteAnswerDto.setAnswerId(answerId);
         Answer answer = answerService.updateVote(voteAnswerDto);
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.OK);
