@@ -1,38 +1,33 @@
-import { Button } from "@mui/material";
 import { useState } from "react";
-import { fetchQuestion } from "../../../utils/api/api";
-import { useNavigate } from "react-router-dom";
+import { fetchAnswer } from "../../../utils/api/api";
 import { isCookieExist } from "../../../utils/cookie";
 import Editor from "../../editor/Editor";
+import { Button } from "@mui/material";
 
-const AnswerForm = ({ answerlist }) => {
-  const navigate = useNavigate();
+const AnswerForm = ({ questionId }) => {
+  console.log("questionId", { questionId });
 
-  const [answer, setAnswer] = useState("");
+  const [content, setContent] = useState("");
 
-  const onChangeAnswer = (e) => {
-    e.preventDefault();
-    setAnswer(e.target.value);
-  };
+  const userId = 2;
 
   const onClickSubmit = async () => {
-    console.log("answer", { answer });
-    console.log("answerlist", { answerlist });
+    console.log("content", { content, questionId, userId });
 
     console.log("isCookieExist", isCookieExist);
-    if (answer.length < 10) {
+    if (content.length < 10) {
       console.log("Minimum 10 characters.");
     } else {
-      await fetchQuestion({ answer }).then((questionId) => {
+      await fetchAnswer({ content, questionId, userId }).then((questionId) => {
         console.log(questionId);
-        navigate(`/questions/${questionId}`);
+        location.reload();
       });
     }
   };
 
   return (
     <div>
-      <Editor value={answer} onChange={onChangeAnswer} />
+      <Editor value={content} onChange={setContent} />
 
       <div className="flex flex-row">
         <Button

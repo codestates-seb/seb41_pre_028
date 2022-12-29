@@ -1,6 +1,7 @@
 import QuestionHeader from "../components/showQuestion/questionsection/QuestionHeader";
 import QuestionBody from "../components/showQuestion/questionsection/QuestionBody";
 import AnswerList from "../components/showQuestion/answerSection/AnswerList";
+import AnswerForm from "../components/showQuestion/answerSection/AnswerForm";
 import { BufferMd5 } from "../components/buffer/Buffer";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -33,6 +34,7 @@ const ShowQuestionPage = () => {
           <div>
             <h1 className="m-4 text-2xl">Your Answers</h1>
           </div>
+          <AnswerForm questionId={questions.questionId} />
         </div>
       </div>
       <BufferMd5 />

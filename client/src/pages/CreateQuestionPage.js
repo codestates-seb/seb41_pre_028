@@ -27,10 +27,6 @@ const CreateQuestionPage = () => {
   //   setContent(e.target.value);
   // };
 
-  const onChangeContent = (e) => {
-    e.preventDefault();
-    setContent(e.target.value);
-  };
   const Editor = () => {
     return (
       <div className="flex flex-col z-0 container">
@@ -39,7 +35,7 @@ const CreateQuestionPage = () => {
           className="flex min-w-max"
           data-color-mode="light"
           value={content}
-          onChange={onChangeContent}
+          onChange={setContent}
           preview="edit"
         />
         <BufferMd5 />

@@ -1,9 +1,10 @@
 import VoteCell from "../VoteCell";
 import { Link } from "react-router-dom";
 import { BufferMd5 } from "../../buffer/Buffer";
-import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
 // import { useState, useEffect } from "react";
+import CommentAnswerCell from "../commentSection/CommentAnswerCell";
+
 const QuestionStats = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,14 +34,15 @@ const AnswerBody = ({ item }) => {
       <div className="m-4 flex flex-row">
         <VoteCell item={item.userId} />
         <div> {item.content}</div>
+        <div> answerId:{item.answerId}</div>
+
         {/* <div> {JSON.stringify(item)}</div> */}
-        {console.log(item)}
       </div>
       <BufferMd5 />
       {/* tag */}
 
       {/* profile */}
-      <div className="flex flex-row items-center space-between ml-auto">
+      <div className="flex flex-row items-center  ml-auto">
         <QuestionStats>
           <div>
             <Link
@@ -68,9 +70,9 @@ const AnswerBody = ({ item }) => {
         <Link to={`/users/${item.userId}`}>
           <div className="flex items-center justify-center">
             <img
-              className="block w-[16px] h-[16px] rounded-[3px]"
-              src={item.userId}
-              alt={`${item.userId}'s avatar`}
+              className="block w-[32px] h-[32px] rounded-[3px]"
+              src="https://www.gravatar.com/avatar/adef0b5893a6615076a5b41cbbcfc7bc?s=256&d=identicon&r=PG"
+              alt={`${item.nickname}'s avatar`}
             />
           </div>
         </Link>
@@ -86,7 +88,7 @@ const AnswerBody = ({ item }) => {
         </div>
       </div>
       {/* comment */}
-      <CommentCell comments={item.userId} />
+      <CommentAnswerCell answerId={item.answerId} />
     </div>
   );
 };
