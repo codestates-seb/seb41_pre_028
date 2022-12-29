@@ -2,7 +2,6 @@ package com.codestates.pre_028.stackoverflow_clone.Dto;
 
 import lombok.Getter;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
