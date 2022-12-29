@@ -31,6 +31,8 @@ public enum ExceptionCode {
 
     EMAIL_EXISTS(409,"Email Exists"),
 
+    SAME_USERS(409, "same users"),
+
     NICKNAME_EXISTS(409,"Nickname Exists"),
 
     USER_NOT_ALLOWED(403,"User Not Allowed"),
