@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="flex-1">
+      <div className="flex-1 min-h-screen">
         <Routes>
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />

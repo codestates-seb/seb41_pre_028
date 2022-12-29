@@ -5,7 +5,7 @@ const SideBarNav = () => {
     <nav>
       <Link to={"/"}>Home</Link>
       <ul className="flex flex-col">
-        <Link to={"/questions"}>Questions</Link>
+        <a href="/questions">Questions</a>
         <Link to={"/users"}>User</Link>
       </ul>
     </nav>
