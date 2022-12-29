@@ -2,7 +2,6 @@ import UserCard from "./UserCard";
 import { useState, useEffect } from "react";
 const UserItem = () => {
   const [users, setUsers] = useState([]);
-
   const getUsers = async () => {
     await fetch("https://random-data-api.com/api/v2/users?size=36")
       .then((res) => res.json())

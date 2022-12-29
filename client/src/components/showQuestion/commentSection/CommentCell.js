@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 import CommentBody from "./CommentBody.js";
-import InputPrimary from "./../../input/inputPrimary.jsx";
+import InputPrimary from "./../../input/inputPrimary";
 import { BufferMd5 } from "../../buffer/Buffer.jsx";
 
-const CommentCell = ({ commentList }) => {
+const CommentCell = ({ comments }) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = async (e) => {
@@ -13,9 +13,11 @@ const CommentCell = ({ commentList }) => {
   };
   return (
     <div className="comment">
-      {commentList.map((anItem) => (
-        <CommentBody key={anItem.commentId} item={anItem} />
-      ))}
+      {comments && comments.length > 0
+        ? comments.map((anItem) => (
+            <CommentBody key={anItem.commentId} item={anItem} />
+          ))
+        : ""}
       <div className="flex flex-row ">
         <InputPrimary
           placeholder="Add a comment"

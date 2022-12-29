@@ -1,9 +1,8 @@
 import { useState } from "react";
-
 const InputPrimary = ({ placeholder }) => {
-  const [title, setTitle] = useState("");
+  const [input, setInput] = useState("");
   const onChangeTitle = (e) => {
-    setTitle(e.target.value);
+    setInput(e.target.value);
   };
 
   return (
@@ -12,7 +11,7 @@ const InputPrimary = ({ placeholder }) => {
         id="title"
         name="title"
         type="text"
-        value={title}
+        value={input}
         maxLength="300"
         placeholder={placeholder}
         className="w-full px-4 py-2 border rounded border-soGray-light"

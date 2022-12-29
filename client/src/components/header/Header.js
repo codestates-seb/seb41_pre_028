@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { PrimaryLink, SecondaryLink } from "../StyledLink";
+import { removeCookie, getCookie } from "../../utils/cookie";
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -14,7 +14,15 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = () => {
-  const { isLogined } = useSelector((state) => state.login);
+  const isCookieExist = getCookie("authorizationToken");
+  const onLogout = () => {
+    if (isCookieExist && window.confirm("정말 로그아웃 하시겠습니까?")) {
+      removeCookie("authorizationToken");
+      window.location.reload();
+    }
+  };
+  console.log(isCookieExist);
+
   return (
     <header className="fixed top-0 z-40 w-screen h-header-height bg-[#F8F9F9] flex justify-center">
       <HeaderContainer>
@@ -25,10 +33,10 @@ const Header = () => {
           <SearchBar></SearchBar>
         </div>
         {/** 로그인&비로그인 다르게 보여줌 */}
-        {isLogined ? (
+        {isCookieExist ? (
           <ul className="flex flex-row">
             <li>프로필</li>
-            <li>로그아웃</li>
+            <button onClick={onLogout}>로그아웃</button>
           </ul>
         ) : (
           <ul className="flex flex-row">

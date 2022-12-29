@@ -1,10 +1,53 @@
-import InputPrimary from "../components/input/inputPrimary.jsx";
+import InputPrimary from "../components/input/inputPrimary";
 import { BufferMd5, BufferMr5 } from "../components/buffer/Buffer.jsx";
-import Editor from "../components/editor/Editor.jsx";
+// import Editor from "../components/editor/Editor.jsx";
 import { Button } from "@mui/material";
 import { PageContainer, MainContainer } from "../components/StyledContainer";
+import { useState } from "react";
+import MDEditor from "@uiw/react-md-editor";
 
 const CreateQuestionPage = () => {
+  const Title = ({ placeholder }) => {
+    const [input, setInput] = useState("");
+    const onChangeTitle = (e) => {
+      setInput(e.target.value);
+    };
+
+    return (
+      <div>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          value={input}
+          maxLength="300"
+          placeholder={placeholder}
+          className="w-full px-4 py-2 border rounded border-soGray-light"
+          data-min-length="15"
+          data-max-length="150"
+          onChange={onChangeTitle}
+        />
+      </div>
+    );
+  };
+
+  const Editor = () => {
+    const [value, setValue] = useState("");
+    return (
+      <div className="flex flex-col z-0 container">
+        {/* 크기를 최대로 조정해야함 */}
+        <MDEditor
+          className="flex min-w-max"
+          data-color-mode="light"
+          value={value}
+          onChange={setValue}
+          preview="edit"
+        />
+        <BufferMd5 />
+        <div> {value}</div>
+      </div>
+    );
+  };
   return (
     <PageContainer className="bg-[#f1f2f3]">
       <MainContainer>
@@ -54,14 +97,17 @@ const CreateQuestionPage = () => {
 
           <BufferMd5 />
 
+          {/* title */}
           <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
             <h2 className="mb-0 font-bold text-xl">Title</h2>
             <p className="mb-2 text-sm">
               Be specific and imagine you’re asking a question to another
               person.
             </p>
-            <InputPrimary placeholder="e.g. Is there an R function for finding the index of an element in a vector?" />
+            <Title placeholder="e.g. Is there an R function for finding the index of an element in a vector?" />
           </div>
+
+          {/* content */}
           <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
             <h2 className="mb-0 font-bold text-xl ">
               What are the details of your problem?
@@ -73,6 +119,7 @@ const CreateQuestionPage = () => {
             <Editor />
           </div>
 
+          {/* tag */}
           <div className="mb-8 p-6 bg-white border rounded-md border-soGray-light">
             <h2 className="mb-0 font-bold text-xl">Tags </h2>
             <p className="mb-2 text-sm">
