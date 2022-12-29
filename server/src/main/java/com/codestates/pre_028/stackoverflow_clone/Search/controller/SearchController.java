@@ -29,15 +29,16 @@ public class SearchController {
 
     @GetMapping
     public ResponseEntity searchQuestionWithKeyword(
-            @RequestParam Map<String, String> params,
+            @RequestParam(required = false) String value,
             @PageableDefault(size = 15) Pageable pageable){
-        String key = (String) params
-                .keySet()
-                .iterator()
-                .next();
-        String value = params.get(key);
-        System.out.println("key : "+key+" value : "+value);
-        Page<Question> pageQuestions = searchService.searchQuestion(key,value,pageable);
+//        String key = (String) params
+//                .keySet()
+//                .iterator()
+//                .next();
+//        String value = params.get(key);
+        System.out.println(" value : "+value);
+
+        Page<Question> pageQuestions = searchService.searchQuestion(value,pageable);
         List<Question> questions = pageQuestions.getContent();
         List<QuestionPaginationDto> responsDtos = mapper.questionToQuestionWithKeywordResponseDto(questions);
 

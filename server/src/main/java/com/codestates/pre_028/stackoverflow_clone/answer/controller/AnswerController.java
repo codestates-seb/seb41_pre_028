@@ -45,7 +45,7 @@ public class AnswerController {
     @PostMapping
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post answerPostDto){
 
-        answerPostDto.setUserId(userService.getLoginUserWithToken().getUserId());
+        answerPostDto.setUserId(userService.getLoginUserWithToken().getUserId());        // 로그인 유저 가져오기
         Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
 
         if(!Objects.equals(answer.getUser().getUserId(), answer.getQuestion().getUser().getUserId()))
