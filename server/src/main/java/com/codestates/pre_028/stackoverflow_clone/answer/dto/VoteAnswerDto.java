@@ -12,8 +12,6 @@ public class VoteAnswerDto {
 
     Long answerId;
 
-    @NotNull
-    @Positive
     Long userId;
 
     //1 or -1만

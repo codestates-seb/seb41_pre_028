@@ -4,6 +4,7 @@ import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionPaginationDto;
+import com.codestates.pre_028.stackoverflow_clone.Question.Dto.VoteQuestionDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.mapper.QuestionMapper;
 import com.codestates.pre_028.stackoverflow_clone.Question.service.PaginationService;
@@ -142,5 +143,14 @@ public class QuestionController {
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionToQuestionResponseDto(questionsWithTag), pageQuestions, barNumber), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{question-id}/question_vote")
+    public ResponseEntity voteToQuestion(@PathVariable("question-id") Long questionId,
+                                         @Valid @RequestBody VoteQuestionDto voteQuestionDto){
+        voteQuestionDto.setUserId(userService.getLoginUserWithToken().getUserId());
+        voteQuestionDto.setQuestionId(questionId);
+        Question question = questionService.updateVote(voteQuestionDto);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question)), HttpStatus.OK);
     }
 }

@@ -77,12 +77,17 @@ public class AnswerService {
     public Answer updateVote(VoteAnswerDto voteAnswerDto){
         Answer findAnswer = findVerifiedAnswer(voteAnswerDto.getAnswerId());
         VoteAnswer voteAnswer = findAnswer.getVoteAnswer();
-        if(voteAnswer.getUserIds().contains(voteAnswerDto.getUserId())){
+
+        if(findAnswer.getUser().getUserId() == voteAnswerDto.getUserId()){
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+        }
+
+        if(voteAnswer.getAnswerUserIds().contains(voteAnswerDto.getUserId())){
             throw new BusinessLogicException(ExceptionCode.VOTED);
         }
 
         voteAnswer.setVoteNum(voteAnswer.getVoteNum() + voteAnswerDto.getVote());
-        voteAnswer.setUserIds(voteAnswerDto.getUserId());
+        voteAnswer.setAnswerUserIds(voteAnswerDto.getUserId());
 
         findAnswer.setVoteAnswer(voteAnswer); //이 라인 생략가능한지 체크할것
 
