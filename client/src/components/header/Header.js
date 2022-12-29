@@ -14,10 +14,10 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = () => {
-  const isCookieExist = getCookie("Authoriazation");
+  const isCookieExist = getCookie("Authorization");
   const onLogout = () => {
     if (isCookieExist && window.confirm("정말 로그아웃 하시겠습니까?")) {
-      removeCookie("Authoriazation");
+      removeCookie("Authorization");
       window.location.reload();
     }
   };

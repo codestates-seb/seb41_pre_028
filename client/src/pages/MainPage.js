@@ -7,7 +7,6 @@ import UsersPage from "./UsersPage";
 import UserPage from "./UserPage";
 import ShowQuestionPage from "./ShowQuestionPage";
 import SearchQuestionPage from "./SearchQuestionPage";
-
 export const PageContainer = styled.div`
   width: 100%;
   display: flex;
