@@ -101,10 +101,18 @@ public class QuestionController {
 
     //질문 전체 조회
     @GetMapping
-    public ResponseEntity getQuestionPagination(@RequestParam int page,
-                                                @Positive @RequestParam int size){
+    public ResponseEntity getQuestionPagination(
+            @RequestParam(required = false , value = "filter")
+            String filter,
+            @RequestParam int page,
+            @Positive @RequestParam int size){
 
-        Page<Question> pageQuestions = questionService.findQuestions(page , size);
+        if(filter == null) filter = "newest";
+        if(!filter.equals("newest") && !filter.equals("unanswerd"))
+            return new ResponseEntity<>("잘못된 filter 입니다", HttpStatus.BAD_REQUEST);
+
+
+        Page<Question> pageQuestions = questionService.findQuestionsFromFilter(filter, page , size);
         List<Question> questions = pageQuestions.getContent();
         List<QuestionPaginationDto> responseDtos = mapper.questionToQuestionResponseDto(questions);
         List<Integer> barNumber = paginationService.getPaginationBarNumbers(page, pageQuestions.getTotalPages());
@@ -129,11 +137,12 @@ public class QuestionController {
             @RequestParam int page,
             @RequestParam(defaultValue = "15") int size){
 
-        Page<Question> pageQuestions = questionService.findAllbyTag(tag, page, size);
-        List<Question> questions = pageQuestions.getContent();
+        Page<Question> pageQuestions = questionService.findQuestionsByTag(tag, page, size);
+        List<Question> questionsWithTag = pageQuestions.getContent();
+        List<Integer> barNumber = paginationService.getPaginationBarNumbers(page, pageQuestions.getTotalPages());
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.questionToQuestionResponseDto(questions), pageQuestions), HttpStatus.OK);
+                new MultiResponseDto<>(mapper.questionToQuestionResponseDto(questionsWithTag), pageQuestions, barNumber), HttpStatus.OK);
     }
 
     @PatchMapping("/{question-id}/question_vote")

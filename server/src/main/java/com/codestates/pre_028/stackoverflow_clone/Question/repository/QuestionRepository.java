@@ -21,9 +21,12 @@ public interface QuestionRepository extends JpaRepository<Question, Long>,
     Page<Question> findByTitleContaining(String title, Pageable pageable);
     Page<Question> findByContentContaining(String content, Pageable pageable);
 
-    Page<Question> findAllByTag(String tag, Pageable pageable);
+    Page<Question> findAllByTagContaining(String tag, Pageable pageable);
+
 
     Page<Question> findByTagContaining(String tag, Pageable pageable);
+
+    Page<Question> findAllByAnswerListIsNull(Pageable pageable);
 
     @Override
     default void customize(QuerydslBindings bindings , QQuestion root){

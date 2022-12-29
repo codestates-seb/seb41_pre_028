@@ -75,11 +75,6 @@ public class QuestionService {
 
     }
 
-    public List<Question> findQuestions() {
-
-        return (List<Question>)questionRepository.findAll();
-    }
-
     public void deleteQuestion(long questionId) {
         Question findQuestion = findVerifiedQuestion(questionId);
         questionRepository.delete(findQuestion);
@@ -95,13 +90,21 @@ public class QuestionService {
         return findQuestion;
     }
 
+    //퀘스쳔 필터 페이지네이션
+
+    public Page<Question> findQuestionsFromFilter(String filter, int page, int size){
+         if(filter.equals("unanswerd")) return questionRepository.findAllByAnswerListIsNull(PageRequest.of(page, size, Sort.by("questionId").descending()));
+
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
+    }
+
     //퀘스쳔 페이지네이션
     public Page<Question> findQuestions(int page, int size){
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
-    public Page<Question> findAllbyTag(String tag, int page, int size){
-        return questionRepository.findAllByTag(tag, PageRequest.of(page, size));
+    public Page<Question> findQuestionsByTag(String tag, int page, int size){
+        return questionRepository.findAllByTagContaining(tag, PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
     // tag string -> tag 공백 혹은 , 로 끊어서 하나씩 테이블에 저장

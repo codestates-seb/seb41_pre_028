@@ -2,6 +2,7 @@ package com.codestates.pre_028.stackoverflow_clone.answer.controller;
 
 import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
+import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerWithCommentResponseDto;
@@ -12,6 +13,8 @@ import com.codestates.pre_028.stackoverflow_clone.answer.service.AnswerService;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import com.codestates.pre_028.stackoverflow_clone.comment.service.CommentService;
+import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
+import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/answers")
@@ -35,7 +39,11 @@ public class AnswerController {
     private final CommentService commentService;
     private final UserService userService;
 
-    public AnswerController(AnswerMapper mapper, AnswerService answerService, CommentService commentService, UserService userService) {
+    public AnswerController(
+            AnswerMapper mapper,
+            AnswerService answerService,
+            CommentService commentService,
+            UserService userService) {
         this.mapper = mapper;
         this.answerService = answerService;
         this.commentService = commentService;
@@ -44,7 +52,12 @@ public class AnswerController {
 
     @PostMapping
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post answerPostDto){
+
+        answerPostDto.setUserId(userService.getLoginUserWithToken().getUserId());
         Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
+
+        if(!Objects.equals(answer.getUser().getUserId(), answer.getQuestion().getUser().getUserId()))
+            throw new BusinessLogicException(ExceptionCode.SAME_USERS);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.CREATED);
@@ -53,8 +66,13 @@ public class AnswerController {
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.Patch answerPatchDto){
+
         answerPatchDto.setAnswerId(answerId);
         Answer answer = answerService.updateAnswer(mapper.answerPatchDtoToAnswer(answerPatchDto));
+        User createUser = userService.findVerifiedUser(answer.getUser().getUserId());  //앤서 작성 유저
+        if (!Objects.equals(userService.getLoginUserWithToken().getUserId(), createUser.getUserId())) {
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+        }
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.OK);
     }

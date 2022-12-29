@@ -26,6 +26,7 @@ public class AnswerDto {
     @NoArgsConstructor  //test를 위해 추가
     @AllArgsConstructor //test를 위해 추가
     @Getter
+    @Setter
     public static class Post{
         @Positive
         private long userId;
