@@ -11,14 +11,7 @@ export const questionFilterList = [
   },
   {
     id: 2,
-    tab: "Latest",
-    params: {
-      sorted_by: "",
-    },
-  },
-  {
-    id: 3,
-    tab: "Extra",
+    tab: "Unanswerd",
     params: {
       sorted_by: "",
     },
