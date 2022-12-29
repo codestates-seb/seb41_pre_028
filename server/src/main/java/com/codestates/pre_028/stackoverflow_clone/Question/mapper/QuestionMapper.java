@@ -85,6 +85,7 @@ public interface QuestionMapper {
                         .userId(answer.getUser().getUserId())
                         .nickname(answer.getUser().getNickname())
                         .questionId(answer.getQuestion().getQuestionId())
+                        .vote(answer.getVoteAnswer())
                         .content(answer.getContent())
                         .build())
                 .collect(Collectors.toList());
