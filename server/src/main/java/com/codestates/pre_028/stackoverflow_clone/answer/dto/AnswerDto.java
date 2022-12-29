@@ -24,9 +24,7 @@ public class AnswerDto {
     @Getter
     @Setter
     public static class Post{
-        @Positive
         private long userId;
-
 
         private long questionId;
 
