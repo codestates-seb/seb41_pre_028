@@ -1,10 +1,11 @@
 import InputPrimary from "../components/input/inputPrimary";
 import { BufferMd5, BufferMr5 } from "../components/buffer/Buffer";
-// import Editor from "../components/editor/Editor.jsx";
+// import Editor from "../components/editor/Editor";
+import MDEditor from "@uiw/react-md-editor";
+
 import { Button } from "@mui/material";
 import { PageContainer, MainContainer } from "../components/StyledContainer";
 import { useState } from "react";
-import MDEditor from "@uiw/react-md-editor";
 import { fetchCreateQuestion } from "../utils/api/api";
 import { useNavigate } from "react-router-dom";
 import { isCookieExist } from "../utils/cookie";
@@ -20,11 +21,16 @@ const CreateQuestionPage = () => {
     setTitle(e.target.value);
   };
 
-  const onChangeTag = (e) => {
-    e.preventDefault();
-    setTag(e.target.value);
-  };
+  /** editor */
+  // const onChangeContent = (e) => {
+  //   e.preventDefault();
+  //   setContent(e.target.value);
+  // };
 
+  const onChangeContent = (e) => {
+    e.preventDefault();
+    setContent(e.target.value);
+  };
   const Editor = () => {
     return (
       <div className="flex flex-col z-0 container">
@@ -33,13 +39,18 @@ const CreateQuestionPage = () => {
           className="flex min-w-max"
           data-color-mode="light"
           value={content}
-          onChange={setContent}
+          onChange={onChangeContent}
           preview="edit"
         />
         <BufferMd5 />
         <div> {content}</div>
       </div>
     );
+  };
+
+  const onChangeTag = (e) => {
+    e.preventDefault();
+    setTag(e.target.value);
   };
 
   const onClickDiscard = () => {
@@ -117,8 +128,8 @@ const CreateQuestionPage = () => {
               person.
             </p>
             <InputPrimary
-              title={title}
-              onChangeTitle={onChangeTitle}
+              value={title}
+              onChange={onChangeTitle}
               placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             />
           </div>
@@ -143,8 +154,8 @@ const CreateQuestionPage = () => {
               typing to see suggestions.
             </p>
             <InputPrimary
-              title={tag}
-              onChangeTitle={onChangeTag}
+              value={tag}
+              onChange={onChangeTag}
               placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             />
           </div>

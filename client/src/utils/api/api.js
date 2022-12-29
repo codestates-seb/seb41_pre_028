@@ -53,3 +53,28 @@ export const fetchCreateQuestion = async (fetchData) => {
       throw Error(error.message);
     });
 };
+
+export const fetchQuestion = async (fetchData) => {
+  console.log(fetchData);
+  return fetch(`/questions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: isCookieExist,
+    },
+
+    body: JSON.stringify(fetchData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw Error("유효하지 않은 요청입니다.");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      return data.data.questionId;
+    })
+    .catch((error) => {
+      throw Error(error.message);
+    });
+};

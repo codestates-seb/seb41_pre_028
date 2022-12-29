@@ -1,9 +1,7 @@
-import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import { BufferMd5 } from "../buffer/Buffer";
 
-const Editor = () => {
-  const [value, setValue] = useState("");
+const Editor = ({ value, onChange }) => {
   return (
     <div className="flex flex-col z-0 container">
       {/* 크기를 최대로 조정해야함 */}
@@ -11,7 +9,7 @@ const Editor = () => {
         className="flex min-w-max"
         data-color-mode="light"
         value={value}
-        onChange={setValue}
+        onChange={onChange}
         preview="edit"
       />
       <BufferMd5 />

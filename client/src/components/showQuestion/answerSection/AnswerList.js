@@ -1,4 +1,5 @@
 import AnswerBody from "./AnswerBody";
+import AnswerForm from "./AnswerForm";
 
 function AnswerList({ answers }) {
   // const [answers, setAnswers] = useState([]);
@@ -33,6 +34,7 @@ function AnswerList({ answers }) {
             // 고유키 AnswerID 가 필요함
           ))
         : ""}
+      <AnswerForm answer={answers} />
     </div>
   );
 }
