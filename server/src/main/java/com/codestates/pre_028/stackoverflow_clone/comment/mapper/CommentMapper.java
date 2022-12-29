@@ -9,8 +9,6 @@ import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommentMapper {
     Comment commentPatchDtoToComment(CommentDto.Patch commentPatchDto);

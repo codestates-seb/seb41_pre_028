@@ -2,7 +2,6 @@ package com.codestates.pre_028.stackoverflow_clone.comment.service;
 
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
-import com.codestates.pre_028.stackoverflow_clone.Question.service.QuestionService;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;

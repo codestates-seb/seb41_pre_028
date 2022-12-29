@@ -5,7 +5,6 @@ import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteAnswer;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
-import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import lombok.Getter;
 import lombok.Setter;
 

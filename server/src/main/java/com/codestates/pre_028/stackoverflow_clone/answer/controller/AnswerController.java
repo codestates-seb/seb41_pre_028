@@ -1,32 +1,24 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.controller;
 
-import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.service.UserService;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerDto;
-import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerWithCommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.VoteAnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.answer.mapper.AnswerMapper;
 import com.codestates.pre_028.stackoverflow_clone.answer.service.AnswerService;
-import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
-import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import com.codestates.pre_028.stackoverflow_clone.comment.service.CommentService;
 import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
 import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 @RestController
