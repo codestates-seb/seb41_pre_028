@@ -11,7 +11,6 @@ import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicExcepti
 import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

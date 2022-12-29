@@ -1,15 +1,12 @@
 package com.codestates.pre_028.stackoverflow_clone.answer.dto;
 //추후 주석제거
+
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
-import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteAnswer;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer.AnswerStatus;
-//import com.codestates.pre_028.stackoverflow_clone.user.entity.User;
-//import com.codestates.pre_028.stackoverflow_clone.question.entity.Qusetion;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +15,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 
 public class AnswerDto {
