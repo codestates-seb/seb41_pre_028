@@ -100,7 +100,7 @@ const Question = ({ questionId }) => {
     getQuestionDetail(questionId)
       .then((res) => setQuestion(res.data.data))
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <QuestionWrapper>

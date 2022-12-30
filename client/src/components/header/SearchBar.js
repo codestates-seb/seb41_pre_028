@@ -25,9 +25,16 @@ const SearchBar = () => {
 
   const handleKeyUp = (e) => {
     if (e.key === "Enter") {
-      console.log(searchWord);
-      navigate(`/search/${searchWord}`);
-      // 여기에 추가적인 작업 필요
+      if (searchWord === "") {
+        return;
+      }
+
+      let rdx = /^\[.*\]$/;
+      let value = searchWord;
+      if (rdx.test(value)) {
+        value = "%5B" + value.substring(1, value.length - 1) + "%5D";
+      }
+      navigate(`/search?value=${value}`);
     }
   };
 
