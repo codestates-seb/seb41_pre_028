@@ -67,17 +67,15 @@ public class QuestionController {
             @RequestBody QuestionDto.QuestionPatchDto questionPatchDto){
 
         questionPatchDto.setQuestionId(questionId);
+        questionPatchDto.setUserId(userService.getLoginUserWithToken().getUserId());
+        Question question = mapper.questionPatchDtoToQuestion(questionPatchDto);
+        question.setUser(new User());
+        question.getUser().setUserId(questionPatchDto.getUserId());
 
+       Question response = questionService.updateQuestion(question);
 
-        Question response = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
-        User createUser = userService.findVerifiedUser(response.getUser().getUserId()); //글 작성 유저
-
-        if (!Objects.equals(userService.getLoginUserWithToken().getUserId(), createUser.getUserId())) {  // 로그인 유저 검증
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
-        }
-
-        String tag  = questionService.tagListToTag(questionPatchDto);
-        response.setTag(tag);
+       String tag  = questionService.tagListToTag(questionPatchDto);
+       response.setTag(tag);
 
 
         return new ResponseEntity<>(

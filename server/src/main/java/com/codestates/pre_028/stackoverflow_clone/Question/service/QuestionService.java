@@ -52,13 +52,16 @@ public class QuestionService {
     public Question updateQuestion(Question question) {
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
-
         Optional.ofNullable(question.getTitle())
                 .ifPresent(title -> findQuestion.setTitle(title));
         Optional.ofNullable(question.getContent())
                 .ifPresent(content -> findQuestion.setContent(content));
         Optional.ofNullable(question.getTag())
                 .ifPresent(tag -> findQuestion.setTag(tag));
+
+        if(!Objects.equals(findQuestion.getUser().getUserId(), question.getUser().getUserId()))
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+
 
         String tag = question.getTag();
         List<String> tagList = new ArrayList<>(Arrays.asList(tag.split(", ")));

@@ -48,9 +48,6 @@ public class AnswerController {
         answerPostDto.setUserId(userService.getLoginUserWithToken().getUserId());        // 로그인 유저 가져오기
         Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
 
-        if(!Objects.equals(answer.getUser().getUserId(), answer.getQuestion().getUser().getUserId()))
-            throw new BusinessLogicException(ExceptionCode.SAME_USERS);
-
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.CREATED);
     }
@@ -58,13 +55,13 @@ public class AnswerController {
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.Patch answerPatchDto){
-
         answerPatchDto.setAnswerId(answerId);
-        Answer answer = answerService.updateAnswer(mapper.answerPatchDtoToAnswer(answerPatchDto));
-        User createUser = userService.findVerifiedUser(answer.getUser().getUserId());  //앤서 작성 유저
-        if (!Objects.equals(userService.getLoginUserWithToken().getUserId(), createUser.getUserId())) {
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
-        }
+        answerPatchDto.setUserId(userService.getLoginUserWithToken().getUserId());
+        Answer answer = mapper.answerPatchDtoToAnswer(answerPatchDto);
+        answer.setUser(new User());
+        answer.getUser().setUserId(answerPatchDto.getUserId());
+        answer = answerService.updateAnswer(answer);
+
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerWithCommentToAnswerResponseDto(answer)),
                 HttpStatus.OK);
     }

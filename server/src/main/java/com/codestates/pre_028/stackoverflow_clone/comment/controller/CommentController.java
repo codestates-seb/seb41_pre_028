@@ -36,7 +36,6 @@ public class CommentController {
                                             @Valid @RequestBody CommentDto.AnswerPost commentPostDto){
 
         commentPostDto.setUserId(userService.getLoginUserWithToken().getUserId());
-
         commentPostDto.setAnswerId(answerId);
 
         Comment comment = commentService.createAnswerComment(mapper.commentAnswerPostDtoToComment(commentPostDto));
@@ -65,13 +64,11 @@ public class CommentController {
 
         commentPatchDto.setAnswerId(answerId);
         commentPatchDto.setCommentId(commentId);
-        Comment comment = commentService.updateComment(mapper.commentPatchDtoToComment(commentPatchDto));
-
-        User createUser = userService.findVerifiedUser(comment.getUser().getUserId());
-
-        if(!Objects.equals(userService.getLoginUserWithToken().getUserId(), createUser.getUserId())){
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
-        }
+        commentPatchDto.setUserId(userService.getLoginUserWithToken().getUserId());
+        Comment comment = mapper.commentPatchDtoToComment(commentPatchDto);
+        comment.setUser(new User());
+        comment.getUser().setUserId(commentPatchDto.getUserId());
+        comment = commentService.updateComment(comment);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.commentToAnswerCommentResponseDto(comment)), HttpStatus.OK);
@@ -83,13 +80,11 @@ public class CommentController {
 
         commentPatchDto.setQuestionId(questionId);
         commentPatchDto.setCommentId(commentId);
-        Comment comment = commentService.updateComment(mapper.commentPatchDtoToComment(commentPatchDto));
+        Comment comment = mapper.commentPatchDtoToComment(commentPatchDto);
+        comment.setUser(new User());
+        comment.getUser().setUserId(commentPatchDto.getUserId());
+        comment = commentService.updateComment(comment);
 
-        User createUser = userService.findVerifiedUser(comment.getUser().getUserId());
-
-        if(!Objects.equals(userService.getLoginUserWithToken().getUserId(), createUser.getUserId())){
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
-        }
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.commentToQuestionCommentResponseDto(comment)), HttpStatus.OK);
