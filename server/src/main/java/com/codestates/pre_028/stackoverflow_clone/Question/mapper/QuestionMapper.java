@@ -48,6 +48,7 @@ public interface QuestionMapper {
         questionResponseDto.setUser(question.getUser());
         questionResponseDto.setTitle(question.getTitle());
         questionResponseDto.setTag(question.getTag());
+        questionResponseDto.setTagList(question.getTagList());
         questionResponseDto.setVote(question.getVote());
 
         //메타데이타
