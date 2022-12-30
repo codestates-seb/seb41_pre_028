@@ -37,7 +37,7 @@ public class AnswerDto {
     @Getter
     @Setter
     public static class Patch{
-
+        private long userId;
         private long answerId;
         private AnswerStatus answerStatus;
         private String content;

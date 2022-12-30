@@ -16,7 +16,7 @@ public class CommentDto {
     @Setter //test stub을 위해 추가
     @Getter
     public static class QuestionPost{
-        @Positive
+
         private Long userId;
 
 
@@ -29,7 +29,7 @@ public class CommentDto {
     @Setter //test stub을 위해 추가
     @Getter
     public static class AnswerPost{
-        @Positive
+
         private Long userId;
 
 

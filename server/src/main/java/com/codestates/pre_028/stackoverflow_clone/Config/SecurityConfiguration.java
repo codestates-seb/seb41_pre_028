@@ -65,7 +65,7 @@ public class SecurityConfiguration {
                 )
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/questions")
                 .deleteCookies("jwt_token")
 
         ;// 역할에 다른 기능 추가

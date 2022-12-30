@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -47,6 +48,9 @@ public class AnswerService {
                 .ifPresent(answerStatus -> findAnswer.setAnswerStatus(answerStatus));
         Optional.ofNullable(answer.getContent())
                 .ifPresent(content -> findAnswer.setContent(content));
+
+        if(!Objects.equals(findAnswer.getUser().getUserId(), answer.getUser().getUserId()))
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
 
         return answerRepository.save(findAnswer);
     }

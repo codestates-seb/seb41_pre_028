@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class CommentService {
 
@@ -52,7 +54,6 @@ public class CommentService {
         Answer answer = answerRepository.getReferenceById(comment.getAnswer().getAnswerId());
         User user = userRepository.getReferenceById(comment.getUser().getUserId());
 
-
         comment.setAnswer(answer);
         comment.setUser(user);
 
@@ -77,6 +78,9 @@ public class CommentService {
 
     public Comment updateComment(Comment comment){
         Comment findComment = findVerifiedComment(comment.getCommentId());
+
+        if(!Objects.equals(findComment.getUser().getUserId(), comment.getUser().getUserId()))
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
 
         Optional.ofNullable(comment.getContent())
                 .ifPresent(findComment::setContent);

@@ -4,6 +4,7 @@ import com.codestates.pre_028.stackoverflow_clone.Dto.MultiResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionPaginationDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.mapper.QuestionMapper;
+import com.codestates.pre_028.stackoverflow_clone.Question.service.PaginationService;
 import com.codestates.pre_028.stackoverflow_clone.Search.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,7 @@ import java.util.List;
 public class SearchController {
 
     private final SearchService searchService;
+    private final PaginationService paginationService;
     private final QuestionMapper mapper;
 
     @GetMapping
@@ -40,10 +42,12 @@ public class SearchController {
         Page<Question> pageQuestions = searchService.searchQuestion(value,pageable);
         List<Question> questions = pageQuestions.getContent();
         List<QuestionPaginationDto> responsDtos = mapper.questionToQuestionWithKeywordResponseDto(questions);
+        List<Integer> barNumber = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), pageQuestions.getTotalPages());
+
 
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(responsDtos, pageQuestions), HttpStatus.OK);
+                new MultiResponseDto<>(responsDtos, pageQuestions,barNumber), HttpStatus.OK);
 
     }
 
