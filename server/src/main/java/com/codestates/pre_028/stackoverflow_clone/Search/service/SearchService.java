@@ -19,13 +19,13 @@ public class SearchService {
 
     @Transactional(readOnly = true)
     public Page<Question> searchQuestion(String value,Pageable pageable){
-        if(value.matches("%5B[a-zA-Z0-9]%5D"))
-            return questionRepository.findByTagContaining(value.replaceAll("[^\\w+]",""), pageable);
-        else if(value.matches("\"[a-zA-Z0-9]\""))
-            return questionRepository.findByTitleContaining(value.replaceAll("[^\\w+]", ""), pageable);
+        if(value.matches("\\[[\\wㄱ-ㅎ|ㅏ-ㅣ|가-힣+]\\]"))
+            return questionRepository.findByTagContaining(value.replaceAll("[^[\\wㄱ-ㅎ|ㅏ-ㅣ|가-힣+]+]",""), pageable);
+        else if(value.matches("\"[\\wㄱ-ㅎ|ㅏ-ㅣ|가-힣+]\""))
+            return questionRepository.findByTitleContaining(value.replaceAll("[^[\\wㄱ-ㅎ|ㅏ-ㅣ|가-힣+]+]", ""), pageable);
 
         return questionRepository.
-                findByContentContaining(value.replaceAll("[^\\w+]", ""), PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("questionId").descending()));
+                findByContentContaining(value.replaceAll("[^[\\wㄱ-ㅎ|ㅏ-ㅣ|가-힣+]+]", ""), PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("questionId").descending()));
 
     }
 
