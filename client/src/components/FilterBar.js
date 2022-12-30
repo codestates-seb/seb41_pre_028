@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 const FilterNav = styled.nav`
@@ -27,25 +29,32 @@ const FilterNav = styled.nav`
   }
 `;
 
-const FilterBar = ({
-  filterList,
-  curFilter,
-  setCurFilter,
-  setSearchParams,
-}) => {
+const FilterBar = ({ filterList }) => {
+  const [curFilter, setCurFilter] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.has("filter")) {
+      setCurFilter(
+        filterList.findIndex((el) => el.filter === searchParams.get("filter"))
+      );
+    }
+  }, [searchParams]);
   return (
     <FilterNav>
       {filterList.map((el, idx) => (
         <button
-          value={el.tab}
+          value={el.filter}
           className={idx === curFilter ? "focus" : ""}
-          key={el.id}
+          key={el.filter}
           onClick={() => {
             setCurFilter(idx);
-            setSearchParams({ tab: el.tab });
+            searchParams.set("filter", el.filter);
+            searchParams.set("page", 1);
+            setSearchParams(searchParams);
           }}
         >
-          {el.tab}
+          {el.filter}
         </button>
       ))}
     </FilterNav>

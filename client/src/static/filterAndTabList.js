@@ -4,17 +4,11 @@ import UserProfile from "../components/user/UserProfile";
 export const questionFilterList = [
   {
     id: 1,
-    tab: "Newest",
-    params: {
-      sorted_by: "",
-    },
+    filter: "Newest",
   },
   {
     id: 2,
-    tab: "Unanswerd",
-    params: {
-      sorted_by: "",
-    },
+    filter: "Unanswerd",
   },
 ];
 
