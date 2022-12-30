@@ -9,23 +9,28 @@ const UsersPage = () => {
   const filterList = [
     {
       id: 1,
-      name: "Reputation",
+      filter: "reputation",
+      title: "Reputation",
     },
     {
       id: 2,
-      name: "New users",
+      filter: "reputation",
+      title: "New users",
     },
     {
       id: 3,
-      name: "Voters",
+      filter: "reputation",
+      title: "Voters",
     },
     {
       id: 4,
-      name: "Editors",
+      filter: "reputation",
+      title: "Editors",
     },
     {
       id: 5,
-      name: "Moderators",
+      filter: "reputation",
+      title: "Moderators",
     },
   ];
   return (

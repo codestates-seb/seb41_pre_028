@@ -94,12 +94,15 @@ const QuestionWrapper = styled.div`
 const Question = ({ questionId }) => {
   const [question, setQuestion] = useState({
     answers: [],
+    tagList: [],
   });
   const navigate = useNavigate();
 
   useEffect(() => {
     getQuestionDetail(questionId)
-      .then((res) => setQuestion(res.data.data))
+      .then((res) => {
+        setQuestion(res.data.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -117,14 +120,19 @@ const Question = ({ questionId }) => {
         <div className="q-content--body">{question.content}</div>
         <div className="q-content--meta">
           <div className="flex flex-row">
-            <Tag
+            {/* <Tag
               onClick={() => navigate(`/search?value=%5B${question.tag}%5D`)}
             >
               {question.tag}
-            </Tag>
-            {/* {question.tag.map((tag, idx) => (
-              <Tag key={idx}>{tag}</Tag>
-            ))} */}
+            </Tag> */}
+            {question.tagList.map((tag, idx) => (
+              <Tag
+                onClick={() => navigate(`/search?value=%5B${tag}%5D`)}
+                key={idx}
+              >
+                {tag}
+              </Tag>
+            ))}
           </div>
           <div className="flex flex-row items-center justify-end ml-auto">
             <Link to={`/users/${question.userId}`}>

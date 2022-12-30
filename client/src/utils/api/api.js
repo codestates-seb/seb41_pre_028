@@ -35,6 +35,11 @@ export const getUserProfile = (userId) =>
     headers: { Authorization: getCookie("Authorization") },
   });
 
+export const getMyProfile = () =>
+  axios.get("/users/mypage", {
+    headers: { Authorization: getCookie("Authorization") },
+  });
+
 export const fetchCreateQuestion = async (fetchData) => {
   console.log(fetchData);
   return fetch(`/questions`, {

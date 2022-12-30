@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import CommentBody from "./CommentBody.js";
 import InputPrimary from "./../../input/inputPrimary";
 import { BufferMd5 } from "../../buffer/Buffer";
-import { fetchAnswerComment } from "../../../utils/api/api.js";
+import { fetchAnswerComment } from "../../../utils/api/api";
 import { isCookieExist } from "../../../utils/cookie.js";
 
 const CommentAnswerCell = ({ answerId }) => {
