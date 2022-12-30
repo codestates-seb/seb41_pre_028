@@ -8,6 +8,7 @@ const StyledButton = styled.button`
   color: white;
   background-color: ${(props) => props.bgColor || "#0A95FF"};
   padding: 8px;
+
   border-radius: 5px;
   margin-top: 5px;
 `;
