@@ -1,14 +1,18 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { getCookie } from "../../utils/cookie";
+import axios from "../../utils/api/axios";
+import { getMyProfile } from "../../utils/api/api";
+// import { logoutUser } from "../../store/logoutSlice";
+// import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
-import { PrimaryLink, SecondaryLink } from "../StyledLink";
-import { removeCookie, getCookie } from "../../utils/cookie";
 import Dropdown from "./Dropdown";
+import { PrimaryLink, SecondaryLink } from "../StyledLink";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { logoutUser } from "../../store/logoutSlice";
-import { useDispatch } from "react-redux";
+
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,21 +24,37 @@ const HeaderContainer = styled.div`
 
 const Header = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isCookieExist = getCookie("Authorization");
-  const onLogout = () => {
-    dispatch(logoutUser());
-    removeCookie("Authorization");
+
+  const onLogout = async () => {
+    await axios
+      .get("/logout", { Authorization: getCookie("Authorization") })
+      .then(() => console.log("로그아웃"));
+    // dispatch(logoutUser());
+    // removeCookie("Authorization");
 
     // if (isCookieExist && window.confirm("정말 로그아웃 하시겠습니까?")) {
     //   removeCookie("Authorization");
     //   window.location.reload();
     // }
   };
+
   const onDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  const goToMyPage = () => {
+    if (isCookieExist) {
+      getMyProfile().then((res) => {
+        navigate(`/users/${res.data.userId}`);
+      });
+    }
+  };
+  console.log(isCookieExist);
 
   return (
     <header className="fixed top-0 z-40  w-full h-header-height bg-[#F8F9F9] flex justify-center border-b-2 shadow border-t-amber-500	 border-t-4 drop-shadow-xl">
@@ -107,7 +127,7 @@ const Header = () => {
         {isCookieExist ? (
           <ul className="flex flex-row justify-center items-center gap-3">
             <li role="none">
-              <a href="/users">
+              <button onClick={goToMyPage}>
                 <div className="flex justify-center items-center ">
                   <img
                     className="rounded"
@@ -117,7 +137,7 @@ const Header = () => {
                     height={24}
                   />
                 </div>
-              </a>
+              </button>
             </li>
 
             <li>
@@ -142,11 +162,11 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <a href="/">
+              <button href="/">
                 <svg width={18} height={18} onClick={onLogout}>
                   <path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path>{" "}
                 </svg>
-              </a>
+              </button>
             </li>
           </ul>
         ) : (

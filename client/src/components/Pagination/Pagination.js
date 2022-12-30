@@ -43,6 +43,8 @@ const Pagination = ({ totalPages }) => {
   useEffect(() => {
     if (searchParams.has("page")) {
       setCurPage(Number(searchParams.get("page")));
+    } else {
+      setCurPage(1);
     }
   }, [searchParams]);
 

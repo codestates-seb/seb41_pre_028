@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserProfile } from "../utils/api/api";
+import { getUserProfile, getMyProfile } from "../utils/api/api";
+import { isCookieExist } from "../utils/cookie";
 import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 import { TabButton } from "../components/StyledButton";
@@ -41,6 +42,7 @@ const UserTabButton = styled(TabButton)`
 const UserPage = () => {
   const { userId } = useParams();
   const [userPageTab, setUserPageTab] = useState(0);
+  const [isMyPage, setIsMyPage] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [user, setUser] = useState({
     nickname: "",
@@ -50,16 +52,25 @@ const UserPage = () => {
 
   useEffect(() => {
     // id가 userId인 user 정보를 get 해와야함
-    setUser({ ...user, name: "yerin" });
-    getUserProfile(userId)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        if (err.response.status === 404) {
-          setErrMsg("존재하지 않는 사용자입니다.");
+    if (isCookieExist) {
+      getMyProfile().then((res) => {
+        if (res.data.userId === Number(userId)) {
+          setIsMyPage(true);
         }
+        setUser(res.data);
       });
+    } else {
+      getUserProfile(userId)
+        .then((res) => {
+          console.log(res.data);
+          setUser(res.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            setErrMsg("존재하지 않는 사용자입니다.");
+          }
+        });
+    }
   }, [userId]);
 
   return (
@@ -105,7 +116,7 @@ const UserPage = () => {
                 ))}
               </ul>
             </nav>
-            <div>{tabList[userPageTab].showContent(userId)}</div>
+            <div>{tabList[userPageTab].showContent({ user, isMyPage })}</div>
           </div>
         </main>
       ) : (

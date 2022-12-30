@@ -3,6 +3,7 @@ const SideBarNav = () => {
   // const params = new URLSearchParams();
   // console.log(params.get());
   const location = useLocation();
+
   return (
     <nav className="mt-5 text-sm">
       <Link to={"/"} className="flex p-2 ">
