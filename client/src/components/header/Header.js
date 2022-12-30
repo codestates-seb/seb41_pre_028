@@ -1,10 +1,15 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { getCookie } from "../../utils/cookie";
+import axios from "../../utils/api/axios";
+import { getMyProfile } from "../../utils/api/api";
+// import { logoutUser } from "../../store/logoutSlice";
+// import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
-import { PrimaryLink, SecondaryLink } from "../StyledLink";
-import { getCookie, removeCookie } from "../../utils/cookie";
 import Dropdown from "./Dropdown";
+import { PrimaryLink, SecondaryLink } from "../StyledLink";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -22,6 +27,8 @@ const HeaderContainer = styled.div`
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isCookieExist = getCookie("Authorization");
@@ -40,12 +47,19 @@ const Header = () => {
     //   window.location.reload();
     // }
   };
-  // useEffect(() => {
-  //   onLogout();
-  // }, []);
+
   const onDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  const goToMyPage = () => {
+    if (isCookieExist) {
+      getMyProfile().then((res) => {
+        navigate(`/users/${res.data.userId}`);
+      });
+    }
+  };
+  console.log(isCookieExist);
 
   return (
     <header className="fixed top-0 z-40  w-full h-header-height bg-[#F8F9F9] flex justify-center border-b-2 shadow border-t-amber-500	 border-t-4 drop-shadow-xl">
@@ -118,7 +132,7 @@ const Header = () => {
         {isCookieExist ? (
           <ul className="flex flex-row justify-center items-center gap-3">
             <li role="none">
-              <a href="/users">
+              <button onClick={goToMyPage}>
                 <div className="flex justify-center items-center ">
                   <img
                     className="rounded"
@@ -128,7 +142,7 @@ const Header = () => {
                     height={24}
                   />
                 </div>
-              </a>
+              </button>
             </li>
 
             <li>

@@ -1,20 +1,43 @@
-import { BufferMr5 } from "../../buffer/Buffer.jsx";
-import { Button } from "@mui/material";
+import { useState } from "react";
+import { fetchAnswer } from "../../../utils/api/api";
+import { isCookieExist } from "../../../utils/cookie";
 import Editor from "../../editor/Editor";
+import { Button } from "@mui/material";
 
-const AnswerForm = () => {
+const AnswerForm = ({ questionId }) => {
+  console.log("questionId", { questionId });
+
+  const [content, setContent] = useState("");
+
+  const userId = 2;
+
+  const onClickSubmit = async () => {
+    console.log("content", { content, questionId, userId });
+
+    console.log("isCookieExist", isCookieExist);
+    if (content.length < 10) {
+      console.log("Minimum 10 characters.");
+    } else {
+      await fetchAnswer({ content, questionId, userId }).then((questionId) => {
+        console.log(questionId);
+        location.reload();
+      });
+    }
+  };
+
   return (
     <div>
-      <Editor></Editor>
+      <Editor value={content} onChange={setContent} />
 
       <div className="flex flex-row">
-        <Button variant="contained" sx={{ fontSize: 12 }} size="large">
-          Post your question
+        <Button
+          variant="contained"
+          sx={{ fontSize: 12 }}
+          size="large"
+          onClick={onClickSubmit}
+        >
+          Post your Answer
         </Button>
-        <BufferMr5 />
-        <Button color="error" sx={{ fontSize: 12 }} size="large">
-          Discard
-        </Button>{" "}
       </div>
     </div>
   );

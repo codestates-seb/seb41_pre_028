@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Tag = styled.div`
+const Tag = styled.button`
   background-color: #e1ecf4;
   color: #39739d;
   font-size: 12px;

@@ -5,10 +5,12 @@ export const questionFilterList = [
   {
     id: 1,
     filter: "newest",
+    title: "Newest",
   },
   {
     id: 2,
     filter: "unanswerd",
+    title: "Unanswerd",
   },
 ];
 
@@ -16,12 +18,14 @@ export const userPageTabList = [
   {
     id: 1,
     title: "profile",
-    showContent: (id) => <UserProfile userId={id}></UserProfile>,
+    showContent: ({ user, isMyPage }) => (
+      <UserProfile user={user} isMyPage={isMyPage}></UserProfile>
+    ),
   },
   {
     id: 2,
     title: "activity",
-    showContent: (id) => <UserActivity userId={id}></UserActivity>,
+    showContent: ({ user }) => <UserActivity user={user}></UserActivity>,
   },
 ];
 
@@ -29,12 +33,20 @@ export const userActivityTabList = [
   // get data에는 정보 요청하는 함수가 들어가야 한다.
   {
     id: 1,
-    getData: "answerList 가져올거임!",
+    getData: (user) => {
+      return {
+        id: user.userId,
+      };
+    },
     title: "Answers",
   },
   {
     id: 2,
-    getData: "questionList 가져올거임!",
+    getData: (user) => {
+      return {
+        id: user.email,
+      };
+    },
     title: "Questions",
   },
 ];

@@ -54,7 +54,7 @@ const FilterBar = ({ filterList }) => {
             setSearchParams(searchParams);
           }}
         >
-          {el.filter}
+          {el.title}
         </button>
       ))}
     </FilterNav>
