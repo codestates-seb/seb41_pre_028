@@ -26,7 +26,9 @@ export const searchQuestionsByValue = (params) => {
   // return axios.get(`/search?value=${value}&page=0`, {
   //   params: { ...params, page: params.page - 1, value: value },
   // });
-  return axios.get(`/search?value=${value}&page=${params.page - 1}`);
+  return axios.get(
+    `/search?value=${value}&page=${params.page - 1}&size=${params.size}`
+  );
 };
 
 /** Answers */
