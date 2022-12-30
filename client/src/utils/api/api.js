@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import axios from "./axios";
 /** Questions */
 // page, size : 필수 정보임!
 export const getQuestionList = (params) =>

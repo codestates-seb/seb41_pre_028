@@ -7,6 +7,7 @@ import UsersPage from "./UsersPage";
 import UserPage from "./UserPage";
 import ShowQuestionPage from "./ShowQuestionPage";
 import SearchQuestionPage from "./SearchQuestionPage";
+import TagsPage from "./TagsPage";
 export const PageContainer = styled.div`
   width: 100%;
   display: flex;
@@ -48,6 +49,7 @@ const MainPage = () => {
           <Route path="/users" element={<UsersPage />}></Route>
           <Route path="/users/:userId/*" element={<UserPage />}></Route>
           <Route path="/search" element={<SearchQuestionPage />}></Route>
+          <Route path="/tags" element={<TagsPage />} />
           <Route path="/" element={<QuestionsPage />}></Route>
         </Routes>
       </MainContainer>

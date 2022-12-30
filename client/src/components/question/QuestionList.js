@@ -3,9 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { getQuestionList } from "../../utils/api/api";
 import Question from "./Question";
 import FilterBar from "../FilterBar";
-import Pagination from "../pagination/Pagination";
 import { questionFilterList as filterList } from "../../static/filterAndTabList";
 import paramsToObject from "../../utils/paramsToObject";
+import Pagination from "../Pagination/Pagination";
 
 const QuestionList = ({ questionList, setQuestionList }) => {
   const [totalQuestions, setTotalQuestions] = useState(0);
