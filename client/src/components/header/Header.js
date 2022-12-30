@@ -13,6 +13,9 @@ import { PrimaryLink, SecondaryLink } from "../StyledLink";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+// import { logoutUser } from "../../store/logoutSlice";
+// import { useDispatch } from "react-redux";
+import axios from "../../utils/api/axios";
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,13 +32,15 @@ const Header = () => {
   // const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isCookieExist = getCookie("Authorization");
-
   const onLogout = async () => {
-    await axios
-      .get("/logout", { Authorization: getCookie("Authorization") })
-      .then(() => console.log("로그아웃"));
-    // dispatch(logoutUser());
-    // removeCookie("Authorization");
+    const res = await axios.get("/logout").then(() => {
+      if (window.confirm("정말 로그아웃 하시겠습니까?")) {
+        removeCookie("Authorization");
+        window.location.reload();
+      }
+    });
+    console.log(res.data);
+    // dispatch(logoutUser()).then(() => removeCookie("Authorization"));
 
     // if (isCookieExist && window.confirm("정말 로그아웃 하시겠습니까?")) {
     //   removeCookie("Authorization");
@@ -131,7 +136,7 @@ const Header = () => {
                 <div className="flex justify-center items-center ">
                   <img
                     className="rounded"
-                    src="https://lh3.googleusercontent.com/a/AEdFTp4SrtG9m8-F-OAFvzDklVkHqIy-Zzhl-JikFhucHg=k-s256"
+                    src="https://post-phinf.pstatic.net/MjAxNzExMTRfMjUz/MDAxNTEwNjUwODAwOTYx.N8rgE6_pPw2VxVRy2Hqq8cSc16YcD574Y9Uix9ws8nUg.Jv5-95xGjRZGZiQAqOUo2pOe8cCbbuZyt3u_UqilgxEg.JPEG/Fotolia_129866260_Subscription_Monthly_M.jpg?type=w1200"
                     alt=""
                     width={24}
                     height={24}
@@ -162,11 +167,11 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <button href="/">
+              <div>
                 <svg width={18} height={18} onClick={onLogout}>
                   <path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path>{" "}
                 </svg>
-              </button>
+              </div>
             </li>
           </ul>
         ) : (

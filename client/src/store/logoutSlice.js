@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "../utils/api/axios";
 
 export const logoutUser = createAsyncThunk("logout/logoutUser", async () => {
   try {
@@ -18,9 +18,9 @@ const logoutSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(logoutUser.pending, (state) => {
-        if (window.confirm("로그아웃 하시겠습니까?")) {
-          return;
-        }
+        // if (window.confirm("로그아웃 하시겠습니까?")) {
+        //   state.isLogout = false;
+        // }
         state.isLogout = false;
       })
       .addCase(logoutUser.fulfilled, (state) => {

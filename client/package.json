@@ -19,7 +19,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@uiw/react-md-editor": "^3.20.1",
     "axios": "^1.2.1",
-    "http-proxy-middleware": "^2.0.6",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
@@ -69,6 +68,5 @@
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "tailwindcss": "^3.2.4"
-  },
-  "proxy" : "http://3.37.105.24:8080"
+  }
 }
