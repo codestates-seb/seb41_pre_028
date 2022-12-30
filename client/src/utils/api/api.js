@@ -15,8 +15,19 @@ export const getQuestion = (questionId) => axios.get(`questions/${questionId}`);
 //    axios.get("http://localhost:3001/question", { params: {userId}});
 // }
 
-export const searchQuestionsByValue = (params) =>
-  axios.get("/search", { params: { ...params, page: params.page - 1 } });
+export const searchQuestionsByValue = (params) => {
+  let rdx = /^\[.*\]$/;
+  let value = params.value;
+  if (rdx.test(value)) {
+    value =
+      encodeURI("[") + value.substring(1, value.length - 1) + encodeURI("]");
+  }
+  // %5Bjava%5D
+  // return axios.get(`/search?value=${value}&page=0`, {
+  //   params: { ...params, page: params.page - 1, value: value },
+  // });
+  return axios.get(`/search?value=${value}&page=${params.page - 1}`);
+};
 
 /** Answers */
 export const getAnswerList = (params) => axios.get("/answers", { params });
