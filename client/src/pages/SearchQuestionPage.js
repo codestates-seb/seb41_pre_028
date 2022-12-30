@@ -48,7 +48,7 @@ const SearchQuestionPage = () => {
       searchParams.append("page", 1);
     }
     if (!searchParams.has("size")) {
-      searchParams.append("size", 3);
+      searchParams.append("size", 1);
     }
 
     searchQuestionsByValue(paramsToObject(searchParams.entries()))
