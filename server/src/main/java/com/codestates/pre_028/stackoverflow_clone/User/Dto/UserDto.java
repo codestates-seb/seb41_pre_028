@@ -1,10 +1,15 @@
 package com.codestates.pre_028.stackoverflow_clone.User.Dto;
 
+import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionDto;
+import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionTitleDto;
+import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerResponseDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 public class UserDto {
 
@@ -45,9 +50,5 @@ public class UserDto {
         private String email;
         private Integer reputation;
     }
-
-
-
-
-
 }
+

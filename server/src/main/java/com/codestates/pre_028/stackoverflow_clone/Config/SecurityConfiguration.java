@@ -65,7 +65,7 @@ public class SecurityConfiguration {
                 )
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/questions")
+                .logoutSuccessUrl("/questions?page=0&size=15")
                 .deleteCookies("jwt_token")
 
         ;// 역할에 다른 기능 추가
@@ -80,8 +80,11 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // 프론트엔드 쪽 서버 주소
+        configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
+        configuration.setAllowCredentials(true);  //
+        configuration.setMaxAge(3000L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

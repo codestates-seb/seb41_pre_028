@@ -18,4 +18,7 @@ public class UserAssembler implements RepresentationModelAssembler<User, EntityM
                 linkTo(methodOn(UserController.class).getUser(user.getUserId())).withSelfRel(),
                 linkTo(methodOn(UserController.class).getUsers()).withRel("users"));
     }
+
+
+
 }
