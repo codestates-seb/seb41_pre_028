@@ -1,8 +1,8 @@
 ---
 name: "[FE-Task] Issue"
 about: Frontend Issue Task
-title: ''
-labels: ''
+title: "[FE] title"
+labels: FE
 assignees: ''
 
 ---

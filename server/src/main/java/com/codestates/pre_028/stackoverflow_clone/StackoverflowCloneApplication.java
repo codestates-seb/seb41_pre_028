@@ -3,6 +3,7 @@ package com.codestates.pre_028.stackoverflow_clone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class StackoverflowCloneApplication {
 
