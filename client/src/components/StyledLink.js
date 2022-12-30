@@ -6,7 +6,7 @@ const PrimaryLink = styled(Link)`
   border: 1px solid #0091ff;
   color: white;
   font-size: 13px;
-  padding: 0.4rem;
+  padding: 5px;
   border-radius: 3px;
 `;
 
@@ -15,7 +15,7 @@ const SecondaryLink = styled(Link)`
   border: 1px solid #7aa7c7;
   color: #39739d;
   font-size: 13px;
-  padding: 0.4rem 0.5rem;
+  padding: 5px;
   border-radius: 3px;
 `;
 

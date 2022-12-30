@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getQuestionList } from "../utils/api/question";
+import { getQuestionList } from "../utils/api/api";
 
 // 사용해야 하는 이유??
 // 액션 타입 문자열, 프로미스를 반환하는 비동기 함수, 추가 옵션 순서대로 인자를 받는 함수

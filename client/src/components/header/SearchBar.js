@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput = styled.input`
-  width: 100%;
+  width: 95%;
   padding: 0.4rem 0.5rem;
   font-size: 13px;
   display: flex;
@@ -14,6 +14,7 @@ const SearchInput = styled.input`
   justify-content: center;
   border: 1px solid #babfc4;
   padding-left: 32px;
+  border-radius: 5px;
 `;
 
 const SearchBar = () => {

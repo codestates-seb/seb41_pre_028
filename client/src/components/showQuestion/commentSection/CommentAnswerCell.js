@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import CommentBody from "./CommentBody.js";
 import InputPrimary from "./../../input/inputPrimary";
 import { BufferMd5 } from "../../buffer/Buffer";
-import { fetchQuestionComment } from "../../../utils/api/api.js";
+import { fetchAnswerComment } from "../../../utils/api/api.js";
 import { isCookieExist } from "../../../utils/cookie.js";
 
-const CommentCell = ({ comments, questionId }) => {
+const CommentAnswerCell = ({ answerId }) => {
+  const [comments, setComments] = useState("");
   const [content, setContent] = useState("");
+
+  const getData = async () => {
+    await fetch(`/answers/${answerId}`)
+      .then((response) => response.json())
+      .then((res) => setComments(res.data.comments))
+      .catch((error) => console.log(error));
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   const userId = 2;
 
@@ -16,13 +27,13 @@ const CommentCell = ({ comments, questionId }) => {
     setContent(e.target.value);
   };
 
-  const onClickQuestionCommentSubmit = async () => {
-    console.log("value", { content, questionId, userId });
+  const onClickAnswerCommentSubmit = async () => {
+    console.log("{ content, answerId, userId }", { content, answerId, userId });
     console.log("isCookieExist", isCookieExist);
     if (content.length < 10) {
       console.log("Minimum 10 characters.");
     } else {
-      await fetchQuestionComment({ content, questionId, userId }).then(
+      await fetchAnswerComment({ content, answerId, userId }).then(
         (questionId) => {
           console.log(questionId);
           location.reload();
@@ -51,7 +62,7 @@ const CommentCell = ({ comments, questionId }) => {
           variant="contained"
           sx={{ fontSize: 12 }}
           size="small"
-          onClick={onClickQuestionCommentSubmit}
+          onClick={onClickAnswerCommentSubmit}
         >
           Send!
         </Button>
@@ -59,4 +70,4 @@ const CommentCell = ({ comments, questionId }) => {
     </div>
   );
 };
-export default CommentCell;
+export default CommentAnswerCell;

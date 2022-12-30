@@ -3,7 +3,7 @@ const SideBarNav = () => {
   // const params = new URLSearchParams();
   // console.log(params.get());
   const location = useLocation();
-  console.log(location.pathname);
+
   return (
     <nav className="mt-5 text-sm">
       <Link to={"/"} className="flex p-2 ">
@@ -19,7 +19,7 @@ const SideBarNav = () => {
                 to={"/questions"}
                 className={
                   location.pathname === "/questions"
-                    ? "flex bg-stone-200 font-bold border-r-orange-400 border-2 py-1"
+                    ? "flex bg-stone-200 font-bold border-r-amber-500	 border-4 py-1"
                     : "flex py-1"
                 }
               >
@@ -35,7 +35,7 @@ const SideBarNav = () => {
                 to={"/tags"}
                 className={
                   location.pathname === "/tags"
-                    ? "flex bg-stone-200 font-bold border-r-orange-400 border-2 py-1"
+                    ? "flex bg-stone-200 font-bold border-r-orange-400 border-4 py-1"
                     : "flex py-1"
                 }
               >
@@ -48,7 +48,7 @@ const SideBarNav = () => {
                 to={"/users"}
                 className={
                   location.pathname === "/users"
-                    ? "flex bg-stone-200 font-bold border-r-orange-400 border-2 py-1"
+                    ? "flex bg-stone-200 font-bold border-r-orange-400 border-4 py-1"
                     : "flex py-1"
                 }
               >

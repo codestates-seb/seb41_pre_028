@@ -9,7 +9,7 @@ import { fetchCreateQuestion } from "../utils/api/api";
 import { useNavigate } from "react-router-dom";
 import { isCookieExist } from "../utils/cookie";
 
-const CreateQuestionPage = () => {
+const EditQuestionPage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -180,4 +180,4 @@ const CreateQuestionPage = () => {
   );
 };
 
-export default CreateQuestionPage;
+export default EditQuestionPage;
