@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { media } from "../../utils/style-utils";
 import { getQuestionDetail } from "../../utils/api/api";
@@ -95,6 +95,7 @@ const Question = ({ questionId }) => {
   const [question, setQuestion] = useState({
     answers: [],
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     getQuestionDetail(questionId)
@@ -116,7 +117,11 @@ const Question = ({ questionId }) => {
         <div className="q-content--body">{question.content}</div>
         <div className="q-content--meta">
           <div className="flex flex-row">
-            <Tag>{question.tag}</Tag>
+            <Tag
+              onClick={() => navigate(`/search?value=%5B${question.tag}%5D`)}
+            >
+              {question.tag}
+            </Tag>
             {/* {question.tag.map((tag, idx) => (
               <Tag key={idx}>{tag}</Tag>
             ))} */}

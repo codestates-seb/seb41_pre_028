@@ -53,6 +53,7 @@ const UserPage = () => {
     setUser({ ...user, name: "yerin" });
     getUserProfile(userId)
       .then((res) => {
+        console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => {

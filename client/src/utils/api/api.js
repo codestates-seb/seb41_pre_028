@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "../cookie";
 
 /** Questions */
 // page, size : 필수 정보임!
@@ -27,4 +28,7 @@ export const getAnswerList = (params) => axios.get("/answers", { params });
 // }
 
 /** Users */
-export const getUserProfile = (userId) => axios.get(`/users/${userId}`);
+export const getUserProfile = (userId) =>
+  axios.get(`/users/${userId}`, {
+    headers: { Authorization: getCookie("Authorization") },
+  });

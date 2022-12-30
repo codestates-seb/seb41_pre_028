@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
@@ -21,6 +21,7 @@ const Header = () => {
       window.location.reload();
     }
   };
+  const navigate = useNavigate();
   console.log(isCookieExist);
 
   return (
@@ -35,7 +36,7 @@ const Header = () => {
         {/** 로그인&비로그인 다르게 보여줌 */}
         {isCookieExist ? (
           <ul className="flex flex-row">
-            <li>프로필</li>
+            <button onClick={() => navigate("/users/mypage")}>프로필</button>
             <button onClick={onLogout}>로그아웃</button>
           </ul>
         ) : (
