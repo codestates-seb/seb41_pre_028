@@ -27,7 +27,7 @@ public class Question extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
     @Column(nullable = false) private String title;
-    @Column(nullable = false) private String content;
+    @Column(length = 65535, nullable = false) private String content;
     @Column
     private String tag;
 
