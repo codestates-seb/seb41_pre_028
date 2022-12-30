@@ -1,18 +1,17 @@
 import AnswerBody from "./AnswerBody";
-import { useState, useEffect } from "react";
 
-function AnswerList({ params }) {
-  const [answers, setAnswers] = useState([]);
-  const getData = async () => {
-    await fetch(`/answers/${params}`)
-      .then((response) => response.json())
-      .then((data) => setAnswers(data))
-      .catch((error) => console.log(error));
-  };
+function AnswerList({ answers }) {
+  // const [answers, setAnswers] = useState([]);
+  // const getData = async () => {
+  //   await fetch(`/answers/${params}`)
+  //     .then((response) => response.json())
+  //     .then((data) => setAnswers(data))
+  //     .catch((error) => console.log(error));
+  // };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   // const getAnswerList = (params) => axios.get("/answers", { params });
 
@@ -30,7 +29,7 @@ function AnswerList({ params }) {
 
       {answers && answers.length > 0
         ? answers.map((anItem) => (
-            <AnswerBody key={anItem.userId} item={anItem} />
+            <AnswerBody key={anItem.answerId} item={anItem} />
             // 고유키 AnswerID 가 필요함
           ))
         : ""}

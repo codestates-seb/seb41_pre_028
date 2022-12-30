@@ -2,8 +2,6 @@
 // import { createRoot } from "react-dom/client";
 
 // const TOAST_ID = "toast";
-// const TOAST_MS = 1500;
-// let isRunning = false;
 
 // export const showToast = (message = "default message", type = "confirm") => {
 //   let container = document.getElementById(TOAST_ID);
@@ -26,18 +24,10 @@
 //   target.unmount();
 // };
 
-// const Toast = ({ message, target, type }) => {
+// const Toast = ({ message, type }) => {
 //   const toast = useRef();
-//   let timer = -1;
-
-//   const onStart = () => {
-//     timer = window.setTimeout(() => {
-//       HideToast(target);
-//     }, TOAST_MS);
-//   };
 
 //   useEffect(() => {
-//     onStart();
 //     toast.current?.focus();
 //   });
 
@@ -49,7 +39,8 @@
 //       className={`so-toast ${
 //         type === "danger" ? "so-toast-danger" : "so-toast-confirm"
 //       }`}
-//       ref={toast}>
+//       ref={toast}
+//     >
 //       {message}
 //     </div>
 //   );
