@@ -1,6 +1,8 @@
 package com.codestates.pre_028.stackoverflow_clone.User.controller;
 
+import com.codestates.pre_028.stackoverflow_clone.Dto.SingleResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserDto;
+import com.codestates.pre_028.stackoverflow_clone.User.Dto.UserWithAnswerAndQuestionResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.User.assembler.UserAssembler;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.mapper.UserMapper;
@@ -39,11 +41,13 @@ public class UserController {
 
     // 유저 단건 조회
     @GetMapping ("/{user-id}")
-    public EntityModel<User> getUser(@PathVariable("user-id") long id){
+    public ResponseEntity getUser(@PathVariable("user-id") long id){
         User user = userService.findUser(id);
 
 
-        return userAssembler.toModel(user);
+//      return userAssembler.toModel(userPage);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.userToUserResponsePage(user)),HttpStatus.OK);
     }
 
     //JWT 토큰만 사용하여 유저 정보 Return
