@@ -11,10 +11,6 @@ export const getQuestionDetail = (questionId) =>
 
 export const getQuestion = (questionId) => axios.get(`questions/${questionId}`);
 
-// export const getQuestionListByUserId = (userId) => {
-//    axios.get("http://localhost:3001/question", { params: {userId}});
-// }
-
 export const searchQuestionsByValue = (params) => {
   let rdx = /^\[.*\]$/;
   let value = params.value;
@@ -22,10 +18,6 @@ export const searchQuestionsByValue = (params) => {
     value =
       encodeURI("[") + value.substring(1, value.length - 1) + encodeURI("]");
   }
-  // %5Bjava%5D
-  // return axios.get(`/search?value=${value}&page=0`, {
-  //   params: { ...params, page: params.page - 1, value: value },
-  // });
   return axios.get(
     `/search?value=${value}&page=${params.page - 1}&size=${params.size}`
   );

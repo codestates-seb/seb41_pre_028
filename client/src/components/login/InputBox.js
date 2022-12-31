@@ -49,6 +49,7 @@ const InputBox = ({ isSignup, isLogin }) => {
           setCookie("Authorization", res.payload.headers.authorization, {
             path: "/",
           });
+
           setTimeout(() => {
             // navigate("/", { replace: true });
             window.location.replace("/");

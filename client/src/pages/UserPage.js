@@ -51,26 +51,36 @@ const UserPage = () => {
   });
 
   useEffect(() => {
-    // id가 userId인 user 정보를 get 해와야함
-    if (isCookieExist) {
-      getMyProfile().then((res) => {
-        if (res.data.userId === Number(userId)) {
-          setIsMyPage(true);
-        }
-        setUser(res.data);
-      });
-    } else {
-      getUserProfile(userId)
-        .then((res) => {
-          console.log(res.data);
-          setUser(res.data);
-        })
-        .catch((err) => {
-          if (err.response.status === 404) {
-            setErrMsg("존재하지 않는 사용자입니다.");
+    const setUserPage = async () => {
+      // 로그인한 상태라면...
+      if (isCookieExist) {
+        // 현재 유저의 아이디 정보와 현재 페이지의 아이디 정보를 비교
+
+        try {
+          const res = await getMyProfile();
+          if (res.data.userId === Number(userId)) {
+            setIsMyPage(true);
           }
-        });
-    }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      try {
+        const res = await getUserProfile(userId);
+        console.log(res.data.data);
+        setUser(res.data.data);
+      } catch (err) {
+        if (err.response.status === 404) {
+          setErrMsg("존재하지 않는 사용자입니다.");
+        }
+      }
+    };
+    // id가 userId인 user 정보를 get 해와야함
+    // 만약 로그인 상태라면
+    // console.log(userData);
+
+    setUserPage();
   }, [userId]);
 
   return (

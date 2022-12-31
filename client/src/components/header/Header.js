@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getCookie } from "../../utils/cookie";
+import { getCookie, removeCookie } from "../../utils/cookie";
 import axios from "../../utils/api/axios";
 import { getMyProfile } from "../../utils/api/api";
 // import { logoutUser } from "../../store/logoutSlice";
@@ -15,7 +15,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import { logoutUser } from "../../store/logoutSlice";
 // import { useDispatch } from "react-redux";
-import axios from "../../utils/api/axios";
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,7 +28,6 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   // const navigate = useNavigate();
-  // const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isCookieExist = getCookie("Authorization");
   const onLogout = async () => {
@@ -54,12 +52,16 @@ const Header = () => {
 
   const goToMyPage = () => {
     if (isCookieExist) {
-      getMyProfile().then((res) => {
-        navigate(`/users/${res.data.userId}`);
-      });
+      getMyProfile()
+        .then((res) => {
+          navigate(`/users/${res.data.userId}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("올바르지 않은 접근입니다.");
+        });
     }
   };
-  console.log(isCookieExist);
 
   return (
     <header className="fixed top-0 z-40  w-full h-header-height bg-[#F8F9F9] flex justify-center border-b-2 shadow border-t-amber-500	 border-t-4 drop-shadow-xl">

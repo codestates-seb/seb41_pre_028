@@ -126,10 +126,7 @@ const Question = ({ questionId }) => {
               {question.tag}
             </Tag> */}
             {question.tagList.map((tag, idx) => (
-              <Tag
-                onClick={() => navigate(`/search?value=%5B${tag}%5D`)}
-                key={idx}
-              >
+              <Tag onClick={() => navigate(`/search?value=[${tag}]`)} key={idx}>
                 {tag}
               </Tag>
             ))}
