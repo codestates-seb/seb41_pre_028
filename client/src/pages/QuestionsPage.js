@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
-import { PrimaryLink } from "../components/StyledLink";
+import AskQuestionButton from "../components/AskQuestionButton";
 import QuestionList from "../components/question/QuestionList";
 
 const ContentWrapper = styled.div`
@@ -36,7 +36,7 @@ const QuestionsPage = () => {
       <main>
         <div className="flex flex-row items-center justify-between mb-[12px]">
           <h1 className="text-title-size">All Questions</h1>
-          <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
+          <AskQuestionButton />
         </div>
         <QuestionList
           questionList={questionList}

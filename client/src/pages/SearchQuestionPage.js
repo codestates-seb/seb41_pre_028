@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { searchQuestionsByValue } from "../utils/api/api";
 import paramsToObject from "../utils/paramsToObject";
-
+import AskQuestionButton from "../components/AskQuestionButton";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
 import Question from "../components/question/Question";
 import Pagination from "../components/pagination/Pagination";
-import { PrimaryLink } from "../components/StyledLink";
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -48,7 +47,7 @@ const SearchQuestionPage = () => {
       searchParams.append("page", 1);
     }
     if (!searchParams.has("size")) {
-      searchParams.append("size", 1);
+      searchParams.append("size", 10);
     }
 
     searchQuestionsByValue(paramsToObject(searchParams.entries()))
@@ -65,7 +64,7 @@ const SearchQuestionPage = () => {
       <main>
         <div className="flex flex-row items-center justify-between mb-[12px]">
           <h1 className="text-title-size">Search Result</h1>
-          <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
+          <AskQuestionButton />
         </div>
         <div className="sm:ml-[-24px]">
           <div className="sm:ml-[24px] mb-[12px] flex flex-row justify-between items-center">
