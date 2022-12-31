@@ -17,14 +17,14 @@ export const questionFilterList = [
 export const userPageTabList = [
   {
     id: 1,
-    title: "profile",
+    title: "Profile",
     showContent: ({ user, isMyPage }) => (
       <UserProfile user={user} isMyPage={isMyPage}></UserProfile>
     ),
   },
   {
     id: 2,
-    title: "activity",
+    title: "Activity",
     showContent: ({ user }) => <UserActivity user={user}></UserActivity>,
   },
 ];
@@ -34,19 +34,29 @@ export const userActivityTabList = [
   {
     id: 1,
     getData: (user) => {
-      return {
-        id: user.userId,
-      };
+      return user.answers.map((el) => {
+        return {
+          id: el.answerId,
+          questionId: el.questionId,
+          title: el.content,
+        };
+      });
     },
     title: "Answers",
+    zeroContent: "There are no answers left by",
   },
   {
     id: 2,
     getData: (user) => {
-      return {
-        id: user.email,
-      };
+      return user.questions.map((el) => {
+        return {
+          id: el.questionId,
+          questionId: el.questionId,
+          title: el.title,
+        };
+      });
     },
     title: "Questions",
+    zeroContent: "There are no answers left by",
   },
 ];

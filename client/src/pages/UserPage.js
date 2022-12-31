@@ -6,7 +6,7 @@ import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 import { TabButton } from "../components/StyledButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faCakeCandles } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 // import { media } from "../utils/style-utils";
 const ContentWrapper = styled.div`
   display: flex;
@@ -48,6 +48,8 @@ const UserPage = () => {
     nickname: "",
     email: "",
     createdAt: "",
+    answers: [],
+    questions: [],
   });
 
   useEffect(() => {
@@ -62,6 +64,7 @@ const UserPage = () => {
             setIsMyPage(true);
           }
         } catch (err) {
+          setIsMyPage(false);
           console.log(err);
         }
       }
@@ -104,16 +107,16 @@ const UserPage = () => {
                   <FontAwesomeIcon icon={faEnvelope} />
                   <span className="ml-[3px]">{user.email}</span>
                 </div>
-                <div>
+                {/* <div>
                   <FontAwesomeIcon icon={faCakeCandles} />
                   <span>{user.createdAt}</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </Profile>
           <div>
-            <nav>
-              <ul className="flex flex-row">
+            <nav className="mb-[10px] mt-[10px]">
+              <ul className="flex flex-row gap-[5px]">
                 {tabList.map((el, idx) => (
                   <li key={el.id}>
                     <UserTabButton
@@ -126,7 +129,9 @@ const UserPage = () => {
                 ))}
               </ul>
             </nav>
-            <div>{tabList[userPageTab].showContent({ user, isMyPage })}</div>
+            <div className="border-t pt-[10px]">
+              {tabList[userPageTab].showContent({ user, isMyPage })}
+            </div>
           </div>
         </main>
       ) : (
