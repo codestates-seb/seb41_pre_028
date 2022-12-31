@@ -3,18 +3,15 @@ import { useState } from "react";
 import { getCookie, removeCookie } from "../../utils/cookie";
 import axios from "../../utils/api/axios";
 import { getMyProfile } from "../../utils/api/api";
-// import { logoutUser } from "../../store/logoutSlice";
-// import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
+import { media } from "../../utils/style-utils";
 import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 import { PrimaryLink, SecondaryLink } from "../StyledLink";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// import { logoutUser } from "../../store/logoutSlice";
-// import { useDispatch } from "react-redux";
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -23,6 +20,9 @@ const HeaderContainer = styled.div`
   max-width: 1264px;
   padding-right: 24px;
   width: var(--screen-full);
+  ${media.mobile`
+    padding-right: 0px;
+  `}
 `;
 
 const Header = () => {
@@ -137,12 +137,12 @@ const Header = () => {
         >
           <span className="logo-img h-[30px] w-[25px] mt-[-4px]"></span>
         </Link>
-        <div className="h-full flex items-center justify-center grow">
+        <div className="h-full flex items-center justify-start grow">
           <SearchBar></SearchBar>
         </div>
         {/** 로그인&비로그인 다르게 보여줌 */}
         {isCookieExist ? (
-          <ul className="flex flex-row w-[150px] justify-end items-center gap-3">
+          <ul className="flex flex-row justify-end items-center gap-3">
             <li role="none">
               <button onClick={goToMyPage}>
                 <div className="flex justify-center items-center ">
@@ -187,7 +187,7 @@ const Header = () => {
             </li>
           </ul>
         ) : (
-          <ul className="flex flex-row ml-2	gap-2 w-[150px] justify-end">
+          <ul className="flex flex-row ml-2	gap-2 justify-end">
             <li className="flex items-center justify-center ">
               <SecondaryLink to={"/login"}>Log in</SecondaryLink>
             </li>
