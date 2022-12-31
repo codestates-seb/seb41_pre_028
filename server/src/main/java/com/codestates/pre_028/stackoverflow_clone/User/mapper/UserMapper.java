@@ -61,6 +61,7 @@ public interface UserMapper {
                         .builder()
                         .answerId(answer.getAnswerId())
                         .userId(answer.getUser().getUserId())
+                        .vote(answer.getVoteAnswer().getAnswer().getVoteAnswer())
                         .content(answer.getContent())
                         .build())
                 .collect(Collectors.toList());
