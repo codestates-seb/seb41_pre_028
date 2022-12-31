@@ -1,7 +1,7 @@
 import TagsList from "../components/tags/TagsList";
 const TagsPage = () => {
   return (
-    <div>
+    <div className="content">
       <TagsList />
     </div>
   );

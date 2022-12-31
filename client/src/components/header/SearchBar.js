@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { change } from "../../store/searchSlice";
+import { change, focus, blur } from "../../store/searchSlice";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput = styled.input`
-  width: 95%;
+  width: 100%;
   padding: 0.4rem 0.5rem;
   font-size: 13px;
   display: flex;
@@ -17,24 +17,29 @@ const SearchInput = styled.input`
   border-radius: 5px;
 `;
 
+const SearchModal = styled.div`
+  position: absolute;
+  background-color: white;
+  box-shadow: 1px;
+  left: 50%;
+  top: var(--h-header);
+  transform: translate(-50%, 0%);
+  width: 100%;
+`;
+
 const SearchBar = () => {
   // slice를 생성할 때 지정해준 이름을 이용해 state를 이용한다.
-  const searchWord = useSelector((state) => state.search.word);
+  const { word, focused } = useSelector((state) => state.search);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleKeyUp = (e) => {
     if (e.key === "Enter") {
-      if (searchWord === "") {
+      if (word === "") {
         return;
       }
-
-      // let rdx = /^\[.*\]$/;
-      // let value = searchWord;
-      // if (rdx.test(value)) {
-      //   value = "%5B" + value.substring(1, value.length - 1) + "%5D";
-      // }
-      navigate(`/search?value=${searchWord}`);
+      dispatch(blur());
+      navigate(`/search?value=${word}`);
     }
   };
 
@@ -45,17 +50,35 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-h-max relative rounded-[3px]">
+    <div className="w-full pr-[5px] pl-[5px] max-h-max relative rounded-[3px]">
       <SearchInput
         type="text"
         placeholder="Search..."
         onKeyUp={handleKeyUp}
         onChange={handleChange}
+        onFocus={() => dispatch(focus())}
+        onBlur={() => dispatch(blur())}
       ></SearchInput>
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
-        className="absolute top-1/2 mt-[-9px] left-[0.5rem] text-[#838C95]"
+        className="absolute top-1/2 mt-[-9px] left-[0.8rem] text-[#838C95]"
       />
+      {focused ? (
+        <SearchModal>
+          <div>
+            <span>{"[tag]"}</span>
+            <span>search within a tag</span>
+          </div>
+          <div>
+            <span>{'"title"'}</span>
+            <span>search by title</span>
+          </div>
+          <div>
+            <span>content</span>
+            <span>search by content</span>
+          </div>
+        </SearchModal>
+      ) : null}
     </div>
   );
 };

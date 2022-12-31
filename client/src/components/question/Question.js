@@ -120,11 +120,6 @@ const Question = ({ questionId }) => {
         <div className="q-content--body">{question.content}</div>
         <div className="q-content--meta">
           <div className="flex flex-row">
-            {/* <Tag
-              onClick={() => navigate(`/search?value=%5B${question.tag}%5D`)}
-            >
-              {question.tag}
-            </Tag> */}
             {question.tagList.map((tag, idx) => (
               <Tag onClick={() => navigate(`/search?value=[${tag}]`)} key={idx}>
                 {tag}

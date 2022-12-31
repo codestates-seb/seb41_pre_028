@@ -20,7 +20,8 @@ const HeaderContainer = styled.div`
   flex-direction: row;
   height: 100%;
   align-items: center;
-  max-width: 100%;
+  max-width: 1264px;
+  padding-right: 24px;
   width: var(--screen-full);
 `;
 
@@ -64,75 +65,84 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 z-40  w-full h-header-height bg-[#F8F9F9] flex justify-center border-b-2 shadow border-t-amber-500	 border-t-4 drop-shadow-xl">
-      <div className="invisible max-[640px]:visible flex justify-center items-center p-2">
-        <button onClick={onDropdown}>
-          {dropdownOpen ? (
-            <FontAwesomeIcon icon={faXmark} width={24} height={24} />
-          ) : (
-            <FontAwesomeIcon icon={faBars} width={24} height={24} />
-          )}
-        </button>
-        <Dropdown visibilty={dropdownOpen}>
-          <ul className="flex flex-col ">
-            <li>
-              <Link to={"/"} className="flex p-2 ml-4">
-                Home
-              </Link>
-            </li>
-            <li className="flex p-2 ml-4">PUBLIC</li>
-            <li>
-              <Link
-                to={"/questions"}
-                className={
-                  location.pathname === "/questions"
-                    ? "flex bg-stone-200 font-bold border-r-amber-500	 border-r-4 py-1"
-                    : "flex py-1"
-                }
-              >
-                <svg width="18px" height="18px" className="mr-1">
-                  <path d="M9 1C4.64 1 1 4.64 1 9c0 4.36 3.64 8 8 8 4.36 0 8-3.64 8-8 0-4.36-3.64-8-8-8ZM8 15.32a6.46 6.46 0 0 1-4.3-2.74 6.46 6.46 0 0 1-.93-5.01L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52Zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.45 6.45 0 0 1 3.83 4.51 6.45 6.45 0 0 1-1.51 5.73v.01Z"></path>
-                </svg>
-                <span>Question</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/tags"}
-                className={
-                  location.pathname === "/tags"
-                    ? "flex bg-stone-200 font-bold border-r-orange-400 border-r-4 py-1"
-                    : "flex py-1"
-                }
-              >
-                <div className="ml-5">Tags</div>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/users"}
-                className={
-                  location.pathname === "/users"
-                    ? "flex bg-stone-200 font-bold border-r-orange-400 border-r-4 py-1"
-                    : "flex py-1"
-                }
-              >
-                <div className="ml-5">Users</div>
-              </Link>
-            </li>
-          </ul>
-        </Dropdown>
-      </div>
+    <header className="fixed top-0 z-40 w-full h-header-height bg-[#F8F9F9] flex justify-center border-b-2 shadow border-t-amber-500 border-t-4 drop-shadow-xl">
       <HeaderContainer>
-        <Link to={"/"} className="h-full flex items-center justify-center">
+        <div className="flex sm:hidden justify-center items-center p-2">
+          <button onClick={onDropdown}>
+            {dropdownOpen ? (
+              <FontAwesomeIcon icon={faXmark} width={24} height={24} />
+            ) : (
+              <FontAwesomeIcon icon={faBars} width={24} height={24} />
+            )}
+          </button>
+          <Dropdown visibilty={dropdownOpen}>
+            <ul className="flex flex-col ">
+              <li>
+                <Link to={"/"} className="flex p-2 ml-4">
+                  Home
+                </Link>
+              </li>
+              <li className="flex p-2 ml-4">PUBLIC</li>
+              <li>
+                <Link
+                  to={"/questions"}
+                  className={
+                    location.pathname === "/questions"
+                      ? "flex bg-stone-200 font-bold border-r-amber-500	 border-r-4 py-1"
+                      : "flex py-1"
+                  }
+                >
+                  <svg width="18px" height="18px" className="mr-1">
+                    <path d="M9 1C4.64 1 1 4.64 1 9c0 4.36 3.64 8 8 8 4.36 0 8-3.64 8-8 0-4.36-3.64-8-8-8ZM8 15.32a6.46 6.46 0 0 1-4.3-2.74 6.46 6.46 0 0 1-.93-5.01L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52Zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.45 6.45 0 0 1 3.83 4.51 6.45 6.45 0 0 1-1.51 5.73v.01Z"></path>
+                  </svg>
+                  <span>Question</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={"/tags"}
+                  className={
+                    location.pathname === "/tags"
+                      ? "flex bg-stone-200 font-bold border-r-orange-400 border-r-4 py-1"
+                      : "flex py-1"
+                  }
+                >
+                  <div className="ml-5">Tags</div>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={"/users"}
+                  className={
+                    location.pathname === "/users"
+                      ? "flex bg-stone-200 font-bold border-r-orange-400 border-r-4 py-1"
+                      : "flex py-1"
+                  }
+                >
+                  <div className="ml-5">Users</div>
+                </Link>
+              </li>
+            </ul>
+          </Dropdown>
+        </div>
+        <Link
+          to={"/"}
+          className="h-full hidden sm:flex w-[164px] items-center justify-center pl-[10px]"
+        >
           <span className="logo-img h-[30px] w-[150px] mt-[-4px]"></span>
+        </Link>
+        <Link
+          to={"/"}
+          className="h-full flex sm:hidden w-[40px] items-center justify-center"
+        >
+          <span className="logo-img h-[30px] w-[25px] mt-[-4px]"></span>
         </Link>
         <div className="h-full flex items-center justify-center grow">
           <SearchBar></SearchBar>
         </div>
         {/** 로그인&비로그인 다르게 보여줌 */}
         {isCookieExist ? (
-          <ul className="flex flex-row justify-center items-center gap-3">
+          <ul className="flex flex-row w-[150px] justify-end items-center gap-3">
             <li role="none">
               <button onClick={goToMyPage}>
                 <div className="flex justify-center items-center ">
@@ -177,7 +187,7 @@ const Header = () => {
             </li>
           </ul>
         ) : (
-          <ul className="flex flex-row ml-2	gap-2">
+          <ul className="flex flex-row ml-2	gap-2 w-[150px] justify-end">
             <li className="flex items-center justify-center ">
               <SecondaryLink to={"/login"}>Log in</SecondaryLink>
             </li>
