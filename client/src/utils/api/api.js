@@ -14,13 +14,16 @@ export const getQuestionDetail = (questionId) =>
 
 export const getQuestion = (questionId) => axios.get(`questions/${questionId}`);
 
-// export const getQuestionListByUserId = (userId) => {
-//    axios.get("http://localhost:3001/question", { params: {userId}});
-// }
-
 export const searchQuestionsByValue = (params) => {
-  console.log(params.value);
-  return axios.get("/search", { params: { ...params, page: params.page - 1 } });
+  let rdx = /^\[.*\]$/;
+  let value = params.value;
+  if (rdx.test(value)) {
+    value =
+      encodeURI("[") + value.substring(1, value.length - 1) + encodeURI("]");
+  }
+  return axios.get(
+    `/search?value=${value}&page=${params.page - 1}&size=${params.size}`
+  );
 };
 
 /** Answers */

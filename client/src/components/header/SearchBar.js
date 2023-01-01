@@ -30,15 +30,12 @@ const SearchBar = () => {
         return;
       }
 
-      let rdx = /^\[.*\]$/;
-      let value = searchWord;
-      if (rdx.test(value)) {
-        value =
-          encodeURI("[%5") +
-          value.substring(1, value.length - 1) +
-          encodeURI("%B]");
-      }
-      navigate(`/search?value=${value}`);
+      // let rdx = /^\[.*\]$/;
+      // let value = searchWord;
+      // if (rdx.test(value)) {
+      //   value = "%5B" + value.substring(1, value.length - 1) + "%5D";
+      // }
+      navigate(`/search?value=${searchWord}`);
     }
   };
 

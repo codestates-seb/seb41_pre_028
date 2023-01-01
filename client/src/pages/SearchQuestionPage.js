@@ -6,7 +6,7 @@ import paramsToObject from "../utils/paramsToObject";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
 import Question from "../components/question/Question";
-import Pagination from "../components/Pagination/Pagination";
+import Pagination from "../components/pagination/Pagination";
 import { PrimaryLink } from "../components/StyledLink";
 
 const ContentWrapper = styled.div`
@@ -48,7 +48,7 @@ const SearchQuestionPage = () => {
       searchParams.append("page", 1);
     }
     if (!searchParams.has("size")) {
-      searchParams.append("size", 3);
+      searchParams.append("size", 1);
     }
 
     searchQuestionsByValue(paramsToObject(searchParams.entries()))

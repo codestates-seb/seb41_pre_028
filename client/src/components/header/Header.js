@@ -3,7 +3,6 @@ import { getCookie, removeCookie } from "../../utils/cookie";
 import axios from "../../utils/api/axios";
 import { getMyProfile } from "../../utils/api/api";
 import styled from "styled-components";
-import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 import { PrimaryLink, SecondaryLink } from "../StyledLink";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import userImg from "../../static/identicon1.jpeg";
 import DropdownList from "./DropdownList";
 import useDetectClose from "../../hooks/useDetectClose";
+import SearchBar from "./SearchBar";
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -37,9 +37,14 @@ const Header = () => {
 
   const goToMyPage = () => {
     if (isCookieExist) {
-      getMyProfile().then((res) => {
-        navigate(`/users/${res.data.userId}`);
-      });
+      getMyProfile()
+        .then((res) => {
+          navigate(`/users/${res.data.userId}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("올바르지 않은 접근입니다.");
+        });
     }
   };
   return (
