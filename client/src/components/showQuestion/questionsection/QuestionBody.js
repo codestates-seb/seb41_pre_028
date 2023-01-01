@@ -30,6 +30,7 @@ const QuestionBody = ({ item }) => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <div className="flex flex-col w-full">
       {/* screen 크기에 맞추기 */}
@@ -51,9 +52,19 @@ const QuestionBody = ({ item }) => {
             </Link>
           </div>
           <div>
-            <Link to={`/questions/create`} className="text-[#6a737C]">
+            <Link
+              to={`/questions/${item.questionId}/edit`}
+              state={{
+                questionId: item.questionId,
+                oldTitle: item.title,
+                oldTags: item.tags,
+                oldContent: item.content,
+              }}
+              className="text-[#6a737C]"
+            >
               Edit
             </Link>
+            <button> </button>
           </div>
           <div>
             <Link

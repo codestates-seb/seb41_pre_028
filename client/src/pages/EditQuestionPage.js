@@ -5,15 +5,21 @@ import Editor from "../components/editor/Editor";
 import { Button } from "@mui/material";
 import { PageContainer, MainContainer } from "../components/StyledContainer";
 import { useState } from "react";
-import { fetchCreateQuestion } from "../utils/api/api";
-import { useNavigate } from "react-router-dom";
+import { fetchEditQuestion } from "../utils/api/api";
+import { useNavigate, useLocation } from "react-router-dom";
 import { isCookieExist } from "../utils/cookie";
 
 const EditQuestionPage = () => {
+  const location = useLocation();
+  const { oldTitle, oldContent, oldTag, questionId } = location.state;
+
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [tag, setTag] = useState("");
+
+  console.log("location", location);
+
+  const [title, setTitle] = useState(oldTitle);
+  const [content, setContent] = useState(oldContent);
+  const [tag, setTag] = useState(oldTag);
 
   const onChangeTitle = (e) => {
     e.preventDefault();
@@ -53,17 +59,19 @@ const EditQuestionPage = () => {
   };
 
   const onClickSubmit = async () => {
-    console.log("title, content, tag", { title, content, tag });
+    console.log("title, content, tag", { title, content, tag, questionId });
     console.log("isCookieExist", isCookieExist);
     if (title.length < 10) {
       console.log("Minimum 10 characters.");
     } else if (content.length < 50) {
       console.log("Minimum 50 characters.");
     } else {
-      await fetchCreateQuestion({ title, content, tag }).then((questionId) => {
-        console.log(questionId);
-        navigate(`/questions/${questionId}`);
-      });
+      await fetchEditQuestion({ title, content, tag, questionId }).then(
+        (questionId) => {
+          console.log(questionId);
+          navigate(`/questions/${questionId}`);
+        }
+      );
     }
   };
   return (
