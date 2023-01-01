@@ -19,11 +19,11 @@ function AnswerList({ answers }) {
     <div className="answers-group">
       {answers && answers.length > 0 ? (
         <h3 className="px-6 mb-5 pb-4 text-2xl border-b border-soGray-light">
-          {answers.length} Answer
+          {answers.length} Answers
         </h3>
       ) : (
         <h3 className="px-6 mb-5 pb-4 text-2xl border-b border-soGray-light">
-          0 Answer
+          0 Answers
         </h3>
       )}
 
