@@ -8,6 +8,7 @@ import axios from "axios";
 import Tag from "../../StyledTag";
 import { useState, useEffect } from "react";
 import { getQuestionDetail, getMyProfile } from "../../../utils/api/api";
+import elapsedTime from "../../../utils/elapsedTime";
 const QuestionStats = styled.div`
   display: flex;
   flex-direction: row;
@@ -144,7 +145,7 @@ const QuestionBody = ({ item }) => {
               </Link>
               <div className="flex flex-col">
                 <div className="text-[12px] text-[#6a637c]">
-                  asked at {item.createdAt}
+                  asked at {elapsedTime(item.createdAt)}
                 </div>
                 <div className="h-full items-center">
                   <div className="flex items-center text-[12px] text-[#0063bf]">
