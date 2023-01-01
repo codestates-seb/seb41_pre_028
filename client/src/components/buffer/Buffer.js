@@ -12,4 +12,10 @@ export const BufferBorder1 = () => {
   );
 };
 
+export const BufferBorder2 = () => {
+  return (
+    <div className="mx-2 border-solid border-[0.3px] border-[#cecccc]"></div>
+  );
+};
+
 // border-[#e3e6e8]

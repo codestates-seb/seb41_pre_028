@@ -26,7 +26,7 @@ const AnswerForm = ({ questionId }) => {
   };
 
   return (
-    <div>
+    <div className="ml-10">
       <Editor value={content} onChange={setContent} />
 
       <div className="flex flex-row">

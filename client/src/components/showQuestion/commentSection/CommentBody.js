@@ -9,8 +9,12 @@ const CommentBody = ({ item }) => {
       {/* profile */}
       <div className="flex flex-row h-full items-center">
         <div className="flex items-center text-[12px] text-[#0063bf]">
-          <div className="text-[12px] text-[#6a637c]">created by</div>
+          <div>
+            {"  "}- {"  "}
+          </div>
+          <div className="text-[12px] text-[#6a637c]">{item.nickname}</div>
           <Link to={`/users/${item.userId}`}>{item.userId}</Link>
+          <div> {item.createdBy} </div>
         </div>
       </div>
     </div>

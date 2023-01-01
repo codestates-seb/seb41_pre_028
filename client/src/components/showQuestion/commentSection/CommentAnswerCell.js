@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import CommentBody from "./CommentBody.js";
 import InputPrimary from "./../../input/inputPrimary";
-import { BufferMd5 } from "../../buffer/Buffer";
+import { BufferMd5, BufferBorder2 } from "../../buffer/Buffer";
 import { fetchAnswerComment } from "../../../utils/api/api";
 import { isCookieExist } from "../../../utils/cookie.js";
 import { useNavigate } from "react-router-dom";
@@ -55,17 +55,8 @@ const CommentAnswerCell = ({ answerId }) => {
 
   return (
     <div className="comment">
-      <div className="commentInfo">
-        {comments && comments.length > 0 ? (
-          <h3 className="px-6 mb-5 pb-4 text-2xl border-b border-soGray-light">
-            {comments.length} Comments
-          </h3>
-        ) : (
-          <h3 className="px-6 mb-5 pb-4 text-2xl border-b border-soGray-light">
-            0 Comments
-          </h3>
-        )}
-      </div>
+      <BufferBorder2 />
+
       <div className="commentMap">
         {comments && comments.length > 0
           ? comments.map((anItem) => (
@@ -73,11 +64,16 @@ const CommentAnswerCell = ({ answerId }) => {
             ))
           : ""}
       </div>
+      <BufferMd5 />
+
       <div className="flex flex-row ">
-        <button onClick={commentToggle}>Add a comment</button>
+        <button className="text-[12px] text-[#515252]" onClick={commentToggle}>
+          Add a comment
+        </button>
         {isEditing ? (
           <div className="flex flex-row w-full">
             <InputPrimary
+              className="flex w-max"
               placeholder="Add a comment"
               value={content}
               onChange={onChangeContent}
