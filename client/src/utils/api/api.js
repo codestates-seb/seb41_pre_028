@@ -75,7 +75,7 @@ export const fetchCreateQuestion = async (fetchData) => {
 
 export const fetchEditQuestion = async (fetchData) => {
   console.log(fetchData);
-  return fetch(`/questions`, {
+  return fetch(`/questions/${fetchData.questionId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
