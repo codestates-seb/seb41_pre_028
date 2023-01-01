@@ -6,7 +6,7 @@ import AskQuestionButton from "../components/AskQuestionButton";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
 import Question from "../components/question/Question";
-import Pagination from "../components/pagination/Pagination";
+import Pagination from "../components/Pagination/Pagination";
 
 const ContentWrapper = styled.div`
   display: flex;
