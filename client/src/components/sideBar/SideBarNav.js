@@ -1,7 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 const SideBarNav = () => {
-  // const params = new URLSearchParams();
-  // console.log(params.get());
   const location = useLocation();
 
   return (

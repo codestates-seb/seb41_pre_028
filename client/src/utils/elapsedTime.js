@@ -1,6 +1,5 @@
 export default function elapsedTime(date) {
   const start = new Date(date);
-  console.log(start);
   const end = new Date(); // 현재 날짜
 
   const diff = (end - start) / 1000;

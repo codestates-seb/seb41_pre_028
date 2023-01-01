@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { media } from "../utils/style-utils";
 
 const PrimaryLink = styled(Link)`
   background-color: #0091ff;
@@ -8,6 +9,11 @@ const PrimaryLink = styled(Link)`
   font-size: 13px;
   padding: 5px;
   border-radius: 3px;
+
+  ${media.mobile`
+    font-size:11px;
+    padding: 5px 3px;
+  `}
 `;
 
 const SecondaryLink = styled(Link)`
@@ -17,6 +23,10 @@ const SecondaryLink = styled(Link)`
   font-size: 13px;
   padding: 5px;
   border-radius: 3px;
+  ${media.mobile`
+    font-size:11px;
+    padding: 5px 3px;
+  `}
 `;
 
 export { PrimaryLink, SecondaryLink };

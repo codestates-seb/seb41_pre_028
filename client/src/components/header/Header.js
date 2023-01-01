@@ -32,13 +32,12 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isCookieExist = getCookie("Authorization");
   const onLogout = async () => {
-    const res = await axios.get("/logout").then(() => {
+    await axios.get("/logout").then(() => {
       if (window.confirm("정말 로그아웃 하시겠습니까?")) {
         removeCookie("Authorization");
         window.location.reload();
       }
     });
-    console.log(res.data);
     // dispatch(logoutUser()).then(() => removeCookie("Authorization"));
 
     // if (isCookieExist && window.confirm("정말 로그아웃 하시겠습니까?")) {
@@ -58,6 +57,9 @@ const Header = () => {
           navigate(`/users/${res.data.userId}`);
         })
         .catch((err) => {
+          if (err.response.status === 401) {
+            removeCookie("Authorization");
+          }
           console.log(err);
           alert("올바르지 않은 접근입니다.");
         });
