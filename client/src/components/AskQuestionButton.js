@@ -6,7 +6,7 @@ const AskQuestionButton = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     if (isCookieExist) {
-      navigate("/createQuestions");
+      navigate("/createQuestion");
     } else {
       navigate("/login");
     }

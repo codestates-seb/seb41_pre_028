@@ -3,8 +3,11 @@ import { getCookie, isCookieExist } from "../cookie";
 
 /** Questions */
 // page, size : 필수 정보임!
-export const getQuestionList = (params) =>
-  axios.get(`/questions`, { params: { ...params, page: params.page - 1 } });
+export const getQuestionList = (params) => {
+  return axios.get(`/questions`, {
+    params: { ...params, page: params.page - 1 },
+  });
+};
 
 export const getQuestionDetail = (questionId) =>
   axios.get(`/questions/${questionId}`);
@@ -74,10 +77,10 @@ export const fetchCreateQuestion = async (fetchData) => {
     });
 };
 
-export const fetchDeleteQuestion = async (fetchData) => {
+export const fetchEditQuestion = async (fetchData) => {
   console.log(fetchData);
   return fetch(`/questions/${fetchData.questionId}`, {
-    method: "DELETE",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: isCookieExist,
