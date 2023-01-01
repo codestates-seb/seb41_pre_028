@@ -9,7 +9,6 @@ export const loginUser = createAsyncThunk(
       const res = await axios.post("/login", data);
       localStorage.setItem("authorizationToken", res.headers.authorization);
 
-      console.log(res);
       return res;
     } catch (error) {
       return rejectWithValue(error.response);
@@ -27,12 +26,7 @@ const loginSlice = createSlice({
     loginError: "",
     authorizationToken: "",
   },
-  reducers: {
-    logout: (state) => {
-      console.log("로그아웃 성공");
-      state.isLogined = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {

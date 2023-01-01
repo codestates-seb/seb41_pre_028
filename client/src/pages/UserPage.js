@@ -51,7 +51,6 @@ const UserPage = () => {
   });
 
   useEffect(() => {
-    // id가 userId인 user 정보를 get 해와야함
     if (isCookieExist) {
       getMyProfile().then((res) => {
         if (res.data.userId === Number(userId)) {
