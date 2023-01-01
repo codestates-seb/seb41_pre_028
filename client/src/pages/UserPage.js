@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserProfile, getMyProfile } from "../utils/api/api";
-import { isCookieExist } from "../utils/cookie";
+import { isCookieExist, removeCookie } from "../utils/cookie";
 import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 import { TabButton } from "../components/StyledButton";
@@ -65,13 +65,15 @@ const UserPage = () => {
           }
         } catch (err) {
           setIsMyPage(false);
+          if (err.response.status === 401) {
+            removeCookie("Authorization");
+          }
           console.log(err);
         }
       }
 
       try {
         const res = await getUserProfile(userId);
-        console.log(res.data.data);
         setUser(res.data.data);
       } catch (err) {
         if (err.response.status === 404) {
@@ -81,7 +83,6 @@ const UserPage = () => {
     };
     // id가 userId인 user 정보를 get 해와야함
     // 만약 로그인 상태라면
-    // console.log(userData);
 
     setUserPage();
   }, [userId]);

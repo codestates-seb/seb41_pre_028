@@ -29,14 +29,6 @@ export const searchQuestionsByValue = (params) => {
 /** Answers */
 export const getAnswerList = (params) => axios.get("/answers", { params });
 
-/** Answers/answer-id/comments */
-// export const getAnswerCommentList = (params) =>
-//   axios.get("/answers", { params });
-
-// export const getAnswerListByUserId = (userId) => {
-//     axios.get("http://localhost:3001/question", { params: {userId}});
-// }
-
 /** Users */
 export const getUserProfile = (userId) =>
   axios.get(`/users/${userId}`, {
@@ -47,6 +39,18 @@ export const getMyProfile = () =>
   axios.get("/users/mypage", {
     headers: { Authorization: getCookie("Authorization") },
   });
+
+export const patchUserProfile = (userInfo) => {
+  console.log(userInfo);
+};
+
+/** Answers/answer-id/comments */
+// export const getAnswerCommentList = (params) =>
+//   axios.get("/answers", { params });
+
+// export const getAnswerListByUserId = (userId) => {
+//     axios.get("http://localhost:3001/question", { params: {userId}});
+// }
 
 export const fetchCreateQuestion = async (fetchData) => {
   console.log(fetchData);

@@ -8,8 +8,10 @@ import UserPage from "./UserPage";
 import ShowQuestionPage from "./ShowQuestionPage";
 import SearchQuestionPage from "./SearchQuestionPage";
 import TagsPage from "./TagsPage";
+
 export const PageContainer = styled.div`
   width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
 `;
@@ -19,6 +21,7 @@ export const MainContainer = styled.div`
   display: flex;
   max-width: 1264px;
   width: 100%;
+  min-height: 100vh;
   > .side-bar {
     width: 164px;
 

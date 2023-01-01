@@ -2,7 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { getCookie, removeCookie } from "../../utils/cookie";
 import axios from "../../utils/api/axios";
 import { getMyProfile } from "../../utils/api/api";
+// import { logoutUser } from "../../store/logoutSlice";
+// import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
+import { media } from "../../utils/style-utils";
+import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 import { PrimaryLink, SecondaryLink } from "../StyledLink";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -10,14 +15,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import userImg from "../../static/identicon1.jpeg";
 import DropdownList from "./DropdownList";
 import useDetectClose from "../../hooks/useDetectClose";
-import SearchBar from "./SearchBar";
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
   align-items: center;
-  max-width: 100%;
+  max-width: 1264px;
+  padding-right: 24px;
   width: var(--screen-full);
+  ${media.mobile`
+    padding-right: 0px;
+  `}
 `;
 
 const Header = () => {
@@ -42,6 +50,9 @@ const Header = () => {
           navigate(`/users/${res.data.userId}`);
         })
         .catch((err) => {
+          if (err.response.status === 401) {
+            removeCookie("Authorization");
+          }
           console.log(err);
           alert("올바르지 않은 접근입니다.");
         });
@@ -50,7 +61,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 z-40 w-full h-header-height bg-[#f8f9f9] flex justify-center border-b-2 shadow border-t-amber-500	 border-t-4 drop-shadow-xl">
       {/** 드랍다운 */}
-      <div className="invisible max-[640px]:visible flex justify-center items-center p-2 ">
+      <div className="hidden max-[640px]:flex justify-center items-center p-2 ">
         <button onClick={visibleHandler} ref={ref}>
           {isOpen ? (
             <FontAwesomeIcon icon={faXmark} width={24} height={24} />
@@ -64,15 +75,23 @@ const Header = () => {
       </div>
       {/** */}
       <HeaderContainer>
-        <Link to={"/"} className="h-full flex items-center justify-center">
+        <Link
+          to={"/"}
+          className="h-full hidden sm:flex w-[164px] items-center justify-center pl-[10px]"
+        >
           <span className="logo-img h-[30px] w-[150px] mt-[-4px]"></span>
         </Link>
-        <div className="h-full flex items-center justify-center grow">
+        <Link
+          to={"/"}
+          className="h-full flex sm:hidden w-[40px] items-center justify-center"
+        >
+          <span className="logo-img h-[30px] w-[25px] mt-[-4px]"></span>
+        </Link>
+        <div className="h-full flex items-center justify-start grow">
           <SearchBar></SearchBar>
         </div>
-        {/** 로그인&비로그인 다르게 보여줌 */}
         {isCookieExist ? (
-          <ul className="flex flex-row justify-center items-center gap-3">
+          <ul className="flex flex-row justify-end items-center gap-3">
             <li role="none">
               <button onClick={goToMyPage}>
                 <div className="flex items-center justify-center p-2">
@@ -105,7 +124,7 @@ const Header = () => {
             </li>
           </ul>
         ) : (
-          <ul className="flex flex-row ml-2	gap-2">
+          <ul className="flex flex-row ml-2	gap-2 justify-end">
             <li className="flex items-center justify-center ">
               <SecondaryLink to={"/login"}>Log in</SecondaryLink>
             </li>
