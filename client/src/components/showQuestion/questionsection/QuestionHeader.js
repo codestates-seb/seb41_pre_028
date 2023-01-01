@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import AskQuestionButton from "../../AskQuestionButton";
+import elapsedTime from "../../../utils/elapsedTime";
 import { Link } from "react-router-dom";
 import { BufferBorder1 } from "../../buffer/Buffer";
 
@@ -24,8 +25,8 @@ const QuestionHeader = ({ question }) => {
       </div>
       <QuestionStats>
         <div>
-          <span className="text-[#6a737C]">Asked </span>
-          <span>{question.createdAt}</span>
+          <span className="text-[#6a737C]">Asked at</span>
+          <span> {elapsedTime(question.createdAt)}</span>
         </div>
         <div>
           <span className="text-[#6a737C]">Modified </span>
