@@ -7,7 +7,7 @@ import { isCookieExist } from "../../../utils/cookie";
 import axios from "axios";
 import Tag from "../../StyledTag";
 import { useState, useEffect } from "react";
-import { getQuestionDetail, getMyProfile } from "../../../utils/api/api";
+import { getMyProfile } from "../../../utils/api/api";
 import elapsedTime from "../../../utils/elapsedTime";
 const QuestionStats = styled.div`
   display: flex;
@@ -20,12 +20,7 @@ const QuestionStats = styled.div`
 `;
 
 const QuestionBody = ({ item }) => {
-  // const userId = item.userId;
-  // console.log("userId", userId);
-  const [userId, setUserId] = useState(false);
-  const [question, setQuestion] = useState({
-    tagList: [],
-  });
+  const [userId, setUserId] = useState();
 
   const navigate = useNavigate();
 
@@ -44,12 +39,6 @@ const QuestionBody = ({ item }) => {
 
     SetupUserPage();
   }, [userId]);
-
-  getQuestionDetail(item.questionId)
-    .then((res) => {
-      setQuestion(res.data.data);
-    })
-    .catch((err) => console.log(err));
 
   const onClickDelete = () => {
     axios
@@ -75,7 +64,7 @@ const QuestionBody = ({ item }) => {
           <BufferMd5 />
           {/* tag */}
           <div className="flex flex-row">
-            {question.tagList.map((tag, idx) => (
+            {item.tagList.map((tag, idx) => (
               <Tag onClick={() => navigate(`/search?value=[${tag}]`)} key={idx}>
                 {tag}
               </Tag>

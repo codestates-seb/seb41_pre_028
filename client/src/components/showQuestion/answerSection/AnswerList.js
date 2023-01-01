@@ -1,20 +1,6 @@
 import AnswerBody from "./AnswerBody";
 
 function AnswerList({ answers }) {
-  // const [answers, setAnswers] = useState([]);
-  // const getData = async () => {
-  //   await fetch(`/answers/${params}`)
-  //     .then((response) => response.json())
-  //     .then((data) => setAnswers(data))
-  //     .catch((error) => console.log(error));
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // const getAnswerList = (params) => axios.get("/answers", { params });
-
   return (
     <div className="answers-group">
       {answers && answers.length > 0 ? (

@@ -5,20 +5,21 @@ import AnswerForm from "../components/showQuestion/answerSection/AnswerForm";
 import { BufferMd5 } from "../components/buffer/Buffer";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "../utils/api/axios";
 
 const ShowQuestionPage = () => {
-  const [questions, setQuestion] = useState([]);
-  const getData = async () => {
-    await fetch(`/questions/${questionId}`)
-      .then((response) => response.json())
-      .then((res) => setQuestion(res.data))
-      .catch((error) => console.log(error));
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
+  const [questions, setQuestion] = useState({ tagList: [] });
   const { questionId } = useParams();
+
+  useEffect(() => {
+    const getData = async () => {
+      await axios(`/questions/${questionId}`)
+        .then((res) => setQuestion(res.data.data))
+        .catch((error) => console.log(error));
+    };
+
+    getData();
+  }, [questionId]);
 
   return (
     <div className="content">
