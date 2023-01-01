@@ -6,7 +6,7 @@ import paramsToObject from "../utils/paramsToObject";
 import styled from "styled-components";
 import { media } from "../utils/style-utils";
 import Question from "../components/question/Question";
-import Pagination from "../components/pagination/Pagination";
+import Pagination from "../components/Pagination/Pagination";
 import { PrimaryLink } from "../components/StyledLink";
 
 const ContentWrapper = styled.div`

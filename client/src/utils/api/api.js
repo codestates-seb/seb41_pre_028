@@ -73,10 +73,10 @@ export const fetchCreateQuestion = async (fetchData) => {
     });
 };
 
-export const fetchDeleteQuestion = async (fetchData) => {
+export const fetchEditQuestion = async (fetchData) => {
   console.log(fetchData);
   return fetch(`/questions/${fetchData.questionId}`, {
-    method: "DELETE",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: isCookieExist,

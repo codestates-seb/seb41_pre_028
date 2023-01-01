@@ -5,15 +5,25 @@ import InputPrimary from "./../../input/inputPrimary";
 import { BufferMd5 } from "../../buffer/Buffer";
 import { fetchQuestionComment } from "../../../utils/api/api";
 import { isCookieExist } from "../../../utils/cookie.js";
+import { useNavigate } from "react-router-dom";
 
 const CommentCell = ({ comments, questionId }) => {
   const [content, setContent] = useState("");
+  const [isEditing, setIsEditing] = useState(false); // input 숨기기
+  const navigate = useNavigate();
 
   const userId = 2;
 
   const onChangeContent = (e) => {
     e.preventDefault();
     setContent(e.target.value);
+  };
+  const commentToggle = () => {
+    if (isCookieExist) {
+      setIsEditing(!isEditing);
+    } else {
+      navigate("/login");
+    }
   };
 
   const onClickQuestionCommentSubmit = async () => {
@@ -33,28 +43,46 @@ const CommentCell = ({ comments, questionId }) => {
 
   return (
     <div className="comment">
-      {comments && comments.length > 0 ? (
-        comments.map((anItem) => (
-          <CommentBody key={anItem.commentId} item={anItem} />
-        ))
-      ) : (
-        <div className="flex flex-row ">0 comment</div>
-      )}
+      <div className="commentInfo">
+        {comments && comments.length > 0 ? (
+          <h3 className="px-6 mb-5 pb-4 text-2xl border-b border-soGray-light">
+            {comments.length} Comments
+          </h3>
+        ) : (
+          <h3 className="px-6 mb-5 pb-4 text-2xl border-b border-soGray-light">
+            0 Comments
+          </h3>
+        )}
+      </div>
+      <div className="commentMap">
+        {comments && comments.length > 0
+          ? comments.map((anItem) => (
+              <CommentBody key={anItem.commentId} item={anItem} />
+            ))
+          : ""}
+      </div>
       <div className="flex flex-row ">
-        <InputPrimary
-          placeholder="Add a comment"
-          value={content}
-          onChange={onChangeContent}
-        ></InputPrimary>
-        <BufferMd5 />
-        <Button
-          variant="contained"
-          sx={{ fontSize: 12 }}
-          size="small"
-          onClick={onClickQuestionCommentSubmit}
-        >
-          Send!
-        </Button>
+        <button onClick={commentToggle}>Add a comment</button>
+        {isEditing ? (
+          <div className="flex flex-row w-full">
+            <InputPrimary
+              placeholder="Add a comment"
+              value={content}
+              onChange={onChangeContent}
+            ></InputPrimary>
+            <BufferMd5 />
+            <Button
+              variant="contained"
+              sx={{ fontSize: 12 }}
+              size="small"
+              onClick={onClickQuestionCommentSubmit}
+            >
+              Send!
+            </Button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -34,7 +34,6 @@ const AnswerBody = ({ item }) => {
       <div className="m-4 flex flex-row">
         <VoteCell item={item.userId} />
         <div> {item.content}</div>
-        <div> answerId:{item.answerId}</div>
 
         {/* <div> {JSON.stringify(item)}</div> */}
       </div>

@@ -1,9 +1,10 @@
 import VoteCell from "../VoteCell";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BufferMd5 } from "../../buffer/Buffer";
 import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
-
+import { isCookieExist } from "../../../utils/cookie";
+import axios from "axios";
 const QuestionStats = styled.div`
   display: flex;
   flex-direction: row;
@@ -15,6 +16,21 @@ const QuestionStats = styled.div`
 `;
 
 const QuestionBody = ({ item }) => {
+  const navigate = useNavigate();
+  const onClickDelete = () => {
+    axios
+      .delete(`/questions/${item.questionId}`, {
+        headers: {
+          Authorization: isCookieExist,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="flex flex-col w-full">
       {/* screen 크기에 맞추기 */}
@@ -36,9 +52,19 @@ const QuestionBody = ({ item }) => {
             </Link>
           </div>
           <div>
-            <Link to={`/questions/create`} className="text-[#6a737C]">
+            <Link
+              to={`/questions/${item.questionId}/edit`}
+              state={{
+                questionId: item.questionId,
+                oldTitle: item.title,
+                oldTags: item.tags,
+                oldContent: item.content,
+              }}
+              className="text-[#6a737C]"
+            >
               Edit
             </Link>
+            <button> </button>
           </div>
           <div>
             <Link
@@ -47,6 +73,11 @@ const QuestionBody = ({ item }) => {
             >
               Follow
             </Link>
+          </div>
+          <div>
+            <button className="text-[#6a737C]" onClick={onClickDelete}>
+              Delete
+            </button>
           </div>
         </QuestionStats>
 
