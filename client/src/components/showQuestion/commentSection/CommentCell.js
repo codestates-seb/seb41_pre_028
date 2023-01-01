@@ -64,7 +64,7 @@ const CommentCell = ({ comments, questionId }) => {
       <div className="flex flex-row ">
         <button onClick={commentToggle}>Add a comment</button>
         {isEditing ? (
-          <div className="flex flex-row">
+          <div className="flex flex-row w-full">
             <InputPrimary
               placeholder="Add a comment"
               value={content}
