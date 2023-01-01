@@ -1,5 +1,7 @@
-import axios from "axios";
+import axios from "./axios";
 import { getCookie, isCookieExist } from "../cookie";
+
+const FETCH_BASIC_URL = "http://3.37.105.24:8080";
 
 /** Questions */
 // page, size : 필수 정보임!
@@ -45,7 +47,7 @@ export const patchUserProfile = (userInfo) => {
 };
 
 export const fetchCreateQuestion = async (fetchData) => {
-  return fetch(`/questions`, {
+  return fetch(`${FETCH_BASIC_URL}/questions`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +71,7 @@ export const fetchCreateQuestion = async (fetchData) => {
 };
 
 export const fetchEditQuestion = async (fetchData) => {
-  return fetch(`/questions/${fetchData.questionId}`, {
+  return fetch(`${FETCH_BASIC_URL}/questions/${fetchData.questionId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -93,7 +95,7 @@ export const fetchEditQuestion = async (fetchData) => {
 };
 
 export const fetchAnswer = async (fetchData) => {
-  return fetch(`/answers`, {
+  return fetch(`${FETCH_BASIC_URL}/answers`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -115,43 +117,20 @@ export const fetchAnswer = async (fetchData) => {
       throw Error(error.message);
     });
 };
-
-/**
- * request body : 
- * {
-    "userId": 2,
-    "questionId": 2,
-    "content":"answer3 content"
-    }
- * response body : 
- * {
-    "data": {
-        "answerId": 5,
-        "questionId": 2,
-        "userId": 2,
-        "email": "test2@gmail.com",
-        "nickname": "test2",
-        "content": "answer3 content",
-        "comments": null,
-        "answerStatus": "일반 답변",
-        "createdAt": "2022-12-29T08:25:08.080866511",
-        "modifiedAt": "2022-12-29T08:25:08.080866511",
-        "createdBy": "amdin",
-        "modifiedBy": "amdin"
-    }
-}
- */
 
 export const fetchQuestionComment = async (fetchData) => {
-  return fetch(`/questions/${fetchData.questionId}/comments`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: isCookieExist,
-    },
+  return fetch(
+    `${FETCH_BASIC_URL}/questions/${fetchData.questionId}/comments`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: isCookieExist,
+      },
 
-    body: JSON.stringify(fetchData),
-  })
+      body: JSON.stringify(fetchData),
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw Error("유효하지 않은 요청입니다.");
@@ -165,18 +144,9 @@ export const fetchQuestionComment = async (fetchData) => {
       throw Error(error.message);
     });
 };
-
-/**
- * request body :
- * {
- *  "userId":2,
- *  "questionId":1,
- *  "content":"comment3"
- * }
- */
 
 export const fetchAnswerComment = async (fetchData) => {
-  return fetch(`/answers/${fetchData.answerId}/comments`, {
+  return fetch(`${FETCH_BASIC_URL}/answers/${fetchData.answerId}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -198,55 +168,3 @@ export const fetchAnswerComment = async (fetchData) => {
       throw Error(error.message);
     });
 };
-
-/**
- * request body :
- * {
- * "userId":2,
- * "answerId":1,
- * "content":"comment3"
- * }
- */
-
-/**
- * request body : 
- * {
-    "userId": 2,
-    "questionId": 2,
-    "content":"answer3 content"
-    }
- * response body : 
- * {
-    "data": {
-        "answerId": 5,
-        "questionId": 2,
-        "userId": 2,
-        "email": "test2@gmail.com",
-        "nickname": "test2",
-        "content": "answer3 content",
-        "comments": null,
-        "answerStatus": "일반 답변",
-        "createdAt": "2022-12-29T08:25:08.080866511",
-        "modifiedAt": "2022-12-29T08:25:08.080866511",
-        "createdBy": "amdin",
-        "modifiedBy": "amdin"
-    }
-}
- */
-
-/**
- * request body :
- * {
- *  "userId":2,
- *  "questionId":1,
- *  "content":"comment3"
- * }
- */
-/**
- * request body :
- * {
- * "userId":2,
- * "answerId":1,
- * "content":"comment3"
- * }
- */

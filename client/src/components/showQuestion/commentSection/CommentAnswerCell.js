@@ -6,6 +6,7 @@ import { BufferMd5, BufferBorder2 } from "../../buffer/Buffer";
 import { fetchAnswerComment } from "../../../utils/api/api";
 import { isCookieExist } from "../../../utils/cookie.js";
 import { useNavigate } from "react-router-dom";
+import axios from "../../../utils/api/axios";
 
 const CommentAnswerCell = ({ answerId }) => {
   const [comments, setComments] = useState("");
@@ -14,9 +15,10 @@ const CommentAnswerCell = ({ answerId }) => {
   const navigate = useNavigate();
 
   const getData = async () => {
-    await fetch(`/answers/${answerId}`)
-      .then((response) => response.json())
-      .then((res) => setComments(res.data.comments))
+    await axios(`/answers/${answerId}`)
+      .then((res) => {
+        setComments(res.data.data.comments);
+      })
       .catch((error) => console.log(error));
   };
   useEffect(() => {

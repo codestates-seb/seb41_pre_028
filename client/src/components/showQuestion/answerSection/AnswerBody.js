@@ -4,7 +4,7 @@ import { BufferMd5 } from "../../buffer/Buffer";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import CommentAnswerCell from "../commentSection/CommentAnswerCell";
-import { isCookieExist } from "../../../utils/cookie";
+import { isCookieExist, removeCookie } from "../../../utils/cookie";
 import { getMyProfile } from "../../../utils/api/api";
 import elapsedTime from "../../../utils/elapsedTime";
 import axios from "axios";
@@ -32,6 +32,10 @@ const AnswerBody = ({ item }) => {
             setUserId(res.data.userId);
           })
           .catch((err) => {
+            if (err.response.status === 401) {
+              removeCookie("Authorization");
+              location.reload();
+            }
             console.log(err);
           });
       }
