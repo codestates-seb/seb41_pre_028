@@ -44,16 +44,7 @@ export const patchUserProfile = (userInfo) => {
   console.log(userInfo);
 };
 
-/** Answers/answer-id/comments */
-// export const getAnswerCommentList = (params) =>
-//   axios.get("/answers", { params });
-
-// export const getAnswerListByUserId = (userId) => {
-//     axios.get("http://localhost:3001/question", { params: {userId}});
-// }
-
 export const fetchCreateQuestion = async (fetchData) => {
-  console.log(fetchData);
   return fetch(`/questions`, {
     method: "POST",
     headers: {
@@ -78,7 +69,6 @@ export const fetchCreateQuestion = async (fetchData) => {
 };
 
 export const fetchEditQuestion = async (fetchData) => {
-  console.log(fetchData);
   return fetch(`/questions/${fetchData.questionId}`, {
     method: "PATCH",
     headers: {
@@ -103,7 +93,6 @@ export const fetchEditQuestion = async (fetchData) => {
 };
 
 export const fetchAnswer = async (fetchData) => {
-  console.log(fetchData);
   return fetch(`/answers`, {
     method: "POST",
     headers: {
@@ -154,7 +143,6 @@ export const fetchAnswer = async (fetchData) => {
  */
 
 export const fetchQuestionComment = async (fetchData) => {
-  console.log(fetchData);
   return fetch(`/questions/${fetchData.questionId}/comments`, {
     method: "POST",
     headers: {
@@ -188,7 +176,6 @@ export const fetchQuestionComment = async (fetchData) => {
  */
 
 export const fetchAnswerComment = async (fetchData) => {
-  console.log(fetchData);
   return fetch(`/answers/${fetchData.answerId}/comments`, {
     method: "POST",
     headers: {

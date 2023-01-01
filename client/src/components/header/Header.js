@@ -52,9 +52,9 @@ const Header = () => {
         .catch((err) => {
           if (err.response.status === 401) {
             removeCookie("Authorization");
+            location.reload();
           }
           console.log(err);
-          alert("올바르지 않은 접근입니다.");
         });
     }
   };

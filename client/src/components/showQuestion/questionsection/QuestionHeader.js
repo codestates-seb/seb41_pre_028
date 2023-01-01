@@ -2,7 +2,6 @@ import styled from "styled-components";
 import AskQuestionButton from "../../AskQuestionButton";
 import { Link } from "react-router-dom";
 import { BufferBorder1 } from "../../buffer/Buffer";
-import { isCookieExist } from "../../../utils/cookie";
 
 const QuestionStats = styled.div`
   display: flex;
@@ -15,7 +14,6 @@ const QuestionStats = styled.div`
 `;
 
 const QuestionHeader = ({ question }) => {
-  console.log(`isCookieExist`, isCookieExist);
   return (
     <div>
       <div className="mx-3 flex flex-row items-end justify-between">

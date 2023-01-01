@@ -7,7 +7,8 @@ import styled from "styled-components";
 import { TabButton } from "../components/StyledButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-// import { media } from "../utils/style-utils";
+import userImg from "../static/identicon1.jpeg";
+
 const ContentWrapper = styled.div`
   display: flex;
   padding: 24px;
@@ -67,6 +68,7 @@ const UserPage = () => {
           setIsMyPage(false);
           if (err.response.status === 401) {
             removeCookie("Authorization");
+            location.reload();
           }
           console.log(err);
         }
@@ -96,7 +98,7 @@ const UserPage = () => {
               <div className="flex items-center justify-center">
                 <img
                   className="block w-[128px] h-[128px] rounded-[3px]"
-                  src="https://www.gravatar.com/avatar/adef0b5893a6615076a5b41cbbcfc7bc?s=256&d=identicon&r=PG"
+                  src={userImg}
                   alt={`${user.nickname}'s avatar`}
                 />
               </div>

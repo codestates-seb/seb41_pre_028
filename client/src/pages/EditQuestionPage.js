@@ -7,15 +7,12 @@ import { PageContainer, MainContainer } from "../components/StyledContainer";
 import { useState } from "react";
 import { fetchEditQuestion } from "../utils/api/api";
 import { useNavigate, useLocation } from "react-router-dom";
-import { isCookieExist } from "../utils/cookie";
 
 const EditQuestionPage = () => {
   const location = useLocation();
   const { oldTitle, oldContent, oldTag, questionId } = location.state;
 
   const navigate = useNavigate();
-
-  console.log("location", location);
 
   const [title, setTitle] = useState(oldTitle);
   const [content, setContent] = useState(oldContent);
@@ -25,29 +22,6 @@ const EditQuestionPage = () => {
     e.preventDefault();
     setTitle(e.target.value);
   };
-
-  /** editor */
-  // const onChangeContent = (e) => {
-  //   e.preventDefault();
-  //   setContent(e.target.value);
-  // };
-
-  // const Editor = () => {
-  //   return (
-  //     <div className="flex flex-col z-0 container">
-  //       {/* 크기를 최대로 조정해야함 */}
-  //       <MDEditor
-  //         className="flex min-w-max"
-  //         data-color-mode="light"
-  //         value={content}
-  //         onChange={setContent}
-  //         preview="edit"
-  //       />
-  //       <BufferMd5 />
-  //       <div> {content}</div>
-  //     </div>
-  //   );
-  // };
 
   const onChangeTag = (e) => {
     e.preventDefault();
@@ -59,12 +33,10 @@ const EditQuestionPage = () => {
   };
 
   const onClickSubmit = async () => {
-    console.log("title, content, tag", { title, content, tag, questionId });
-    console.log("isCookieExist", isCookieExist);
     if (title.length < 10) {
-      console.log("Minimum 10 characters.");
+      alert("The title must be 10 characters or longer.");
     } else if (content.length < 50) {
-      console.log("Minimum 50 characters.");
+      alert("The content must be 50 characters or longer.");
     } else {
       await fetchEditQuestion({ title, content, tag, questionId }).then(
         (questionId) => {

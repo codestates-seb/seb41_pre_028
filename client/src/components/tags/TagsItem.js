@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
+
 const TagsItem = () => {
   return (
     <div className="flex flex-col p-2 border-2 rounded">
       <div className="flex">
-        <div className="bg-[#e1ecf4] text-[#467ca2] text-xs rounded p-1 mb-2">
-          JavaScript
-        </div>
+        <Link to={`/search?value=[javascript]`}>
+          <div className="bg-[#e1ecf4] text-[#467ca2] text-xs rounded p-1 mb-2">
+            JavaScript
+          </div>
+        </Link>
       </div>
       <div className="flex  text-sm mb-2 break-normal">
         For questions about programming in ECMAScript (JavaScript/JS) and its
