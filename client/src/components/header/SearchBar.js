@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 import { change } from "../../store/searchSlice";
 import styled from "styled-components";
@@ -6,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput = styled.input`
-  width: 95%;
+  width: 100%;
   padding: 0.4rem 0.5rem;
   font-size: 13px;
   display: flex;
@@ -29,12 +30,12 @@ const SearchBar = () => {
         return;
       }
 
-      let rdx = /^\[.*\]$/;
-      let value = searchWord;
-      if (rdx.test(value)) {
-        value = "%5B" + value.substring(1, value.length - 1) + "%5D";
-      }
-      navigate(`/search?value=${value}`);
+      // let rdx = /^\[.*\]$/;
+      // let value = searchWord;
+      // if (rdx.test(value)) {
+      //   value = "%5B" + value.substring(1, value.length - 1) + "%5D";
+      // }
+      navigate(`/search?value=${searchWord}`);
     }
   };
 

@@ -4,24 +4,28 @@ import UserProfile from "../components/user/UserProfile";
 export const questionFilterList = [
   {
     id: 1,
-    filter: "Newest",
+    filter: "newest",
+    title: "Newest",
   },
   {
     id: 2,
-    filter: "Unanswerd",
+    filter: "unanswerd",
+    title: "Unanswerd",
   },
 ];
 
 export const userPageTabList = [
   {
     id: 1,
-    title: "profile",
-    showContent: (id) => <UserProfile userId={id}></UserProfile>,
+    title: "Profile",
+    showContent: ({ user, isMyPage }) => (
+      <UserProfile user={user} isMyPage={isMyPage}></UserProfile>
+    ),
   },
   {
     id: 2,
-    title: "activity",
-    showContent: (id) => <UserActivity userId={id}></UserActivity>,
+    title: "Activity",
+    showContent: ({ user }) => <UserActivity user={user}></UserActivity>,
   },
 ];
 
@@ -29,12 +33,30 @@ export const userActivityTabList = [
   // get data에는 정보 요청하는 함수가 들어가야 한다.
   {
     id: 1,
-    getData: "answerList 가져올거임!",
+    getData: (user) => {
+      return user.answers.map((el) => {
+        return {
+          id: el.answerId,
+          questionId: el.questionId,
+          title: el.content,
+        };
+      });
+    },
     title: "Answers",
+    zeroContent: "There are no answers left by",
   },
   {
     id: 2,
-    getData: "questionList 가져올거임!",
+    getData: (user) => {
+      return user.questions.map((el) => {
+        return {
+          id: el.questionId,
+          questionId: el.questionId,
+          title: el.title,
+        };
+      });
+    },
     title: "Questions",
+    zeroContent: "There are no answers left by",
   },
 ];

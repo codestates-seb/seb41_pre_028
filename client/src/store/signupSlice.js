@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "../utils/api/axios";
 export const SignupUser = createAsyncThunk(
   "signup/signupUser",
   async (data, { rejectWithValue }) => {
@@ -38,7 +38,6 @@ const signupSlice = createSlice({
         state.password = payload.password;
       })
       .addCase(SignupUser.rejected, (state, action) => {
-        console.log(action.payload.response.data.message);
         if (action.payload.response.data.message === "Nickname Exists") {
           alert("이미 사용중인 디스플레이 네임입니다.");
         } else if (action.payload.response.data.message === "Email Exists") {

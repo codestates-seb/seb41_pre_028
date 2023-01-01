@@ -3,6 +3,7 @@ import searchReducer from "./searchSlice";
 import loginSlice from "./loginSlice";
 import signupSlice from "./signupSlice";
 import logoutSlice from "./logoutSlice";
+
 const store = configureStore({
   reducer: {
     search: searchReducer,

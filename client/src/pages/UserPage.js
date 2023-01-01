@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserProfile } from "../utils/api/api";
+import { getUserProfile, getMyProfile } from "../utils/api/api";
+import { isCookieExist } from "../utils/cookie";
 import { userPageTabList as tabList } from "../static/filterAndTabList";
 import styled from "styled-components";
 import { TabButton } from "../components/StyledButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faCakeCandles } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 // import { media } from "../utils/style-utils";
 const ContentWrapper = styled.div`
   display: flex;
@@ -41,25 +42,48 @@ const UserTabButton = styled(TabButton)`
 const UserPage = () => {
   const { userId } = useParams();
   const [userPageTab, setUserPageTab] = useState(0);
+  const [isMyPage, setIsMyPage] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [user, setUser] = useState({
     nickname: "",
     email: "",
     createdAt: "",
+    answers: [],
+    questions: [],
   });
 
   useEffect(() => {
-    // id가 userId인 user 정보를 get 해와야함
-    setUser({ ...user, name: "yerin" });
-    getUserProfile(userId)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
+    const setUserPage = async () => {
+      // 로그인한 상태라면...
+      if (isCookieExist) {
+        // 현재 유저의 아이디 정보와 현재 페이지의 아이디 정보를 비교
+
+        try {
+          const res = await getMyProfile();
+          if (res.data.userId === Number(userId)) {
+            setIsMyPage(true);
+          }
+        } catch (err) {
+          setIsMyPage(false);
+          console.log(err);
+        }
+      }
+
+      try {
+        const res = await getUserProfile(userId);
+        console.log(res.data.data);
+        setUser(res.data.data);
+      } catch (err) {
         if (err.response.status === 404) {
           setErrMsg("존재하지 않는 사용자입니다.");
         }
-      });
+      }
+    };
+    // id가 userId인 user 정보를 get 해와야함
+    // 만약 로그인 상태라면
+    // console.log(userData);
+
+    setUserPage();
   }, [userId]);
 
   return (
@@ -83,16 +107,16 @@ const UserPage = () => {
                   <FontAwesomeIcon icon={faEnvelope} />
                   <span className="ml-[3px]">{user.email}</span>
                 </div>
-                <div>
+                {/* <div>
                   <FontAwesomeIcon icon={faCakeCandles} />
                   <span>{user.createdAt}</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </Profile>
           <div>
-            <nav>
-              <ul className="flex flex-row">
+            <nav className="mb-[10px] mt-[10px]">
+              <ul className="flex flex-row gap-[5px]">
                 {tabList.map((el, idx) => (
                   <li key={el.id}>
                     <UserTabButton
@@ -105,7 +129,9 @@ const UserPage = () => {
                 ))}
               </ul>
             </nav>
-            <div>{tabList[userPageTab].showContent(userId)}</div>
+            <div className="border-t pt-[10px]">
+              {tabList[userPageTab].showContent({ user, isMyPage })}
+            </div>
           </div>
         </main>
       ) : (

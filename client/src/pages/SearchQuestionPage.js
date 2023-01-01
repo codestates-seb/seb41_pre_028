@@ -48,7 +48,7 @@ const SearchQuestionPage = () => {
       searchParams.append("page", 1);
     }
     if (!searchParams.has("size")) {
-      searchParams.append("size", 3);
+      searchParams.append("size", 1);
     }
 
     searchQuestionsByValue(paramsToObject(searchParams.entries()))
@@ -73,8 +73,8 @@ const SearchQuestionPage = () => {
           </div>
           <div className="border-t border-[#e3e6e8]">
             {totalQuestions === 0 ? (
-              <div className="flex items-center justify-center">
-                질문이 비어있습니다.
+              <div className="flex items-center justify-center mt-[10px]">
+                No Questions
               </div>
             ) : (
               questionList.map((el) => (

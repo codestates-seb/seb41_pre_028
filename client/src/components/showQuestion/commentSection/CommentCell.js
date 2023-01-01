@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import CommentBody from "./CommentBody.js";
 import InputPrimary from "./../../input/inputPrimary";
 import { BufferMd5 } from "../../buffer/Buffer";
-import { fetchQuestionComment } from "../../../utils/api/api.js";
+import { fetchQuestionComment } from "../../../utils/api/api";
 import { isCookieExist } from "../../../utils/cookie.js";
 import { useNavigate } from "react-router-dom";
 
