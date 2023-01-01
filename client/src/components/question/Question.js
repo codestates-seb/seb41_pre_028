@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { media } from "../../utils/style-utils";
 import { getQuestionDetail } from "../../utils/api/api";
 import Tag from "../StyledTag";
+import elapsedTime from "../../utils/elapsedTime";
 
 const QuestionWrapper = styled.div`
   display: flex;
@@ -56,41 +57,6 @@ const QuestionWrapper = styled.div`
   }
 `;
 
-// "data": {
-//   "questionId": 1,
-//   "userId": 2,
-//   "title": "question Title3",
-//   "email": "test2@gmail.com",
-//   "nickname": "test2",
-//   "content": "테스트2",
-//   "tag": "테스트2",
-//   "answers": [
-//       {
-//           "answerId": 1,
-//           "userId": 2,
-//           "nickname": "test2",
-//           "content": "answer2 content"
-//       },
-//       {
-//           "answerId": 2,
-//           "userId": 2,
-//           "nickname": "test2",
-//           "content": "answer2 content"
-//       },
-//       {
-//           "answerId": 3,
-//           "userId": 2,
-//           "nickname": "test2",
-//           "content": "answer3 content"
-//       }
-//   ],
-//   "comments": [],
-//   "createdAt": "2022-12-28T07:28:07.859992",
-//   "modifiedAt": "2022-12-28T07:28:07.859992",
-//   "createdBy": "amdin",
-//   "modifiedBy": "amdin"
-// }
-
 const Question = ({ questionId }) => {
   const [question, setQuestion] = useState({
     answers: [],
@@ -109,9 +75,9 @@ const Question = ({ questionId }) => {
   return (
     <QuestionWrapper>
       <div className="q-stats">
-        <span>1 votes</span>
+        <span>{question.vote} votes</span>
         <span>{question.answers.length} answers</span>
-        <span className="text-[#6a737C]">0 views</span>
+        <span className="text-[#6a737C]">3 views</span>
       </div>
       <div className="q-content">
         <h3 className="q-content--title">
@@ -120,11 +86,6 @@ const Question = ({ questionId }) => {
         <div className="q-content--body">{question.content}</div>
         <div className="q-content--meta">
           <div className="flex flex-row">
-            {/* <Tag
-              onClick={() => navigate(`/search?value=%5B${question.tag}%5D`)}
-            >
-              {question.tag}
-            </Tag> */}
             {question.tagList.map((tag, idx) => (
               <Tag onClick={() => navigate(`/search?value=[${tag}]`)} key={idx}>
                 {tag}
@@ -146,10 +107,10 @@ const Question = ({ questionId }) => {
                 <Link to={`/users/${question.userId}`}>
                   {question.nickname}
                 </Link>
+                <div className="ml-1 text-[#6a637c]">
+                  asked at {elapsedTime(question.createdAt)}
+                </div>
               </div>
-            </div>
-            <div className="text-[12px] text-[#6a637c]">
-              asked at {question.createdAt} 날짜 고치기
             </div>
           </div>
         </div>

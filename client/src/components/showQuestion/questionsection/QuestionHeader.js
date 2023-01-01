@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PrimaryLink } from "../../StyledLink";
+import AskQuestionButton from "../../AskQuestionButton";
 import { Link } from "react-router-dom";
 import { BufferBorder1 } from "../../buffer/Buffer";
 import { isCookieExist } from "../../../utils/cookie";
@@ -22,7 +22,7 @@ const QuestionHeader = ({ question }) => {
         <h1 className="p-0 mt-4 mb-1 font-medium text-3xl">
           <Link to={`/questions`}>{question.title}</Link>
         </h1>
-        <PrimaryLink to={"/createQuestion"}>Ask Question</PrimaryLink>
+        <AskQuestionButton />
       </div>
       <QuestionStats>
         <div>

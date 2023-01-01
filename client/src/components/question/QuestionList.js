@@ -5,7 +5,7 @@ import Question from "./Question";
 import FilterBar from "../FilterBar";
 import { questionFilterList as filterList } from "../../static/filterAndTabList";
 import paramsToObject from "../../utils/paramsToObject";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../pagination/Pagination";
 
 const QuestionList = ({ questionList, setQuestionList }) => {
   const [totalQuestions, setTotalQuestions] = useState(0);
@@ -21,7 +21,7 @@ const QuestionList = ({ questionList, setQuestionList }) => {
       searchParams.append("page", 1);
     }
     if (!searchParams.has("size")) {
-      searchParams.append("size", 3);
+      searchParams.append("size", 10);
     }
 
     getQuestionList(paramsToObject(searchParams.entries()))

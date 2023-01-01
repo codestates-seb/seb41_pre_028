@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div className="relative z-40 w-screen flex-col bg-neutral-800">
-      <div className="flex px-4 pt-8 align-baseline">
+      <div className="flex flex-wrap px-4 pt-8 align-baseline">
         <div className="flex mx-5">{}</div>
         <div className="mt-2 mb-10 grow">
           <div className="font-bold text-gray-300">STACK OVERFLOW</div>
