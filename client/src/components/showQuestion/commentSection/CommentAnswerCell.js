@@ -39,10 +39,8 @@ const CommentAnswerCell = ({ answerId }) => {
   };
 
   const onClickAnswerCommentSubmit = async () => {
-    console.log("{ content, answerId, userId }", { content, answerId, userId });
-    console.log("isCookieExist", isCookieExist);
     if (content.length < 10) {
-      console.log("Minimum 10 characters.");
+      alert("Minimum 10 characters.");
     } else {
       await fetchAnswerComment({ content, answerId, userId }).then(
         (questionId) => {

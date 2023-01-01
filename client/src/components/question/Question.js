@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { media } from "../../utils/style-utils";
 import { getQuestionDetail } from "../../utils/api/api";
+import userImg from "../../static/identicon1.jpeg";
 import Tag from "../StyledTag";
 import elapsedTime from "../../utils/elapsedTime";
 
@@ -94,10 +95,10 @@ const Question = ({ questionId }) => {
           </div>
           <div className="flex flex-row items-center justify-end ml-auto">
             <Link to={`/users/${question.userId}`}>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center mr-[3px]">
                 <img
                   className="block w-[16px] h-[16px] rounded-[3px]"
-                  src="https://www.gravatar.com/avatar/adef0b5893a6615076a5b41cbbcfc7bc?s=256&d=identicon&r=PG"
+                  src={userImg}
                   alt={`${question.nickname}'s avatar`}
                 />
               </div>

@@ -25,11 +25,22 @@ const ContentWrapper = styled.div`
   }
 
   > aside {
-    background-color: yellow;
+    display: flex;
+    flex-direction: column;
     width: 300px;
     ${media.tablet`
       width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
     `};
+
+    > div {
+      width: 100%;
+      height: min-content;
+      ${media.tablet`
+      width: 50%;
+    `};
+    }
   }
 `;
 
@@ -87,7 +98,22 @@ const SearchQuestionPage = () => {
           <Pagination totalPages={totalPages} />
         </div>
       </main>
-      <aside>광고광고</aside>
+      <aside>
+        <div>
+          <img
+            className="block w-full h-[250px]"
+            src="happynewyear.jpeg"
+            alt={`new year 2023`}
+          />
+        </div>
+        <div>
+          <img
+            className="block w-full h-[250px]"
+            src="newyear.jpeg"
+            alt={`new year 2023`}
+          />
+        </div>
+      </aside>
     </ContentWrapper>
   );
 };
