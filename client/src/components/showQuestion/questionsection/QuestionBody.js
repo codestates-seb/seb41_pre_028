@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BufferMd5 } from "../../buffer/Buffer";
 import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
-import { isCookieExist } from "../../../utils/cookie";
+import { isCookieExist, removeCookie } from "../../../utils/cookie";
 import axios from "axios";
 import Tag from "../../StyledTag";
 import { useState, useEffect } from "react";
@@ -32,6 +32,10 @@ const QuestionBody = ({ item }) => {
             setUserId(res.data.userId);
           })
           .catch((err) => {
+            if (err.response.status === 401) {
+              removeCookie("Authorization");
+              location.reload();
+            }
             console.log(err);
           });
       }
