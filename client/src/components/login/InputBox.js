@@ -24,12 +24,9 @@ const ErrSign = styled.div`
 const InputBox = ({ isSignup, isLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLogined, isFetching, authorizationToken } = useSelector(
-    (state) => state.login
-  );
+  const { isLogined, isFetching } = useSelector((state) => state.login);
   const { isSignedUp, isSuccess } = useSelector((state) => state.signup);
-  console.log(isLogined);
-  console.log(authorizationToken);
+
   const {
     register,
     handleSubmit,

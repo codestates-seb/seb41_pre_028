@@ -8,9 +8,9 @@ import Footer from "./components/footer/footer";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
       <Header />
-      <div className="flex-1 min-h-screen">
+      <div className="flex-1 min-h-screen ">
         <Routes>
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
