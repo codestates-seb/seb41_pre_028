@@ -60,6 +60,7 @@ public interface UserMapper {
                 .map(answer -> AnswerResponseDto
                         .builder()
                         .answerId(answer.getAnswerId())
+                        .questionId(answer.getQuestion().getQuestionId())
                         .userId(answer.getUser().getUserId())
                         .vote(answer.getVoteAnswer().getAnswer().getVoteAnswer())
                         .content(answer.getContent())
