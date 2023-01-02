@@ -42,9 +42,9 @@ http://33stackoverflow.s3-website.ap-northeast-2.amazonaws.com/
 
 ## 📚 문서
 
-- [요구사항 정의서](https://docs.google.com/document/d/1-tvI0RAzlCXoddBjPX66JGV_aEA38uP1/edit)
-- [API 명세서](https://www.notion.so/codestates/S3-b5b00d31fdca4f5a870a8cc6f386ad97)
-- [S3 Team Home](https://standing-settee-428.notion.site/S3-Team-Home-93a4d3fb5e0443c1a22bd971c7dc7265)
+-
+-
+-
 
 <br/>
 
