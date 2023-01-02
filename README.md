@@ -23,6 +23,7 @@ http://41-pre-project-028.s3-website.ap-northeast-2.amazonaws.com/
 ## ✅ 구현 기능
 
 <br/>
+https://www.notion.so/codestates/c1b75e6ebc5e457a812e8f8c3bde323a
 
 ##  👥 팀원
 
