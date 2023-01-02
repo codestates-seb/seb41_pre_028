@@ -44,6 +44,9 @@ public class CommentDto {
     @Setter //test stub을 위해 추가
     @Getter
     public static class Patch{
+
+        private Long userId;
+
         private Long commentId;
 
         private Long questionId;

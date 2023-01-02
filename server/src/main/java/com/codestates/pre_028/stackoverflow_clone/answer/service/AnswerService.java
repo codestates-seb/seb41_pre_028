@@ -34,6 +34,9 @@ public class AnswerService {
         User user = userRepository.getReferenceById(answer.getUser().getUserId());
         Question question = questionRepository.getReferenceById(answer.getQuestion().getQuestionId());
 
+        if(Objects.equals(question.getUser().getUserId(), answer.getUser().getUserId()))
+            throw new BusinessLogicException(ExceptionCode.SAME_USERS);
+
         answer.setUser(user);
         answer.setQuestion(question);
 
@@ -83,7 +86,7 @@ public class AnswerService {
         VoteAnswer voteAnswer = findAnswer.getVoteAnswer();
 
         if(findAnswer.getUser().getUserId() == voteAnswerDto.getUserId()){
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+            throw new BusinessLogicException(ExceptionCode.SAME_USERS);
         }
 
         if(voteAnswer.getAnswerUserIds().contains(voteAnswerDto.getUserId())){
