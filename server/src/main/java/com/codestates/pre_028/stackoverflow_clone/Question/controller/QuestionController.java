@@ -64,7 +64,7 @@ public class QuestionController {
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(
             @PathVariable("question-id") long questionId,
-            @RequestBody QuestionDto.QuestionPatchDto questionPatchDto){
+            @RequestBody @Valid QuestionDto.QuestionPatchDto questionPatchDto){
 
         questionPatchDto.setQuestionId(questionId);
         questionPatchDto.setUserId(userService.getLoginUserWithToken().getUserId());

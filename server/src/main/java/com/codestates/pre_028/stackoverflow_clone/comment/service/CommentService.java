@@ -66,7 +66,6 @@ public class CommentService {
         Question question = questionRepository.getReferenceById(comment.getQuestion().getQuestionId());
         User user = userRepository.getReferenceById(comment.getUser().getUserId());
 
-
         comment.setQuestion(question);
         comment.setUser(user);
 

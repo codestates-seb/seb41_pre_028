@@ -143,7 +143,7 @@ public class QuestionService {
         VoteQuestion voteQuestion = findQuestion.getVote();
 
         if(findQuestion.getUser().getUserId() == voteQuestionDto.getUserId()){
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+            throw new BusinessLogicException(ExceptionCode.SAME_USERS);
         }
 
 
