@@ -80,8 +80,9 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // 프론트엔드 쪽 서버 주소
+        configuration.setAllowedOrigins(Arrays.asList("http://41-pre-project-028.s3-website.ap-northeast-2.amazonaws.com", "http://localhost:3000")); // 프론트엔드 쪽 서버 주소
         configuration.setAllowedHeaders(Arrays.asList("*"));  //쿠키 커스텀한 헤더들?
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "jwt_token","Set-Cookie"));  //쿠키 미확인 해결
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
         configuration.setAllowCredentials(true);  //
         configuration.setMaxAge(3000L);

@@ -17,8 +17,9 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
         String refreshToken = response.getHeader("Refresh");
         Cookie cookie = new Cookie("jwt_token", refreshToken);
-//        cookie.setDomain("/");
+        cookie.setPath("/");
         cookie.setHttpOnly(true);
+
 
         response.addCookie(cookie);// 쿠키 세팅
 
