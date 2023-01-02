@@ -36,15 +36,9 @@ http://33stackoverflow.s3-website.ap-northeast-2.amazonaws.com/
 
 ## 🗓️ 프로젝트 기간
 
-22.10.25 ~ 22.11.07
+22.12.19 ~ 23.01.02
 
 <br/>
-
-## 📚 문서
-
--
--
--
 
 <br/>
 
@@ -52,16 +46,16 @@ http://33stackoverflow.s3-website.ap-northeast-2.amazonaws.com/
 
 ### Front-end
 
-김예린|방혜민|임채영|홍유진
+박종효|정태잰|채예린
 :---:|:---:|:---:|:---:
-[yelinz515](https://github.com/yelinz515)|[youthmn](https://github.com/youthmn)|[Icyeong](https://github.com/Icyeong)|[yujinyny](https://github.com/yujinyny)
+[bakjonghyo52](https://github.com/youthmn)|[bakjonghyo52](https://github.com/taejinii)|[chyerin802](https://github.com/chyerin802)
 
 ### Back-end
 
 
-🏅 임원용|김은진|정희윤
+🏅 김진수|이준범|장현준
 :---:|:---:|:---:
-[Im WonYong](https://github.com/ImWonYong)|[kim eunjin](https://github.com/2d3k)|[HuiYun](https://github.com/Tldkt)
+[frontLine-kim](https://github.com/frontLine-kim)|[bum19](https://github.com/bum19)|[tty0912](https://github.com/tty0912)
 
 <br/>
 
@@ -84,20 +78,6 @@ http://33stackoverflow.s3-website.ap-northeast-2.amazonaws.com/
 
 
 <br/>
-
-## 📝 커밋 메세지
-
-유형|설명
-:---:|:---:
-feat|새로운 기능에 대한 커밋
-fix|버그 수정에 대한 커밋
-build|빌드 관련 파일 수정에 대한 커밋
-chore|그 외 자잘한 수정에 대한 커밋
-ci|CI관련 설정 수정에 대한 커밋
-docs|문서 수정에 대한 커밋
-style|코드 스타일 혹은 포맷 등에 관한 커밋
-refactor|코드 리팩토링에 대한 커밋
-test|테스트 코드 수정에 대한 커밋
 
 <br/>
 
