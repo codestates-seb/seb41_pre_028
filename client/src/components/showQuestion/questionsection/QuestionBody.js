@@ -4,7 +4,7 @@ import { BufferMd5 } from "../../buffer/Buffer";
 import CommentCell from "../commentSection/CommentCell";
 import styled from "styled-components";
 import { isCookieExist, removeCookie } from "../../../utils/cookie";
-import axios from "axios";
+import axios from "../../../utils/api/axios";
 import Tag from "../../StyledTag";
 import { useState, useEffect } from "react";
 import { getMyProfile } from "../../../utils/api/api";

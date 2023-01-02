@@ -1,4 +1,4 @@
-import axios from "./axios";
+import axios from "../api/axios";
 import { getCookie, isCookieExist } from "../cookie";
 
 const FETCH_BASIC_URL = "http://3.37.105.24:8080";

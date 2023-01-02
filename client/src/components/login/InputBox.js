@@ -66,6 +66,7 @@ const InputBox = ({ isSignup, isLogin }) => {
       <form
         className="flex flex-col p-5 bg-white rounded mt-5 shadow-lg "
         onSubmit={handleSubmit(onClickLogin, onError)}
+        method="POST"
       >
         {isSignup ? (
           <label htmlFor="displayname" className="mb-1 font-bold">
