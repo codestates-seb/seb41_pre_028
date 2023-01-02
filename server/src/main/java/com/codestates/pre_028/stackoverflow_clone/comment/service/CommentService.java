@@ -1,5 +1,6 @@
 package com.codestates.pre_028.stackoverflow_clone.comment.service;
 
+import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.Question.repository.QuestionRepository;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.codestates.pre_028.stackoverflow_clone.User.repository.UserRepository;
@@ -17,9 +18,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class CommentService {
 
@@ -47,7 +50,7 @@ public class CommentService {
 
     }
 
-    public Comment createComment(Comment comment){
+    public Comment createAnswerComment(Comment comment){
         Answer answer = answerRepository.getReferenceById(comment.getAnswer().getAnswerId());
         User user = userRepository.getReferenceById(comment.getUser().getUserId());
 
@@ -59,8 +62,25 @@ public class CommentService {
         return savedComment;
     }
 
+    public Comment createQuestionComment(Comment comment){
+        Question question = questionRepository.getReferenceById(comment.getQuestion().getQuestionId());
+        User user = userRepository.getReferenceById(comment.getUser().getUserId());
+
+
+        comment.setQuestion(question);
+        comment.setUser(user);
+
+        Comment savedComment = commentRepository.save(comment);
+
+        return savedComment;
+    }
+
+
     public Comment updateComment(Comment comment){
         Comment findComment = findVerifiedComment(comment.getCommentId());
+
+        if(!Objects.equals(findComment.getUser().getUserId(), comment.getUser().getUserId()))
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
 
         Optional.ofNullable(comment.getContent())
                 .ifPresent(findComment::setContent);

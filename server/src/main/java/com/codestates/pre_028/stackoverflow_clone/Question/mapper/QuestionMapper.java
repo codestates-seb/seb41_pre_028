@@ -1,33 +1,43 @@
 package com.codestates.pre_028.stackoverflow_clone.Question.mapper;
 
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionDto;
+import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionPaginationDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.Dto.QuestionWithAnswerDto;
 import com.codestates.pre_028.stackoverflow_clone.Question.entity.Question;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteQuestion;
 import com.codestates.pre_028.stackoverflow_clone.answer.dto.AnswerResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.comment.dto.CommentResponseDto;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionMapper {
+    List<QuestionPaginationDto> questionToQuestionResponseDto(List<Question> questions);
+
+ List<QuestionPaginationDto> questionToQuestionWithKeywordResponseDto(List<Question> questions);
+
     default Question questionPostDtoToQuestion(QuestionDto.QuestionPostDto questionPostDto){
         Question question = new Question();
         User user = new User();
+        VoteQuestion voteQuestion = new VoteQuestion();
         user.setUserId(questionPostDto.getUserId());
 
         question.setUser(user);
         question.setTitle(questionPostDto.getTitle());
         question.setContent(questionPostDto.getContent());
         question.setTag(questionPostDto.getTag());
+        question.setVote(voteQuestion);
         return question;
 
     };
     Question questionPatchDtoToQuestion(QuestionDto.QuestionPatchDto questionPatchDto);
+
     default QuestionWithAnswerDto questionToQuestionResponseDto(Question question){
         List<Comment> comments = question.getComments();
         List<Answer> answers = question.getAnswerList();
@@ -36,6 +46,10 @@ public interface QuestionMapper {
         questionResponseDto.setQuestionId(question.getQuestionId());
         questionResponseDto.setContent(question.getContent());
         questionResponseDto.setUser(question.getUser());
+        questionResponseDto.setTitle(question.getTitle());
+        questionResponseDto.setTag(question.getTag());
+        questionResponseDto.setTagList(question.getTagList());
+        questionResponseDto.setVote(question.getVote());
 
         //메타데이타
         questionResponseDto.setCreatedAt(question.getCreatedAt());
@@ -44,7 +58,7 @@ public interface QuestionMapper {
         questionResponseDto.setModifiedBy(question.getModifiedBy());
 
         //답변
-        questionResponseDto.setAnswerResponseDtos(answerToAnswerWithQuestionResponseDtos(answers));
+        questionResponseDto.setAnswers(answerToAnswerWithQuestionResponseDtos(answers));
 
         //댓글
         questionResponseDto.setComments(commentToCommentWithQuestionResponeDtos(comments));
@@ -58,6 +72,7 @@ public interface QuestionMapper {
                 .stream()
                 .map(comment -> CommentResponseDto
                         .builder()
+                        .commentId(comment.getCommentId())
                         .userId(comment.getUser().getUserId())
                         .content(comment.getContent())
                         .build())
@@ -70,8 +85,11 @@ public interface QuestionMapper {
                 .stream()
                 .map(answer -> AnswerResponseDto
                         .builder()
+                        .answerId(answer.getAnswerId())
                         .userId(answer.getUser().getUserId())
                         .nickname(answer.getUser().getNickname())
+                        .questionId(answer.getQuestion().getQuestionId())
+                        .vote(answer.getVoteAnswer())
                         .content(answer.getContent())
                         .build())
                 .collect(Collectors.toList());

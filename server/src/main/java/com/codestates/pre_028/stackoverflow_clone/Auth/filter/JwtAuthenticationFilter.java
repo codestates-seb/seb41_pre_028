@@ -6,7 +6,6 @@ import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
@@ -51,11 +50,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String accessToken = delegateAccessToken(user);
         String refreshToken = delegateRefreshToken(user);
 
-        Cookie cookie = new Cookie("jwt_token", accessToken);
-        cookie.setDomain("/");
-        cookie.setHttpOnly(true);
-
-        response.addCookie(cookie);// 쿠키 세팅
+//        Cookie cookie = new Cookie("jwt_token", accessToken);
+//        cookie.setDomain("/");
+//        cookie.setHttpOnly(true);
+//
+//        response.addCookie(cookie);// 쿠키 세팅
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("Refresh", refreshToken);
 

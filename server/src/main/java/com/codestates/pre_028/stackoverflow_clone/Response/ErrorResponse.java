@@ -1,9 +1,11 @@
 package com.codestates.pre_028.stackoverflow_clone.Response;
 
+import com.codestates.pre_028.stackoverflow_clone.exception.BusinessLogicException;
 import com.codestates.pre_028.stackoverflow_clone.exception.ExceptionCode;
 import jakarta.validation.ConstraintViolation;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
@@ -14,6 +16,14 @@ import java.util.stream.Collectors;
 public class ErrorResponse {
     private int status;
     private String message;
+    private String cause;
+
+    public ErrorResponse(int status, String message, String cause) {
+        this.status = status;
+        this.message = message;
+        this.cause = cause;
+    }
+
     private List<FieldError> fieldErrors;
     private List<ConstraintViolationError> violationErrors;
 
@@ -46,6 +56,16 @@ public class ErrorResponse {
 
     public static ErrorResponse of(HttpStatus httpStatus, String message) {
         return new ErrorResponse(httpStatus.value(), message);
+    }
+
+    // 로그인 실패 리스폰스 바디 구현
+    public static ErrorResponse of(HttpStatus httpStatus, AuthenticationException exception){
+        return new ErrorResponse(httpStatus.value(), httpStatus.getReasonPhrase(), exception.getMessage());
+    }
+
+    //회원가입 비지니스 로직 익셉션 리스폰스 구현
+    public static ErrorResponse of(BusinessLogicException exception){
+        return new ErrorResponse(exception.getExceptionCode().getStatus(), exception.getMessage());
     }
 
     @Getter

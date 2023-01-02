@@ -2,6 +2,7 @@ package com.codestates.pre_028.stackoverflow_clone.Question.entity;
 
 import com.codestates.pre_028.stackoverflow_clone.Auditing.AuditingFields;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
+import com.codestates.pre_028.stackoverflow_clone.Vote.entity.VoteQuestion;
 import com.codestates.pre_028.stackoverflow_clone.answer.entity.Answer;
 import com.codestates.pre_028.stackoverflow_clone.comment.entity.Comment;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -26,7 +27,7 @@ public class Question extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
     @Column(nullable = false) private String title;
-    @Column(nullable = false) private String content;
+    @Column(length = 65535, nullable = false) private String content;
     @Column
     private String tag;
 
@@ -40,8 +41,28 @@ public class Question extends AuditingFields {
     List<Answer> answerList = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question" , cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "QUESTION_TAG_LIST", joinColumns = @JoinColumn(name = "QUESTION_ID"))
+    @Column(name = "TAG")
+    private List<String> tagList;
+
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+    private VoteQuestion vote;
+
+    public void setVote(VoteQuestion voteQuestion){
+        this.vote = voteQuestion;
+        if(voteQuestion.getQuestion() != this){
+            voteQuestion.setQuestion(this);
+        }
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
 
     public void setComment(Comment comment){
         this.comments.add(comment);

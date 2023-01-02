@@ -1,6 +1,5 @@
 package com.codestates.pre_028.stackoverflow_clone.User.service;
 
-import com.codestates.pre_028.stackoverflow_clone.Auth.Dto.LoginDto;
 import com.codestates.pre_028.stackoverflow_clone.Auth.utils.CustomAuthorityUtils;
 import com.codestates.pre_028.stackoverflow_clone.Auth.utils.UserRegistrationApplicationEvent;
 import com.codestates.pre_028.stackoverflow_clone.User.entity.User;
@@ -44,7 +43,6 @@ public class UserService {
         return findVerifiedUser(id);
     }
     //유저 전체 조회
-    @Transactional(readOnly = true)
     public List<User> findUsers(){
         return new ArrayList<>(userRepository.findAll());
     }
@@ -91,7 +89,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User getLoginUserWithToken() { // 로그인된 유저 가져오기
+    // 로그인된 유저 가져오기
+    public User getLoginUserWithToken() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousUser"))

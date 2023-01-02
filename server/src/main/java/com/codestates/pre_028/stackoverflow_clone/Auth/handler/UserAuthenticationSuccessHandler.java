@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-// application 에서 확인 하기에 만든 핸들러이므로  cookie 생성에는 부적합
 import java.io.IOException;
 @Slf4j
 public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -16,6 +15,13 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
 
+        String refreshToken = response.getHeader("Refresh");
+        Cookie cookie = new Cookie("jwt_token", refreshToken);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+
+
+        response.addCookie(cookie);// 쿠키 세팅
 
         log.info(" # 인증 성공입니다!");
     }

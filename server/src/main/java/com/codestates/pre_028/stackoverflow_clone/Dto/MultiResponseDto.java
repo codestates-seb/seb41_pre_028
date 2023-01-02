@@ -10,10 +10,20 @@ import java.util.List;
 public class MultiResponseDto<T> {
     private List<T> data;
     private PageInfo pageInfo;
+    private List<Integer> barNumber;
 
-    public MultiResponseDto(List<T> data, Page page) {
+    public MultiResponseDto(List<T> data, Page page, List<Integer> barNumber) {
         this.data = data;
         this.pageInfo = new PageInfo(page.getNumber() + 1,
                 page.getSize(), page.getTotalElements(), page.getTotalPages());
+        this.barNumber = barNumber;
     }
+
+    public MultiResponseDto(List<T> data, Page page ){
+        this.data = data;
+        this.pageInfo = new PageInfo(page.getNumber() ,
+                page.getSize(), page.getTotalElements(), page.getTotalPages());
+    }
+
 }
+
