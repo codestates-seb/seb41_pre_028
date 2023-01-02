@@ -10,7 +10,7 @@
 
 ## 🔗 배포 주소
 
-[https://41-pre-project-028.s3.ap-northeast-2.amazonaws.com/index.html](https://41-pre-project-028.s3.ap-northeast-2.amazonaws.com/index.html)
+http://41-pre-project-028.s3-website.ap-northeast-2.amazonaws.com/
 
 <br/>
 
