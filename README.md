@@ -46,8 +46,9 @@ http://33stackoverflow.s3-website.ap-northeast-2.amazonaws.com/
 
 ### Front-end
 
-박종효|정태잰|채예린
-:---:|:---:|:---:|:---:
+
+🏅 박종효|정태진|
+:---:|:---:|:---:
 [bakjonghyo52](https://github.com/youthmn)|[bakjonghyo52](https://github.com/taejinii)|[chyerin802](https://github.com/chyerin802)
 
 ### Back-end
