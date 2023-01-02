@@ -1,36 +1,16 @@
 # Stack Overflow Clone Project
 
-## 👥 팀원
-
-## 서비스 소개
-
-## 구현 기능
-
-## 기술 스택
-
-### 공통
-
-### IDE
-
-### Front-end
-
-### Back-end
-
-
-## 화면
-![image](https://user-images.githubusercontent.com/74370531/200337543-ad7dbbbc-7aa1-419c-97a9-5acf73c95ea0.png)
-
 <br/>
 
 ## 💡 서비스 소개
 
-스택 오버플로우 사이트 클론입니다.
+41기 28조 스택 오버플로우 사이트 클론입니다.
 
 <br/>
 
 ## 🔗 배포 주소
 
-http://33stackoverflow.s3-website.ap-northeast-2.amazonaws.com/
+[https://41-pre-project-028.s3.ap-northeast-2.amazonaws.com/index.html](https://41-pre-project-028.s3.ap-northeast-2.amazonaws.com/index.html)
 
 <br/>
 
@@ -40,21 +20,23 @@ http://33stackoverflow.s3-website.ap-northeast-2.amazonaws.com/
 
 <br/>
 
+## ✅ 구현 기능
+
 <br/>
 
-## 👨‍👩‍👧‍👦 팀원 소개
+##  👥 팀원
 
 ### Front-end
 
 
-🏅 박종효|정태진|
+박종효|정태진|🏅채예린
 :---:|:---:|:---:
-[bakjonghyo52](https://github.com/youthmn)|[bakjonghyo52](https://github.com/taejinii)|[chyerin802](https://github.com/chyerin802)
+[bakjonghyo52](https://github.com/bakjonghyo52)|[taejinii](https://github.com/taejinii)|[chyerin802](https://github.com/chyerin802)
 
 ### Back-end
 
 
-🏅 김진수|이준범|장현준
+김진수|이준범|장현준
 :---:|:---:|:---:
 [frontLine-kim](https://github.com/frontLine-kim)|[bum19](https://github.com/bum19)|[tty0912](https://github.com/tty0912)
 
